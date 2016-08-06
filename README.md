@@ -41,7 +41,7 @@ This will clone the latest version of the BALOO repository to a **baloo_app_code
 Since the MongoDB will already be installed by now:
 
 * start mongo: open cmd, type **mongod**, you will need to create "data/db" folders in your current drive (e.g. Windows C: Drive, create C:\Data\db).
-* get latest dev database from ``` https://devops-tools.pearson.com/stash/scm/baloo/baloo_app_content.git ```
+* get latest dev database from ``` https://github.com/sakshi-nagpal/CMS.git ```
 * in the data/db directory, copy the 2 “baloo-dev” data files(“baloo-dev.0”,”baloo-dev.ns”) from baloo_app_content\dev
 
 ### Compiling Your Application
@@ -76,6 +76,8 @@ You can run the full test suite with the test task:
 $ grunt test
 ```
 
+**More Informantion
+
 This will run both the server-side tests (located in the app/tests/ directory) and the client-side tests (located in the public/modules/*/tests/).
 
 To execute only the server tests, run the test:server task:
@@ -88,49 +90,4 @@ And to run only the client tests, run the test:client task:
 
 ```
 $ grunt test:client
-```
-
-## Deployment With Docker
-
-* Install Docker
-
-```
-curl -sSL https://get.docker.com/ubuntu/ | sudo sh
-```
-
-and check if it it installed
-
-```
-docker --version
-```
-
-* Install Fig
-
-```
-sudo su
-curl -L https://github.com/docker/fig/releases/download/1.0.1/fig-`uname -s`-`uname -m` > /usr/local/bin/fig; chmod +x /usr/local/bin/fig
-```
-
-and check if it is installed
-
-```
-fig --version
-```
-
-* Checkout the branch in the desired location
-
-```
-git clone -b <branch-name> https://devops-tools.pearson.com/stash/scm/baloo/baloo_app_code.git <destination-folder-name>
-```
-
-* Build the images (NOTE : Login as super user)
-
-```
-fig build
-```
-
-* Run the application (or containers)
-
-```
-fig up
 ```
