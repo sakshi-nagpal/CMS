@@ -1,0 +1,25 @@
+<div ng-if="importTask.isCopyScenario || flag.initialScreen" class="import-footer bg-theme pvl phxl">
+    <div class="text-color text-center">
+        <div ng-if="importTask.isCopyScenario" class="include-attachments">
+
+            <input ng-model="importTask.includeAttachments" type="checkbox"/>
+            <span class="plx text-x-large include-label">{{'importModule.label_include_attachments' | translate}}</span>
+
+        </div>
+
+        <button ng-if="flag.initialScreen" class="btn header-btn btn-large mlm mrs text-x-large phm pvs" ng-click="goBack(importTask.friendlyId, importTask.sourceFriendlyId)">{{'importModule.label_back' | translate}}</button>
+
+        <div class="copy-button-container">
+            <a ng-if="importTask.isCopyScenario" data-toggle="modal" alert-modal="importTask.copyScenarioConfirmJson">
+                <button class="btn header-btn btn-large mlm mrs text-x-large phm pvs">
+                    <span>{{'importModule.label_copy_scenario' | translate}}</span>
+                </button>
+            </a>
+            <a ng-if="!importTask.isCopyScenario">
+                <button class="btn header-btn btn-large mlm mrs text-x-large phm pvs" ng-click="importStep(importTask.friendlyId, importTask.sourceFriendlyId, scenario.steps[importTask.stepIndex-1]._id)">
+                    <span ng-if="!importTask.isCopyScenario">{{'importModule.label_import_from_step' | translate}}{{importTask.stepIndex}}</span>
+                </button>
+            </a>
+        </div>
+    </div>
+</div>

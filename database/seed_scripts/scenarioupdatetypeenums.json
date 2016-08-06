@@ -1,0 +1,9 @@
+[
+  {"name": "Scenario Create", "code": "Scenario_Create"},
+  {"name":"Step Create", "code" :"Step_Create"},
+  {"name":"Step Content Update", "code" :"Step_Content_Update"},
+  {"name":"Step Import", "code" :"Step_Import"},
+  {"name":"Metadata Update", "code" :"Metadata_Update"},
+  {"name":"Document Update", "code" :"Document_Update"},
+  {"name":"Phase Change", "code" :"Phase_Change"}
+]

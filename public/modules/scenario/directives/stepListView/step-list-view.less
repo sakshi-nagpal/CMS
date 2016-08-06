@@ -1,0 +1,199 @@
+.step-list-view {
+  .scenario-step {
+    border: 1px solid transparent;
+    border-bottom: 1px solid @color-theme;
+    padding-top: 26px;
+    padding-bottom: 47px !important;
+    position: relative;
+    margin: 0 5px 0  0;
+    &:hover {
+      .bg-theme;
+      cursor: pointer;
+      .gripper-icon {
+          display: inline !important;
+      }
+    }
+    .comments{
+      &:hover {
+        .bg-theme;
+
+        .gripper-icon {
+          display: inline !important;
+        }
+      }
+      .stepPlaceHolder{
+        border: 1px dashed #000;
+        list-style-type: none;
+        margin-right: 3px;
+      }
+    }
+    .badge{
+      max-width: 20px!important;
+    }
+    .baloo-font,.fa{
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      line-height: 30px;
+      margin: auto;
+      height: 30px;
+      width: 30px;
+      text-align: center;
+      font-size: 24px;
+      .text-color;
+      &.baloo-icon-comments {
+        right: 48px;
+        &:hover{
+          color:@brand-primary !important;
+          cursor: pointer;
+        }
+      }
+      &.wider-btn{
+        //width: 40px;
+        sup{
+          position: absolute;
+          top: -.0021em;
+          right: -7px;
+        }
+      }
+
+      &.gripper-icon {
+        display: none;
+        left: -5px;
+        font-size: 45px !important;
+        cursor: move;
+        &:hover{
+          color:@brand-primary !important;
+        }
+      }
+      &.tag-icon {
+        right: 80px;
+        &:hover{
+          color:@brand-primary !important;
+        }
+      }
+
+      &.fa-angle-right {
+        right: 20px;
+      }
+    }
+
+    .step-index {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      margin: auto 20px;
+      height: 30px;
+      border-radius: 100%;
+      display: inline-block;
+      border: 1px solid #c3c3c3;
+      min-width: 30px;
+      text-align: center;
+      box-sizing: border-box;
+      line-height: 40px;
+      .text-small;
+      .mhl;
+      vertical-align: middle;
+      span {
+        display: inline-block;
+        height: 100%;
+        line-height: 100%;
+        margin: auto;
+        position: relative;
+        top: 1px;
+        vertical-align: middle;
+
+      }
+      &.step1 {
+        border-color: @color-indicator-blue;
+        .color-indicator-blue;
+
+      }
+      &.step2 {
+        border-color: @color-indicator-yellow;
+        .color-indicator-yellow;
+      }
+      &.step3 {
+        border-color: @color-indicator-pink;
+        .color-indicator-pink;
+      }
+      &.step4 {
+        border-color: @color-indicator-purple;
+        .color-indicator-purple;
+      }
+      &.step5 {
+        border-color: @color-indicator-green;
+        .color-indicator-green;
+      }
+      &.step6 {
+        border-color: @color-indicator-brown;
+        .color-indicator-brown;
+
+      }
+      &.step7 {
+        border-color: @color-indicator-orange;
+        .color-indicator-orange;
+      }
+      &.step8 {
+        border-color: @color-indicator-majenta;
+        .color-indicator-majenta;
+      }
+      &.step9 {
+        border-color: @color-indicator-cyan;
+        .color-indicator-cyan;
+      }
+      &.step10 {
+        border-color: @color-indicator-olive;
+        .color-indicator-olive;
+      }
+    }
+    .step-content {
+      vertical-align: middle;
+      padding-right: 116px;
+      padding-left: 70px;
+
+      .skills-container{
+        display: inline-block;
+        border-right: 1px solid;
+        .border-theme;
+        white-space: nowrap;
+        max-width: calc(~'100% - 120px');
+        max-width: -moz-calc(~'100% - 120px');
+        max-width: -o-calc(~'100% - 120px');
+        max-width: -webkit-calc(~'100% - 120px');
+        overflow: hidden;
+        text-overflow: ellipsis;
+        .attached-skills {
+          display: inline;
+        }
+      }
+
+      .method-count {
+        display: inline-block;
+      }
+      .step-text {
+        line-height: 26px;
+      }
+    }
+    .gripper-icon-drag {
+      .text-primary;
+      left: -5px;
+      font-size: 45px !important;
+    }
+  }
+
+  .stepDragEl{
+    .bg-theme;
+    overflow:hidden !important;
+    position: absolute;
+    pointer-events: none;
+    margin-right: 5px !important;
+    z-index: 9999;
+  }
+  .stepPlaceHolder{
+    border: 1px dashed #000;
+    list-style-type: none;
+    margin-right: 3px;
+  }
+}

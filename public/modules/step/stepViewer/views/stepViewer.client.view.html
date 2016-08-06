@@ -1,0 +1,32 @@
+<div class="step-viewer-container" >
+    <div class="step-header" ng-if="scenario">
+        <nav class="navbar navbar-default mbn pvs phm">
+            <step-header scenario-switch='stepConfig.isScenarioSwitchable' scenario="scenario" step-switch='true' step-index="stepIndex"  on-change-step="onStepClickInViewer(index)" scenario-siblings="scenarioSiblings" scenario-switch='true' on-switch-scenario="onSwitchScenario()"></step-header>
+            <div class="navbar-right mrl mts">
+                <h5 class="method-count prm mhm pvs mvn" ng-if="stepJson">Method count: <span
+                        ng-bind="stepJson.methods.length"></span></h5>
+                    <span ng-if="stepConfig.isEditable">
+                        <i class="baloo-font baloo-icon-comments" title="Add Comment"
+                           ng-click="showComment(stepIndex,stepJson._id)">
+                            <sup ng-if="stepNewCommentCountArray.countArray[stepIndex-1].count>0">
+                                <span class="badge"
+                                      title="{{stepNewCommentCountArray.countArray[stepIndex-1].count}} New Comments">{{stepNewCommentCountArray.countArray[stepIndex-1].count}}</span></sup></i>
+                    </span>
+                <button class="btn header-btn btn-large mrx mls"
+                        ui-sref="content.task.scenario.step.edit"
+                        ng-bind="'stepViewer.label_edit_button' | translate"
+                        ng-if="stepConfig.isEditable"
+                        user-can='edit_content'
+                        phase-editable="scenario.phase.code"></button>
+
+                <button class="btn header-btn btn-large mlx"
+                        ng-bind="'stepViewer.label_close_button' | translate" ng-click="onStepClose()">
+                </button>
+            </div>
+        </nav>
+    </div>
+
+    <step-viewer ng-if="stepJson" step-json="stepJson" step-index="stepIndex" get-viewer-height="getViewerHeight()" change-method-status="onMethodStatusChange(id,status)" manage-method-status="manageMethodStatus">
+
+    </step-viewer>
+</div>

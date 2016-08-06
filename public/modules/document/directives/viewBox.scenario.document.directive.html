@@ -1,0 +1,30 @@
+<div id="scenario-document-viewbox">
+    <section ng-class="{collapsed: itemCount.value>5 && visible,sections: true}">
+        <div class="headers">
+            <span class="header-text" ng-bind="'scenario.label_scenario_documents' | translate"></span>
+            <a class="pull-right manage-button" ng-click="showPopup()">Manage</a>
+        </div>
+        <ul class="scenario-documents meta-data-container">
+            <li ng-repeat="fileItem in fileItems | orderObjectBy:'category.order':false">
+                <div ng-show="fileItem.file.length==0 && fileItem.category.notifications" class="file-list-item">
+                    <i class="baloo-font baloo-icon-exclamation color-indicator-pink"></i>
+                    <span class="title" ng-bind="fileItem.category.displayName"></span></div>
+                <div ng-show="fileItem.file.length>0 && fileItem.category.notifications" class="file-list-item">
+                    <a class="title"
+                       title="{{fileItem.file[0].originalName}} - {{(fileItem.file[0].fileSize/1024).toFixed(2)}} KB"
+                       ng-click="download(fileItem.file[0]._id,fileItem.category)"><i
+                            class="baloo-font baloo-icon-msword"></i>{{fileItem.category.displayName}}</a>
+                </div>
+                <div ng-repeat="file in fileItem.file">
+                    <div ng-show="fileItem.file.length>0 && !fileItem.category.notifications"
+                         class="file-list-item">
+                        <a class="title" title="{{file.originalName}} - {{(file.fileSize/1024).toFixed(2)}} KB"
+                           ng-click="download(file._id,fileItem.category)"><i class="baloo-font baloo-icon-msword"></i>
+                            {{file.originalName}}</a></div>
+                </div>
+            </li>
+        </ul>
+        <div class="expand-box" ng-show="visible && itemCount.value>5" ng-click="collapse()">Show All...</div>
+        <div class="expand-box" ng-show="!visible && itemCount.value>5" ng-click="collapse()">Collapse...</div>
+    </section>
+</div>

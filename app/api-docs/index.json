@@ -1,0 +1,39 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Baloo API",
+    "description": "NextGen MyITLab – Baloo",
+    "version": "1.0"
+  },
+  "tags" : [
+    {
+      "name": "health",
+      "description": "Application Health Monitor"
+    },
+    {
+      "name": "user",
+      "description": "User operations"
+    },
+    {
+      "name": "catalog",
+      "description": "Catalog Information"
+    },
+    {
+      "name": "contentAdministration",
+      "description": "Admin Extra Rights"
+    }
+  ],
+  "schemes": [
+    "http", "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths" :{
+    "$ref": "./paths.json"
+  },
+  "definitions": {
+    "$ref": "./definitions.json"
+  }
+}
+

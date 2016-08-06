@@ -1,0 +1,19 @@
+<div class="ui-data-grid pbxl">
+    <div class="mtl search" ng-if="searchEnabled">
+        <div class="search-label plm">
+            <span class="text-medium text-color" ng-bind="gridTitle"></span>
+        </div>
+        <div class="btn-group search-div pull-right">
+            <input type="text" placeholder="{{placeholderText}}" ng-model="data.filterValue"
+                   class="search-box text-base text-color plxl mvm mrm" ng-keyup="filterRows()"/>
+            <i class="icon-class search-icon text-grey2 fa fa-search"></i>
+            <i class="icon-class clear-icon text-medium text-grey2 fa fa-times" ng-if="data.filterValue" ng-click="clearText()"></i>
+        </div>
+
+    </div>
+    <div  id="grid1" ui-grid="gridOptions" class="grid" ui-grid-selection >
+        <div class="msg-block" ng-show="!resultCount">
+            <span class="text-large maxl" ng-bind="errorMessage"></span>
+        </div>
+    </div>
+</div>

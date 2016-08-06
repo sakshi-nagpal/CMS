@@ -1,0 +1,48 @@
+<div class="skill-import bg-white skill-module-popup">
+    <div class="header">
+        <nav class="navbar navbar-default mbn pam bg-theme">
+            <div class="navbar-header pll mtx">
+                <label class="man text-color heading text-x-large" ng-bind="'skillImport.label_header' | translate"></label>
+            </div>
+            <div class="navbar-right mrl">
+                <button class="btn btn-primary btn-large mlx" ng-click="popupClose()" ng-bind="'skillImport.label_close' | translate"></button>
+            </div>
+        </nav>
+    </div>
+    <div class="container pan">
+        <div class="state-chooser-container ptxl pbm bg-theme">
+                <state-chooser on-state-change="changeState(data)" state-data="stateData" current-state-index="currentStateIndex"></state-chooser>
+        </div>
+
+        <ul class="legend-container list-inline pull-right mlm pam mbn" ng-if="state == 'skillPopup.import.1'|| state == 'skillPopup.import.2'">
+            <li class="plm prn">
+                <span class="indicator-color img-circle border-indicator-pink bg-indicator-pink"></span>
+                <span class="indicator-label plx">{{'skillImport.label_task_step'| translate}}</span>
+                <span ng-if="state === 'skillPopup.import.2'">:</span>
+                <span ng-if="state === 'skillPopup.import.2'" class="indicator-counter plx" ng-bind="commonData.taskStepsLength"></span>
+            </li>
+            <li class="plm prn">
+                <span class="indicator-color img-circle border-indicator-yellow bg-indicator-yellow"></span>
+                <span class="indicator-label plx" >{{'skillImport.label_lib_step'| translate}}</span>
+                <span ng-if="state === 'skillPopup.import.2'">:</span>
+                <span ng-if="state === 'skillPopup.import.2'" class="indicator-counter plx" ng-bind="commonData.libraryStepsLength"></span>
+            </li>
+        </ul>
+
+        <div class="grid-heading plxl mtl prm text-medium border-grey2" ng-if="state == 'skillPopup.import.1'">
+            <span ng-bind="'skillTagging.label_search_title' | translate"></span>
+            <span class="prs">{{commonData.product}}</span>
+            <span class="change-product text-base text-primary cursor-pointer" product-chooser call-back="launchState(data)">Change</span>
+        </div>
+       <div class="views">
+           <div ng-repeat="state in stateData" ui-view="state{{$index+1}}" class="state-view" ng-class="{true:'active',false:''}[currentStateIndex == $index]"></div>
+       </div>
+    </div>
+
+    <div class="footer-skill bg-theme pvl phxl" ng-if="currentStateIndex==2">
+        <div class="button container text-center">
+            <button class="btn footer-btn btn-large text-x-large" ng-click="finishImport(commonData.friendlyId,commonData.sourceTaskId,commonData.stepId,commonData.type)" ng-bind="'skillImport.label_finish' | translate"></button>
+        </div>
+
+    </div>
+</div>

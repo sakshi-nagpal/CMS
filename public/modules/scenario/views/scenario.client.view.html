@@ -1,0 +1,255 @@
+<div class="scenario-module bg-white" data-ng-controller="scenarioController">
+    <div class="scenario-container" ng-if="taskId && scenario">
+        <div ng-include="'scenario.header.client.view.html'"></div>
+        <div class="scenario-content">
+            <div class="meta-data pull-right">
+                <section class="sections">
+                    <div class="headers">
+                        <span class="header-text" ng-bind="'scenario.label_task_metadata' | translate"></span>
+                        <i class="baloo-font baloo-icon-pencil"
+                           user-can='edit_task_metadata'
+                           ng-click="onMetaDataEditClick()"></i>
+                    </div>
+                    <ul class="task-info meta-data-container">
+                        <li>
+                            <span class="title created-label"
+                                  ng-bind="('scenario.label_created' | translate)+':'"></span>&nbsp;
+                        <span class="title-value timestamp"
+                              ng-bind="(scenario.createdTimestamp|date:'dd-MMM-yy')+', '+scenario.createdBy.name">
+                        </span>
+                        </li>
+                        <li>
+                            <span class="title last-updated-label"
+                                  ng-bind="('scenario.label_updated' | translate)+':'"></span>&nbsp;
+                        <span class="title-value timestamp"
+                              ng-bind="(scenario.updatedTimestamp|date:'dd-MMM-yy')+', '+scenario.updatedBy.name">
+                        </span>
+                        </li>
+                        <li>
+                           <!-- <span class="title"
+                                  ng-bind="('scenario.label_skills' | translate)+':'"></span>&nbsp;-->
+                            <div class="btn-group skill-dialog">
+                                <a class="btn dropdown-toggle pvn phn cent-line-height" data-toggle="dropdown" href="#">
+                                    <span class="title-value" ng-bind="scenarioSkills.length"></span>
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu pull-right cent-line-height mts"
+                                    ng-click="$event.stopPropagation();">
+                                    <li class="skill-dialog-title text-medium text-color ptl plxl">
+                                        <span ng-if="scenarioSkills.length>0"
+                                              ng-bind="'scenario.label_skills_title' | translate"></span>
+                                        <span ng-if="scenarioSkills.length === 0"
+                                              ng-bind="'scenario.label_no_skill_title' | translate"></span>
+                                    </li>
+                                    <li class="content plxxl">
+                                        <ul class="skill-list plm mls">
+                                            <li ng-repeat="skill in scenarioSkills"><span
+                                                    class="text-grey3 text-base" ng-bind="skill.title"></span></li>
+                                        </ul>
+                                    </li>
+                                    <li class="footer border-theme">
+                                        <button class="btn btn-primary" ng-click="closeSkillDialog();"
+                                                ng-bind="'scenario.label_skill_ok_button' | translate"></button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="title"
+                                  ng-bind="('scenario.label_steps_count' | translate)+':'"></span>&nbsp;
+                            <span class="title-value"
+                                  ng-bind="scenario.steps.length">
+                            </span>
+                        </li>
+                        <li user-can="view_authoring_metadata">
+                            <span class="title"
+                                  ng-bind="('scenario.label_reusability_factor' | translate)+':'"></span>&nbsp;
+                            <span class="title-value"
+                                  ng-bind="(scenarioSkills.length == 0 || scenario.steps.length == 0)?0:(scenarioSkills.length/scenario.steps.length | number : 2)">
+                            </span>
+                        </li>
+                        <li user-can="view_authoring_metadata">
+                            <span class="title" ng-bind="'scenario.label_level_of_revision' | translate"></span>:&nbsp;
+                            <span class="title-value" ng-bind="(scenario.levelOfRevision !== -1)?scenario.levelOfRevision:'-';"></span>
+
+                        </li>
+                        <li>
+                            <span class="title" ng-bind="'scenario.label_difficulty' | translate"></span>:&nbsp;
+                            <span class="title-value" ng-bind="(scenario.difficulty!== -1)?scenario.difficulty:'-';"></span>
+                        </li>
+                    </ul>
+                    <div class="sub-headers cent-line-height">
+                        <span class="text" ng-bind="'scenario.label_reference' | translate"></span>
+
+                        <div class="horizontal-divider"></div>
+                    </div>
+                    <ul class="scenario-references meta-data-container">
+                        <li>
+                            <span class="title" ng-bind="'scenario.label_id' | translate"></span>:&nbsp;
+                            <span class="title-value" ng-bind="(scenario.content_ref.scenario_ref.reference_id)?scenario.content_ref.scenario_ref.reference_id:'-'"></span>
+                        </li>
+                        <li>
+                            <span class="title" ng-bind="'scenario.label_name' | translate"></span>:&nbsp;
+                            <span class="title-value" ng-bind="(scenario.content_ref.scenario_ref.reference_name)?scenario.content_ref.scenario_ref.reference_name:'-'"></span>
+                        </li>
+                        <li>
+                            <span class="title document-label"
+                                  ng-bind="('scenario.label_document' | translate)+':'"></span>&nbsp;
+                            <span class="title-value document-name" ng-bind="(scenario.content_ref.doc_name)?scenario.content_ref.doc_name:'-'"></span>
+                        </li>
+                    </ul>
+                    <div class="sub-headers cent-line-height">
+                        <span class="text" ng-bind="'scenario.label_learning_aids' | translate"></span>
+
+                        <div class="horizontal-divider"></div>
+                    </div>
+                    <ul class="learning-aids meta-data-container">
+                        <li>
+                            <span class="title" ng-bind="'scenario.label_page_no' | translate"></span>:&nbsp;
+                            <span class="title-value" ng-bind="(task.data.pageNo)?task.data.pageNo:'-';"></span>
+                        </li>
+                        <li>
+                            <span class="title" ng-bind="'scenario.label_etext_url' | translate"></span>:&nbsp;
+                            <a href="{{task.data.eTextURL}}" class="title-value eTextURL text-primary" target="_blank"
+                               title="{{task.data.eTextURL}}" ng-bind="task.data.eTextURL" ng-click="onURLClick($event)">
+                            </a>
+                        </li>
+                        <li>
+                            <span class="title" ng-bind="'scenario.label_video_url' | translate"></span>:&nbsp;
+                            <a href="{{task.data.videoURL}}" class="title-value videoURL text-primary" target="_blank"
+                               title="{{task.data.videoURL}}" ng-bind="task.data.videoURL" ng-click="onURLClick($event)">
+                            </a>
+                        </li>
+                    </ul>
+
+                </section>
+                <section scenario-Document-View></section>
+            </div>
+            <div class="step-list-content">
+                <step-list-view ng-if="scenario.steps.length !== 0" steps='scenario.steps'
+                                on-step-click='onStepClick(index)' reorder-steps='reorderSteps(id, index)'
+                                phase="scenario.phase"
+                                tag-skill='tagSkill(index)' comment-Drop="showComment(index,stepId)" get-Step-New-Comment="getStepNewCommentCount()" step-New-Comment-Count="stepNewCommentCountArray"></step-list-view>
+                <div ng-if="task.data && scenario" user-can='edit_content' phase-editable="scenario.phase.code"
+                     options-modal="addStep" class="add-step text-color text-large border-theme">
+                    <div class="add-icon pull-left text-primary text-h3"><span>+</span></div>
+                    <div class="add-text clearfix text-primary">
+                        <span>Add New Step</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class='clearfix'></div>
+        </div>
+        <div id="task-meta-data-modal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header pal">
+                        <button type="button" class="close text-color" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title text-large text-color cent-line-height" ng-bind="'scenario.label_task_metadata' | translate"></h4>
+                    </div>
+                    <form name="taskMetaDataForm" ng-submit="updateMetaData()" novalidate>
+                        <div class="modal-body phl pbn ">
+                            <table>
+                                <tbody>
+                                <tr>
+                                    <td class="pbm" colspan="2">
+                                        <label class="meta-data-label scenario-meta-data-label text-medium text-color mbn" ng-bind="('scenario.label_level_of_revision' | translate) + ':'"></label>
+                                        <select class="selectpicker revision-dropdown text-base"
+                                                ng-model="metaData.scenario.levelOfRevision"
+                                                ng-options="k for (k,v) in levelOfRevisionRange track by v">
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="pbm">
+                                        <label class="meta-data-label scenario-meta-data-label text-medium text-color mbn" ng-bind="('scenario.label_difficulty' | translate) + ':'"></label>
+                                    </td>
+                                    <td class="pbm">
+                                        <input placeholder="Enter 1-100" class="border-grey2" name="difficulty" type="number" max="100" min="1"
+                                               ng-model-options="{ allowInvalid: true }"
+                                               ng-pattern="/^[0-9]+$/"
+                                               ng-model="metaData.scenario.difficulty" ng-change="difficultyChange()">
+                                        <span class="helper-block text-red" ng-show="taskMetaDataForm.difficulty.$error.number || taskMetaDataForm.difficulty.$error.pattern || taskMetaDataForm.difficulty.$error.max || taskMetaDataForm.difficulty.$error.min">Please enter a number between 1 to 100</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="pbm">
+                                        <i class="baloo-font baloo-icon-filled-star"></i>
+                                        <label class="meta-data-label task-meta-data-label text-medium text-color mbn" ng-bind="('scenario.label_page_no' | translate) + ':'"></label>
+                                    </td>
+                                    <td class="pbm">
+                                        <input placeholder="Add Page No" class="border-grey2" type="text" name="pageNo"
+                                               ng-model="metaData.task.data.pageNo">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="pbm">
+                                        <i class="baloo-font baloo-icon-filled-star"></i>
+                                        <label class="meta-data-label task-meta-data-label text-medium text-color mbn" ng-bind="('scenario.label_etext_url' | translate) + ':'"></label>
+                                    </td>
+                                    <td class="pbm">
+                                        <input placeholder="Add eText URL" class="border-grey2" type="text" name="eTextURL"
+                                               ng-model="metaData.task.data.eTextURL">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <i class="baloo-font baloo-icon-filled-star"></i>
+                                        <label class="meta-data-label task-meta-data-label text-medium text-color mbn" ng-bind="('scenario.label_video_url' | translate) + ':'"></label>
+                                    </td>
+                                    <td>
+                                        <input placeholder="Add video URL" class="border-grey2" type="text" name="videoURL"
+                                               ng-model="metaData.task.data.videoURL">
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div class="metadata-info text-color text-base mvl cent-line-height">
+                                <i class="baloo-font baloo-icon-filled-star"></i>
+                                <span ng-bind="('scenario.label_metadata_info' | translate)" ></span>
+                            </div>
+                        </div>
+                        <div class="modal-footer pal border-theme">
+                            <button type="submit" type="button" class="btn btn-primary" ng-disabled="taskMetaDataForm.$invalid" ng-bind="'scenario.label_save_button' | translate">
+                            </button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-bind="'scenario.label_cancel_button' | translate"></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div ui-view>
+        </div>
+    </div>
+    <div ng-if="taskId && !scenario" class="create-scenario">
+        <div class="header text-color text-x-large pvl pll" user-can='edit_content'
+             ng-bind="'scenario.label_create_scenario_title_can_edit' | translate"></div>
+        <div class="header text-color text-x-large pvl pll" ng-if="!authorization.canAccess('edit_content')"
+             ng-bind="'scenario.label_create_scenario_title_can_not_edit' | translate"></div>
+
+        <div class="scenario-container mtxxl" user-can='edit_content'>
+            <div class="scenario-content">
+                <div class="blank-scenario  mrxxxl" ng-click="createBlankScenario===true? onBlankScenarioClick() : ''">
+                    <div class="blank-scenario-box border-theme"></div>
+                    <label class="blank-scenario-label text-color text-x-large"
+                           ng-bind="'scenario.label_blank_scenario' | translate"></label>
+                </div>
+                <div class="copy-scenario">
+                    <img options-modal="copyScenario" class="copy-scenario-img border-theme"
+                         ng-src="{{baseURL}}/modules/scenario/img/copyFromScenario.png">
+                    <label class="copy-scenario-label text-color text-x-large"
+                           ng-bind="'scenario.label_copy_scenario'  | translate"></label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="phase-change-modal" alert-modal = 'phaseChange.popupData' show-modal = 'phaseChange.showModal'></div>
+
+</div>
+
+
+

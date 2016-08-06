@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Skill Analysis tool</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+    <link rel="stylesheet" href="bower_repo/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="global/css/common.css"/>
+
+    <script src="bower_repo/jquery/dist/jquery.min.js"></script>
+    <script src="bower_repo/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bower_repo/handlebars/handlebars.min.js"></script>
+
+    <!-- lib for sorting functionality in ul > li elements, https://github.com/RubaXa/Sortable-->
+    <script src="lib/jquery.fn.sortable.js"></script>
+    <script src="modules/compare/compare_min.js"></script>
+    <script src="modules/compare/item_config_min.js"></script>
+
+    <script src="global/scripts/app.js"></script>
+</head>
+<body>
+<div class="page-header">
+    <div class="box">
+        <h1 class="title">Skill Analysis Tool
+            <small></small>
+        </h1>
+        <button class="compare-button btn btn-default pull-right">Compare</button>
+    </div>
+</div>
+<div class="box">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="left-view view-input" data-column="left-view"></div>
+        </div>
+        <div class="col-md-6">
+            <div class="right-view view-input" data-column="right-view"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="left-view view-item-header" data-column="left-view">
+                <div class="bs-callout loader">Loading...</div>
+                <div class="content"></div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="right-view view-item-header" data-column="right-view">
+                <div class="bs-callout loader">Loading...</div>
+                <div class="content"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="left-view view-item-content" data-column="left-view"></div>
+        </div>
+        <div class="col-md-6">
+            <div class="right-view view-item-content" data-column="right-view"></div>
+        </div>
+    </div>
+</div>
+<div id="compare-view" class="box compare-view-box hidden">
+    <div class="page-header">
+        <div class="box">
+            <h1 class="title">
+                <small>Comparison View <span class="diff-tag"></span></small>
+            </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="compare-view view-item-header" data-column="compare-view">
+                <div class="content"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="compare-view view-item-content" data-column="compare-view"></div>
+        </div>
+    </div>
+</div>
+<div class="scroll-top"><span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span></div>
+<script id="input-template" type="text/x-handlebars-template">
+    <form action="">
+        <div class="input-group">
+            <input type="text" class="task-input form-control" placeholder="Enter Task ID, Task Number (Ex. EXP13.XL13.01.01.01.T1,1)" data-id="left-view"/>
+            <span class="input-group-btn">
+                <input class="submit-button btn btn-default" type="submit" value="Go!" data-column="{{column}}"/>
+            </span>
+        </div>
+    </form>
+</script>
+<script id="view-header-template" type="text/x-handlebars-template">
+        <div class="question">
+            {{#ifObject QuesText}}
+                {{#with QuesText}}
+                    {{#each changeSet}}
+                        {{#ifEqual [0] "0"}}
+                            <span>{{{1}}}</span>
+                        {{/ifEqual}}
+                        {{#ifEqual [0] "1"}}
+                            <span class="added-text">{{{1}}}</span>
+                        {{/ifEqual}}
+                        {{#ifEqual [0] "-1"}}
+                            <span class="deleted-text">{{{1}}}</span>
+                        {{/ifEqual}}
+                    {{/each}}
+                    <span class="diff-tag">{{diffDistance}}</span>
+                {{/with}}
+            {{else}}
+                {{{QuesText}}}
+            {{/ifObject}}
+        </div>
+</script>
+<script id="view-content-template" type="text/x-handlebars-template">
+    <div class="task-view">
+        <ul class="draggable-list list-group">
+            {{#each ScenarioPathwayList}}
+            <li class="list-group-item" data-index="{{@index}}">
+                {{#if ../isSortable}}
+                    <span class="glyphicon glyphicon-move" aria-hidden="true"></span>
+                {{else}}
+                    <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                {{/if}}
+                <span>
+                    {{#ifObject PathwayEnumName}}
+                        {{#with PathwayEnumName}}
+                            {{#each changeSet}}
+                                {{#ifEqual [0] "0"}}
+                                    <span>{{{1}}}</span>
+                                {{/ifEqual}}
+                                {{#ifEqual [0] "1"}}
+                                    <span class="added-text">{{{1}}}</span>
+                                {{/ifEqual}}
+                                {{#ifEqual [0] "-1"}}
+                                    <span class="deleted-text">{{{1}}}</span>
+                                {{/ifEqual}}
+                            {{/each}}
+                            <span class="diff-tag">{{diffDistance}} ( total = {{../diffDistance}} )</span>
+                        {{/with}}
+                    {{else}}
+                        {{{PathwayEnumName}}}
+                        {{#if ../diffDistance}}
+                        <span class="diff-tag">( total = {{../diffDistance}} )</span>
+                        {{/if}}
+                    {{/ifObject}}
+                </span>
+                <ol>
+                    {{#each ScenarioActionList}}
+                        <li>
+                            {{#ifObject ActionDesc}}
+                                {{#with ActionDesc}}
+                                    {{#each changeSet}}
+                                        {{#ifEqual [0] "0"}}
+                                            <span>{{{1}}}</span>
+                                        {{/ifEqual}}
+                                        {{#ifEqual [0] "1"}}
+                                            <span class="added-text">{{{1}}}</span>
+                                        {{/ifEqual}}
+                                        {{#ifEqual [0] "-1"}}
+                                            <span class="deleted-text">{{{1}}}</span>
+                                        {{/ifEqual}}
+                                    {{/each}}
+                                    <span class="diff-tag">{{diffDistance}}</span>
+                                {{/with}}
+                            {{else}}
+                                {{{ActionDesc}}}
+                            {{/ifObject}}
+                        </li>
+                    {{/each}}
+                </ol>
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+</script>
+<div id="error-modal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title text-danger">Error!!</h4>
+            </div>
+            <div class="modal-body bg-danger text-danger">
+                <p class="text">Error!!</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="ok-button btn btn-default" data-dismiss="modal">OK</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+</body>
+</html>

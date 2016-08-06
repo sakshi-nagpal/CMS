@@ -1,0 +1,12 @@
+<div class="skill-browse limit-content">
+    <div class="header-container clearfix ptm">
+        <breadcrumbs breadcrumbs='view.breadcrumbs'></breadcrumbs>
+        <div ng-include="'grid.header.client.view.html'" ng-if="currentStateIndex==0"></div>
+        <div ng-include="'list.header.client.view.html'" ng-if="currentStateIndex==1"></div>
+    </div>
+    <div class="add-step-container">
+        <add-step user-can="edit_content" state-config="stateConfig" step-data="stepData" add-step-popup-config="addStepPopupConfig"></add-step>
+    </div>
+    <div ui-view class="browse-view"></div>
+</div>
+

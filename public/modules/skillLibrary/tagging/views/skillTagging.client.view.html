@@ -1,0 +1,46 @@
+<div class="skill-tagging bg-white skill-module-popup">
+   <div class="header">
+      <nav class="navbar navbar-default mbn pam">
+         <div class="navbar-header pll mts mbx" >
+            <label class="man text-color heading label-title text-x-large" ng-if="commonData.type == constants.STEP.TASK" ng-bind="'skillTagging.label_header' | translate"></label>
+            <label class="man text-color heading label-title text-x-large" ng-if="commonData.type == constants.STEP.LIBRARY" ng-bind="('skillTagging.label_header_libraryStep' | translate)"></label>
+            <span class="man text-color heading label-title text-x-large" ng-if="commonData.type == constants.STEP.LIBRARY" title={{stepJson.name}} ng-bind="': ' + stepJson.name"></span>
+         </div>
+         <div class="navbar-right mrl">
+            <button class="btn btn-primary btn-large mrx" ng-click="doneTagging()" ng-bind="'skillTagging.label_done_tagging' | translate"></button>
+            <button class="btn btn-primary btn-large mlx" ng-click="popupClose()" ng-bind="'skillTagging.label_cancel' | translate"></button>
+         </div>
+      </nav>
+   </div>
+   <div class="container pan">
+      <div class="step-text-container phxl ptl mts">
+         <label class="text-medium mbn" ng-bind="'skillTagging.label_step' | translate"></label>:
+         <label class="step-text text-medium pls mbn" ng-bind-html="sce.trustAsHtml(stepJson.text)"></label>
+      </div>
+      <div class="tagged-skill-container phxl ptxl">
+         <div class="label-container pull-left">
+            <label class="label-tagged text-medium mbn pull-left"
+                   ng-bind="'skillTagging.label_tagged_skills' | translate"></label>
+            <span class="separator-colon">:</span>
+         </div>
+         <div class="tagged-skill-value-container">
+            <div class="tagged-skill mll clearfix">
+               <div class="skill-pill-container mbs mrm pull-left bg-primary" ng-repeat="selectedSkill in selectedSkills track by selectedSkill._id">
+                  <span class="cross-icon cursor-pointer button-handler text-base" ng-click="clearSkill($index)">x</span>
+                  <label title="{{selectedSkill.app[0].split(' ')[0]}}: {{selectedSkill.title}}" class="text-small mbn pax prl pls">{{selectedSkill.title}}</label>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="grid-heading plxl prm text-medium border-grey2">
+            <span ng-bind="('skillTagging.label_search_title' | translate)+commonData.product+':'"></span>
+            <span class="subtitle prs text-base border-grey2" ng-bind="'skillTagging.label_search_subtitle' | translate"></span>
+            <span class="change-product text-base text-primary cursor-pointer" product-chooser call-back="launchState(data)">Change</span>
+
+      </div>
+      <div ng-if="commonData.app" class="ui-grid-container">
+         <div ng-if="!refresh" data-ui-view="gridView"></div>
+      </div>
+   </div>
+</div>
+

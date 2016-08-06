@@ -1,0 +1,13 @@
+<div class="step-editor-container" ng-init="getMethodTypes()">
+    <step-editor ng-if="stepJson" step-json="stepJson" method-types="methodTypes" scenario="scenario"
+                 step-index="stepIndex" timer-delay="timerDelay"
+                 save-data="saveData(isAutoSave)" editor-close="editorClose()" delete-step="deleteStep()"
+                 on-step-click="onStepClickInEditor(index)"
+                 scenario-siblings="scenarioSiblings" on-switch-scenario="onSwitchScenario()"
+                on-step-Editor-initialise ="onStepEditorInitialise()"></step-editor>
+</div>
+
+
+
+
+

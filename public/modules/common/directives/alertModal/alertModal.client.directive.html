@@ -1,0 +1,67 @@
+<div  tabindex="-1" role="dialog" aria-labelledby="modal-default-label" aria-hidden="true" class="modal fade alert-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header bg-theme pal">
+                <button type="button" data-dismiss="modal" aria-hidden="true" class="close text-color">&times;</button>
+                <h4 id="modal-default-label" class="modal-title text-large cent-line-height"
+                    ng-bind="(alertModal.title || (alertModal.type === 'warning' ? 'common.popup.warning_title' : 'common.popup.error_title')) | translate">
+                </h4>
+            </div>
+
+            <div class="modal-body pan">
+                <div class="error-icon-parent pull-left" ng-if="alertModal.type === 'error'"><span class="error-icon text-white">&times;</span></div>
+
+                <div class="modal-body-content" ng-class="alertModal.type === 'error' ?'mts':''">
+                    <div  ng-if="!alertModal.body.list.length" class="cent-line-height pal text-medium">
+                        <span class="modal-body-message no-text-bold custom-line-height" ng-bind="alertModal.body.message | translate"></span>
+                    </div>
+
+                    <div ng-if="alertModal.body.list.length" class="pll pvl pbm mbs text-medium">
+                        <span class="cent-line-height modal-body-message pbm text-large" ng-bind="alertModal.body.message | translate"></span>
+                        <ul class="item-list mbn">
+                            <li class="item" ng-repeat="item in alertModal.body.list" ng-class="$last ?'pbx':'pbm'">
+                                <span class="item-message" ng-bind="item.message | translate"></span>
+                                <ul ng-if="item.list" class="pll">
+                                    <li class="item-list-message pts text-base" ng-repeat="subList in item.list">
+                                        <span ng-bind="subList.message | translate"></span>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div ng-if="alertModal.type === 'warning'" class="modal-footer pal">
+                <button type="button" class="btn btn-primary cancel" ng-bind="(alertModal.actionButtons[0].name || 'common.popup.warning_cancel') | translate" ng-click="dismissModal()"></button>
+                <button type="button" class="btn btn-primary continue" ng-bind="(alertModal.actionButtons[1].name || 'common.popup.warning_continue') | translate" ng-click="callback(alertModal.actionButtons[1].callback);dismissModal();"></button>
+            </div>
+            <div ng-if="alertModal.type === 'error' || alertModal.type === 'success'" class="modal-footer pal">
+                <button type="button" class="btn btn-primary ok" ng-bind="(alertModal.actionButtons[0].name || 'common.popup.error_ok') | translate" ng-click="dismissModal()"></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--
+<div id="phase-error-modal" tabindex="-1" role="dialog" aria-labelledby="modal-default-label"
+     aria-hidden="true" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-theme pal">
+                <button type="button" data-dismiss="modal" aria-hidden="true"
+                        class="close text-color">&times;</button>
+                <h4 class="modal-title text-large cent-line-height">
+                    <span ng-bind="'scenario.phaseChange.label_error_title'| translate"></span>
+                </h4>
+            </div>
+            <div class="modal-body pvxl pll text-medium">
+                <span ng-bind="'scenario.phaseChange.label_error_info' | translate"></span>
+            </div>
+            <div class="modal-footer pal">
+                <button type="button" data-dismiss="modal" class="btn btn-primary" ng-bind="'scenario.phaseChange.label_ok' | translate"></button>
+            </div>
+        </div>
+    </div>
+</div>-->

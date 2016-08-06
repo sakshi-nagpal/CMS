@@ -1,0 +1,21 @@
+<div class="step-header-directive navbar-header plm">
+    <div class="navbar-brand h3 man">
+        <select ng-if="scenarioSwitch" class="scenario-switcher selectpicker form-control ptn pull-left h3"
+                ng-options="sibling.friendlyId for sibling in scenarioSiblings track by sibling.friendlyId"
+                ng-model="scenario" ng-change="onSwitchScenario({})"></select>
+        <span ng-if="!scenarioSwitch" class="ptn pull-left h3 mvn" ng-bind="scenario.friendlyId"></span>
+        <div class="step_switch_header pull-left" ng-if="stepSwitch">
+            <div class="steps_label pull-left" >&nbsp; Step </div>
+
+            <div class="steps mls text-small pull-left">
+                <div ng-repeat="step in scenario.steps"
+                     title="Step {{$index + 1}}: {{getTooltipText(step.text)}}"
+                     class="mhm step-index"
+                     ng-click="onChangeStep({index: $index+1})"
+                     ng-class="(stepIndex == ($index+1))?'selected':'';">
+                    <span ng-bind="$index + 1"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

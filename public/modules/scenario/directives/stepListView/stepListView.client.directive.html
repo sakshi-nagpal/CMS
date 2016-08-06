@@ -1,0 +1,27 @@
+<div class="step-list-view">
+    <div class="step-list" >
+        <div class="scenario-step text-color text-large" ng-repeat="step in steps"
+             ng-init="util={}" ng-click="util.click===true? util.click=false : onStepClick({index: $index + 1})">
+            <div class="step-index step{{$index+1}} pull-left"><span ng-bind="$index+1"></span></div>
+            <div class="step-content">
+                <div class="step-text mbs" ng-bind-html="sce.trustAsHtml(step.text)"></div>
+                <div ng-if="step.skills.length" ellipsis-tooltip='skillLabel[$index]'
+                     class="skills-container pull-left prm mrm text-grey3 text-small">{{'scenario.label_skill' |
+                    translate}}(s) :&nbsp;
+                    <label class="attached-skills" ng-bind="skillLabel[$index]"></label>
+                </div>
+                <div class="method-count pull-left text-grey3 text-small">Method Count: <span
+                        ng-bind="step.methods.length"></span></div>
+            </div>
+            <i ng-if="!(viewOnly)" title="Reorder Step"
+               class="baloo-font baloo-icon-gripper-lg dd-step-handle gripper-icon" user-can='edit_content'
+               phase-editable="phase.code"></i>
+            <i ng-if="!(viewOnly)" class="fa fa-tag tag-icon text-large" title="Tag Skill"
+               ng-click="util.click=true;tagSkill({index: $index + 1})" user-can='edit_content'></i>
+            <i ng-if="!(viewOnly)"class="baloo-font baloo-icon-comments comments wider-btn" title="Add Comment"
+               ng-click="util.click=true;commentDrop({index: $index + 1,stepId:step._id})"><sup ng-if="stepNewCommentCount.countArray[$index].count>0"> <span class="badge" title="{{stepNewCommentCount.countArray[$index].count}} New Comments">{{stepNewCommentCount.countArray[$index].count}}</span></sup></i>
+            <i class="fa fa-angle-right"></i>
+        </div>
+    </div>
+
+</div>

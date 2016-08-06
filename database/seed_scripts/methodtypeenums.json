@@ -1,0 +1,10 @@
+[
+  {"name" : "Keyboard"},
+  {"name" : "Ribbon"},
+  {"name" : "Menu"},
+  {"name" : "Mouse"},
+  {"name" : "Right-Click"},
+  {"name" : "Toolbar"},
+  {"name" : "Shortcut Menu"},
+  {"name" : "Other"}
+]

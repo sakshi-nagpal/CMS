@@ -1,0 +1,49 @@
+<div id="project-document-module">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="close()" data-dismiss="modal"
+                aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Project Documents</h4>
+    </div>
+    <div>
+        <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)" dismiss-on-timeout="2000">
+            <b>{{alert.msg}}</b></alert>
+    </div>
+    <div class="modal-sub-header text-medium">
+        <h5><strong>Project Name:</strong> {{title}}</h5>
+    </div>
+    <div>
+        <table class="table manage-files modal-table">
+            <thead>
+            <tr>
+                <th><input type="checkbox" ng-model="checkAll" ng-click="selectAll(checkAll)"/> &nbsp; File Type</th>
+                <th ng-repeat="scenarioType in scenarioTypes" class="text-center">{{scenarioType.code}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="fileItem in fileItems">
+                <td><input type="checkbox" ng-model="fileItem.select" ng-disabled="!fileItem.enable"
+                           ng-click="toggleDownloadAll(fileItem.select)"/> &nbsp; {{fileItem.category.displayName}}
+                </td>
+                <td ng-repeat="item in fileItem.items" align="center">
+                    <!--<a class="glyphicon glyphicon-upload" ngf-select ng-model="file"-->
+                    <!--ngf-change="upload(file,fileItem.category,item)"></a>-->
+                    <button class="glyphicon glyphicon-download" title="Download"
+                            ng-click="download(item.files[0]._id)"
+                            ng-disabled="item.files.length<=0"></button>
+                    <!--<a class="glyphicon glyphicon-trash" ng-show="item.files.length>0"-->
+                    <!--ng-click="removeFile(item.files[0]._id,fileItem.category._id,item.scenarioType.code)"></a>-->
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="modal-footer text-center">
+        <div class="nodoc-warning" ng-cloak ng-hide="filesExists">{{noDocMsg}}</div>
+        <button type="button" ng-click="downloadAll()" ng-show="showDownloadAll"
+                class="btn btn-primary center-block"
+                data-dismiss="modal">
+            Download
+        </button>
+    </div>
+</div>
+

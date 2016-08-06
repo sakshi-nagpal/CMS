@@ -1,0 +1,5 @@
+<div class="import-grid-view">
+    <div ng-if="skills" class="skill-import-grid phxl">
+        <ui-data-grid on-row-select="authorization.canAccess('view_skill_steps') ? onGridClick(data, isSelected) : ''" button-callback="addLibraryStep(data, event)" grid-config='gridConfig' on-column-filter="onColumnFilter(columnIndex, data)"></ui-data-grid>
+    </div>
+</div>

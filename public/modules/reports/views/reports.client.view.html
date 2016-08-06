@@ -1,0 +1,105 @@
+<div id="reports-module" class="limit-content">
+    <div class="reports-header ptm">
+        <div class="pts">
+            <breadcrumbs breadcrumbs='breadcrumbs'></breadcrumbs>
+        </div>
+
+        <div class="reports-title text-large pvm" ng-bind="'reports.label_reports_title' | translate"></div>
+    </div>
+    <div class="pbl panel-container">
+
+        <div class="panel reports-panel mbn mtxl">
+            <div class="panel-heading default-cursor bg-primary"  ng-bind="'reports.label_export_content_heading' | translate"></div>
+            <div class="panel-body pvl">
+                <div class="content-info default-cursor text-medium" ng-bind="'reports.label_export_content_info' | translate"></div>
+                <div class="series ptl">
+                    <select class="selectpicker form-control text-large series-options mrxl"  ng-model="selectContentSeries"
+                            ng-options="series.title for series in series track by series._id"></select>
+                    <a class="export-content mll" ng-href="export/series/{{selectContentSeries._id}}"
+                       ng-class="{'disable-button':selectContentSeries == series[0]}">
+                        <button class="btn text-white text-medium content-button" ng-bind="'reports.label_export_button' | translate"
+                                ng-class="{true: 'bg-grey2 border-grey2', false: 'btn-primary'}[selectContentSeries == series[0]]"
+                                ng-click="blurButton($event)"></button>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+        <div class="panel reports-panel mbn mtxl">
+            <div class="panel-heading default-cursor bg-primary" ng-bind="'reports.label_export_pathways_heading' | translate"></div>
+            <div class="panel-body pvl">
+                <div class="content-info default-cursor text-medium" ng-bind="'reports.label_export_pathways_info' | translate"></div>
+                <div class="series ptl">
+                    <select class="selectpicker form-control text-large series-options mrxl"  ng-model="selectPathwaysSeries"
+                            ng-options="series.title for series in series track by series._id"></select>
+                    <a class="export-pathway mll" ng-href="export/series/{{selectPathwaysSeries._id}}/pathway"
+                       ng-class="{'disable-button':selectPathwaysSeries == series[0]}">
+                        <button class="btn text-white text-medium pathway-button" ng-bind="'reports.label_export_button' | translate"
+                                ng-class="{true: 'bg-grey2 border-grey2', false: 'btn-primary'}[selectPathwaysSeries == series[0]]"
+                                ng-click="blurButton($event)">
+                        </button>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="panel reports-panel mbn mtxl">
+            <div class="panel-heading default-cursor bg-primary" ng-bind="'reports.label_export_task_heading' | translate"></div>
+            <div class="panel-body pvl">
+                <div class="content-info default-cursor text-medium" ng-bind="'reports.label_export_task_info' | translate"></div>
+
+                <div class="pvl" ng-init="selectedOption= seriesValue">
+                    <input type="radio" id="seriesId" name="taskExport" value="{{seriesValue}}" ng-model="selectedOption"  ng-change="errorMsg='';selected.ids=''">
+                    <label for="seriesId" class=" text-medium mrxxl prm mlm"
+                           ng-bind="'reports.label_task_series_label' | translate"></label>
+                    <input type="radio" id="taskId" name="taskExport" value="{{taskValue}}" ng-model="selectedOption">
+                    <label for="taskId" class=" mrxl mlm text-medium" ng-bind="'reports.label_task_ids' | translate"></label>
+                </div>
+                <div class="pbl">
+                    <div class="plm" ng-show="selectedOption === seriesValue" >
+                        <select class="selectpicker form-control text-large series-options mrxl"  ng-model="selectTaskSeries"
+                                ng-options="series.title for series in series track by series._id"></select>
+                    </div>
+                    <div ng-show="selectedOption === taskValue" >
+                        <input class="task-ids mlm " placeholder="{{'reports.label_task_placeHolder_text' | translate}}" required
+                               ng-init="selected.ids = ''"  ng-model="selected.ids " ng-focus="data.focussed =true"
+                               ng-blur="data.focussed =false" ng-class="{'border-indicator-pink highlight-pink': errorMsg, 'focus-text-box': (data.focussed && !errorMsg)}" />
+                        <span class="plm text-red" ng-if="errorMsg" ng-bind="errorMsg"></span>
+                    </div>
+                </div>
+
+                <a class="export-task mll">
+                    <button  class="btn text-white text-medium task-button" ng-click="downloadTaskData(); blurButton($event);"
+                            ng-bind="'reports.label_export_button' | translate" ng-class="{ true: 'btn-primary',
+                            false: 'bg-grey2 border-grey2 disable-button'}[(selectTaskSeries != series[0] && selectedOption ===seriesValue)  ||
+                            ((data.focussed == true || selected.ids.length>0 ) &&  selectedOption === taskValue)]">
+                    </button>
+                </a>
+
+
+            </div>
+        </div>
+        <div class="panel reports-panel mbn mtxl">
+            <div class="panel-heading default-cursor bg-primary"  ng-bind="'reports.label_export_updatedScenarios_heading' | translate"></div>
+            <div class="panel-body pvl">
+                <div class="content-info default-cursor text-medium" ng-bind="'reports.label_export_updatedScenarios_info' | translate"></div>
+                <div class="date-picker-container ptl pbm">
+                    <label class="date-picker-label man text-base mll plx mrxxl" ng-bind="'reports.label_choose-date' | translate" ></label>
+                    <div class="date-picker-div">
+                        <div class="input-group date-picker-parent">
+                            <div class="input-group-addon" ng-click="onCalenderClick()"><i class="fa fa-calendar"></i></div>
+                            <input date-range-picker class="form-control date-picker" readonly="true" type="text" ng-model="datePicker.date" options="dateRangePickerOptions"  />
+                        </div>
+                    </div>
+                </div>
+                <a class="export-scenario mll">
+                    <button class="btn text-white text-medium task-button" ng-click="downloadUpdatedScenario();blurButton($event);"
+                             ng-bind="'reports.label_export_button' | translate"  ng-class="{true: 'bg-grey2 border-grey2 disable-button' , false: 'btn-primary'}[datePicker.date.startDate == NULL]">
+                    </button>
+                </a>
+        </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,19 @@
+<div class="grid-header clearfix">
+    <ul class="legend-container list-inline pull-right man phxl" user-can='view_skill_steps'>
+        <li class="plm prn">
+            <span class="indicator-color img-circle border-indicator-pink bg-indicator-pink"></span>
+            <span class="indicator-label plx">{{'skillImport.label_task_step'| translate}}</span>
+        </li>
+        <li class="plm prn">
+            <span class="indicator-color img-circle border-indicator-yellow bg-indicator-yellow"></span>
+            <span class="indicator-label plx" >{{'skillImport.label_lib_step'| translate}}</span>
+        </li>
+    </ul>
+    <div class="app-img-container pull-left prm ptx">
+        <img id="img" class="img" ng-src="/modules/app/directives/productChooser/img/{{commonData.app}}.png"/>
+    </div>
+    <span class="app-name text-x-large prm border-grey2" ng-bind="commonData.app"></span>
+    <span class="change-product pls text-base text-primary cursor-pointer" product-chooser call-back="launchState(data)">
+        Change
+    </span>
+</div>

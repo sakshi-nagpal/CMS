@@ -1,0 +1,141 @@
+<!--commented to remove the up-down arrow handling-->
+<!--<div class="stepContainer man pal" capture-keydown="stepContainerKeyDown($event)">-->
+<div class="itemEditorContainer" ng-click="itemEditorClickHandler($event)">
+    <div class="editorHeader">
+        <nav class="navbar navbar-default mbn pvs phm">
+            <step-header ng-if="!isLibrary"  scenario="scenario" step-switch="true" step-index="stepIndex" on-change-step="onChangeStep(index)"  scenario-siblings="scenarioSiblings" scenario-switch='true' on-switch-scenario="onSwitchScenarioInEditor()"></step-header>
+            <div class="navbar-header plm" ng-if="isLibrary">
+                <div class="navbar-brand man phm pbn ptx">
+
+                    <span class="ptn pull-left text-x-large mvn ptm font-bold" ng-bind="'library.step.label_step_header' | translate" ></span>{{stepName}}
+                    <input ng-class="{'border-indicator-pink highlight-pink': errorMessage}" class="mlm pls step-name text-x-large font-bold" ng-model="stepJson.name" ng-blur="saveStepName()" />
+                    <span class="error-message text-base text-red" ng-bind="errorMessage"></span>
+                </div>
+            </div>
+            <div class="navbar-right mts">
+                <h5 class="method-count prm pvs mvn"><span ng-bind="'library.step.label_step_method_count' | translate" ></span> {{stepJson.methods.length}}</h5>
+                <div class="delete-step-container phs">
+                    <span alert-modal='deleteStepModalJson' title="Delete Step" class="delete-step baloo-font baloo-icon-trash"></span>
+                </div>
+                <button class="btn header-btn btn-large mhm" ng-click="toggleFindReplaceBand()">Find/Replace</button>
+                <div class="save-cancel-container plm mrxl">
+                    <button class="done btn header-btn btn-large mrs" ng-click="doneButtonClickHandler()">Save</button>
+                    <span class="cancel-link" ng-click="beforeCancelSave($event)">Cancel</span><span alert-modal='cancelSaveModalJson'></span>
+                </div>
+
+            </div>
+        </nav>
+        <div id="findReplaceBand" class="findReplaceBand">
+            <div class="findReplaceBox">
+                <div class="group plxl">
+                    <input id="findInputBox" placeholder="Find" ng-model="findPattern" class="form-control "/>
+                    <span class="bar"></span>
+                </div>
+                <div class="group pll mrm">
+                    <input placeholder="Replace" ng-model="replaceText" class="form-control"/>
+                    <span class="bar"></span>
+                </div>
+                <div class="vertical-divider mhs"></div>
+                <button class="button mhs" ng-click="findAllButtonClickHandler()" ng-class="{'disabled-button' : !findPattern}">Find All</button>
+                <button class="button mhx disabled-button">Previous</button>
+                <button class="button mhs" ng-click="findNextButtonClickHandler()" ng-class="{'disabled-button' : !findPattern}">Next</button>
+                <div class="vertical-divider"></div>
+                <button class="button mls mrx" ng-click="findReplaceButtonClickHandler()" ng-class="{'disabled-button' : !findPattern}">Replace</button>
+                <button class="button mlx mrs" ng-click="findReplaceAllButtonClickHandler()" ng-class="{'disabled-button' : !findPattern}">Replace All</button>
+                <div class="vertical-divider mhs"></div>
+                <input class="match-case-input mlm mrs" id="match-case-input" type="checkbox" ng-model="matchCase" ng-true-value="true" ng-false-value="false" ng-change=""/>
+                <label class="match-case-text mrm" for="match-case-input">Match Case</label>
+                <div class="vertical-divider mhs"></div>
+                <span id="finderMessage"></span>
+                <a class="close mrl mts" ng-click="toggleFindReplaceBand()">&times;</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="step-container-parent" style="position:relative">
+        <div class="stepContainer phxl prevent-key-handler">
+            <div class="step-text-hidden-container man pam pll phxl">
+                <div class="step-text-hidden pll prm"  ng-bind-html="sce.trustAsHtml(stepJson.text)"></div>
+            </div>
+            <div class="stepContainerChild">
+                <div class="stepTextDiv">
+                    <div class="stepTextHeader headerBand">
+                        <!--<div class="custom-toolbar pull-right">
+                            <div class="toolbar-icons-divider"></div>
+                            <span title="Insert Method" class="baloo-font baloo-icon-add-method" ng-click="insertMethod()"></span>
+                        </div>-->
+                    </div>
+                    <div class="stepText man pam pll" editor-index="0" ckeditor="stepTextEditorOptions" ng-model="stepText" ng-focus="stepTextFocusHandler($event)" ng-bind-html="sce.trustAsHtml(stepText)"></div>
+                </div>
+
+                <div ng-repeat="method in stepJson.methods" class="method{{$index + 1}} method mvm" capture-keydown="methodKeyDown($event)" ng-mousedown="methodMouseDownHandler($event)" ng-click="methodClickHandler($event)">
+                    <div class="deleteMethod">
+                        <div class="deleteMessage text-center text-white">
+                            <div>Are you sure you want to delete this method?</div>
+                            <div ng-if="method.primary">Note that this is the primary method. Deleting it will mark the top most method in the list as primary method.</div>
+                        </div>
+                        <div class="confirmButtons">
+                            <button class="btn btn-primary btn-large mrm" ng-click="deleteMethod($index)">Delete</button>
+                            <button class="btn btn-primary btn-large" ng-click="cancelDelete($event)">Cancel</button>
+                        </div>
+                    </div>
+
+                    <div class="methodHeader headerBand pas pln">
+                        <span title="Reorder Method" class="baloo-font baloo-icon-gripper-lg dd-method-handle gripper-icon"></span>
+                        <span title="Primary Method" class="baloo-font baloo-icon-filled-star primaryMethodIcon star-icon" ng-if="method.primary"></span>
+                        <span title="Make Primary Method" class="baloo-font baloo-icon-empty-star makePrimaryMethodIcon star-icon" ng-if="!method.primary" ng-click="updatePrimaryMethod($event, $index)"></span>
+                        <span class="mhx mlxxl method-index">Method {{$index + 1}}:&nbsp;</span>
+                        <select tabindex="-1" class="selectpicker methodTypeDropDown" ng-model="method.type" ng-options="methodType for methodType in methodTypes track by methodType"
+                                ng-focus="methodTypeFocusHandler($event)" ng-change="methodTypeChangeHandler()">
+                        </select>
+                        <div class="custom-toolbar pull-right">
+                            <div class="toolbar-icons-divider"></div>
+                            <span title="Insert Method" class="baloo-font baloo-icon-add-method" ng-click="insertMethod($index)"></span>
+                            <span title="Clone Method" class="baloo-font baloo-icon-clone-method" ng-click="cloneMethod($index)"></span>
+                            <span title="Delete Method" class="baloo-font baloo-icon-trash" ng-click="displayDeleteMethodMessage($event)"></span>
+                        </div>
+                    </div>
+
+                    <div class="actionListContainer mlxxl pll" editor-index="{{$index+1}}" ckeditor="methodEditorOptions" ng-model="models[$index]"
+                         ng-focus="actionListFocusHandler($event)" ng-blur="actionListBlurHandler($event)" ng-keydown="actionListKeyDownHandler($event)"
+                         ng-mouseup="actionListMouseUpHandler($event)">
+                        <ul class="actionList mbs" ng-if="method.actions">
+                            <li ng-repeat="action in ::method.actions" class="action action{{$index+1}}" db-id='{{action._id}}' start='{{action.start}}' end='{{action.end}}' ng-bind-html="sce.trustAsHtml(action.text)"></li>
+                        </ul>
+                    </div>
+
+                    <div class="fakeFocus"></div>
+
+                    <ul class="buttonContainerList man pan">
+                        <li class="actionButtonsContainer pas man" ng-repeat="action in method.actions track by $index">
+                            <span title="Delete Action" class="actionDeleteButton baloo-font baloo-icon-trash" ng-click="deleteButtonClickHandler($event)" tabindex="-1"></span>
+                            <span title="Reorder Action" class="dd-action-handle mls phx baloo-font baloo-icon-gripper-sm" tabindex="-1" style="margin-top: 1px"></span>
+                        </li>
+                    </ul>
+
+                    <button class="addAction mbl mlxxl pax" tabindex="-1" ng-click="addActionClickHandler($event)"><i class="baloo-font baloo-icon-plus-circle"></i> Action</button>
+                </div>
+
+            </div>
+            <button title="Insert Method" class="insertMethod mvl " tabindex="-1" ng-click="insertMethod()"><i class="baloo-font baloo-icon-plus-circle"></i> Method</button>
+        </div>
+
+        <!--Modal Default-->
+        <!--<div id="modal-default" tabindex="-1" role="dialog" aria-labelledby="modal-default-label"
+             aria-hidden="true" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" data-dismiss="modal" aria-hidden="true"
+                                class="close">&times;</button>
+                        <h4 id="modal-default-label" class="modal-title">Warning! This cannot be undone!</h4></div>
+                    <div class="modal-body">Are you sure you want to delete this step?</div>
+                    <div class="modal-footer">
+                        <button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
+                        <button type="button" data-dismiss="modal" class="btn btn-primary" ng-click="deleteStep()">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+    </div>
+</div>

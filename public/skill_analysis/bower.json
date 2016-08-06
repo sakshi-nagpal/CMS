@@ -1,0 +1,8 @@
+{
+	"name": "Front-End-Lib Management",
+	"version": "0.0.1",
+	"dependencies": {
+		"bootstrap": "*",
+	  	"handlebars" : "*"
+	}
+}

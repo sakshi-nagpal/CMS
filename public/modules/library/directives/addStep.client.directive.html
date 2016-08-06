@@ -1,0 +1,31 @@
+<div class="modal fade add-step-modal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content text-color modal-container">
+            <div class="modal-header pal bg-theme">
+                <button type="button"  class="close dismiss-button text-color" data-dismiss="modal">&times;</button>
+                <div class="modal-title text-large font-bold" ng-bind="addStepPopupConfig.header"></div>
+            </div>
+            <div class="modal-body phl ptl pbn">
+                    <div class="text-medium step-data" ng-repeat="label in addStepPopupConfig.labels">
+                        <span ng-bind-html="sce.trustAsHtml(label.title + ':')" class="font-bold"></span>
+                        <span ng-bind-html="sce.trustAsHtml(label.value)" ></span>
+                    </div>
+                <div class="text-medium font-bold pbl" ng-bind="'library.addStepModal.label_addStep_step_name' | translate"></div>
+                <form ng-submit="saveLibraryStep()">
+                    <input class="border-grey2 step-name plm" ng-class="{'border-indicator-pink highlight-pink': errorMsg, 'focus-text-box': (focusTextbox && !errorMsg)}" placeholder=""
+                            ng-focus="focusTextbox = true" ng-blur="focusTextbox = false" ng-model="libStepName"/>
+                </form>
+                <div class="error text-red ptl " ng-if="errorMsg" ng-bind="errorMsg"></div>
+            </div>
+            <div class="modal-footer step-footer border-theme pal mbx">
+                <button class="btn btn-primary save-button" ng-click="saveLibraryStep()" ng-bind="'library.addStepModal.label_addStep_save_button' | translate"></button>
+                <button class="btn btn-primary" data-dismiss="modal" ng-bind="'library.addStepModal.label_addStep_cancel_button' | translate"></button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+

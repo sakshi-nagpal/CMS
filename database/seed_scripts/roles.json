@@ -1,0 +1,11 @@
+[
+    { "name":"systemAdmin", "desc": "System Admin"},
+    { "name":"contentAuthor", "desc": "MIL Author"},
+    { "name":"contentReviewer", "desc": "Content Reviewer"},
+    { "name":"customerReviewer", "desc": "Customer Reviewer"},
+    { "name":"developer", "desc": "Developer"},
+    { "name":"softwareTester", "desc": "Software Quality Assurance"},
+    { "name":"devContentAdmin", "desc": "Development Content Admin"},
+    { "name":"editorialAuthor", "desc": "Editorial Author"},
+    { "name" : "mediaVendor", "desc" : "Media Vendor"}
+]

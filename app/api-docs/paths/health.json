@@ -1,0 +1,21 @@
+{
+  "get": {
+    "tags": ["health"],
+    "summary": "System Health",
+    "description": "Retrieves API health status.",
+    "responses": {
+      "200": {
+        "description": "Json object with positive health information",
+        "schema": {
+          "type": "object"
+        }
+      },
+      "default": {
+        "description": "Json object with negative health information",
+        "schema": {
+          "type": "object"
+        }
+      }
+    }
+  }
+}

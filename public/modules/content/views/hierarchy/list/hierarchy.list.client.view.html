@@ -1,0 +1,76 @@
+<div class="two-level-list-container mvn">
+    <ul class="tll-parent fa-ul mhn mvn navigation-parent">
+        <li class="tll-parent-li " ng-repeat="parentListItem in hierarchy.children">
+            <span class="pull-right metadata prl text-large pts" ng-if="view === 'view2'">
+                <i title="{{metadataEntity}} {{'content.label_documents' | translate}}"
+                   class="baloo-font baloo-icon-docs proj-docs-icon"
+                   ng-click="showPopup(parentListItem)"></i>
+            <!--<i title="{{metadataEntity}} {{'content.label_comments' | translate}}"
+               class="glyphicon glyphicon-comment pll"></i>--></span>
+            <span user-can='edit_content' scenario-reference project-data='parentListItem' indicators='data.indicators'
+                  class="pull-right prl text-large pts scenario-ref  text-large" ng-if="view === 'view2'">
+                <i title="{{'content.scenario_ref.label_title' | translate}}"
+                   class="scenario-ref-icon baloo-font baloo-icon-manage-docs"></i>
+            </span>
+
+            <p class="tll-title text-medium mvn phm border-theme" ng-bind="parentListItem.title"></p>
+            <ul class="tll-child fa-ul text-base mvn mhn">
+                <li class="tll-child-li vertical-navigation button-handler" tabindex="0" ng-init="phase={}"
+                    ng-click="phase.click===true? phase.click=false : onChildElementClick(childListItem._id,childListItem.data.friendlyId)"
+                    ng-repeat="childListItem in parentListItem.children">
+                    <img class="tll-icon plm pull-left" ng-class="childListItem.app.split(' ')[0]"
+                         ng-src="/modules/content/img/{{childListItem.app.split(' ')[0]}}.png">
+                    <span ng-bind="childListItem.title" class="ellipsis" ellipsis-tooltip="childListItem.title"></span>
+
+            <div class="pull-right" ng-if="view === 'view2'">
+
+           <span ng-if="phases[childListItem._id + 'T1'].isCommentAvailable||phases[childListItem._id + 'A1'].isCommentAvailable||phases[childListItem._id + 'A2'].isCommentAvailable"
+                 ng-init="newComments ={T1 : (phases[childListItem._id + 'T1'].count>0)?'T1 --> '+phases[childListItem._id + 'T1'].count+' New Comment(s) &#xa;':'',
+                                        A1 : (phases[childListItem._id + 'A1'].count>0)?'A1 --> '+phases[childListItem._id + 'A1'].count+' New Comment(s) &#xa;':'',
+                                        A2 : (phases[childListItem._id + 'A2'].count>0)?'A2 --> '+phases[childListItem._id + 'A2'].count+' New Comment(s)':''}">
+              <span ng-if="(phases[childListItem._id + 'T1'].count+phases[childListItem._id + 'A1'].count+phases[childListItem._id + 'A2'].count)>0" >
+              <i title="{{newComments.T1+newComments.A1+newComments.A2}}" class="baloo-font baloo-icon-comments comments">
+                  <sup ng-if="(phases[childListItem._id + 'T1'].count+phases[childListItem._id + 'A1'].count+phases[childListItem._id + 'A2'].count)>0" class="badge badge-size"
+                       ng-bind="(phases[childListItem._id + 'T1'].count+phases[childListItem._id + 'A1'].count+phases[childListItem._id + 'A2'].count)">        </sup>
+              </i>
+              </span>
+               <span ng-if="(phases[childListItem._id + 'T1'].count+phases[childListItem._id + 'A1'].count+phases[childListItem._id + 'A2'].count)===0">
+               <i class="baloo-font baloo-icon-comments comments badge-padding"></i></span>
+           </span>
+
+                <div class="pull-right indicated-values phases mvs text-xs navigation-parent"
+                             ng-if="view === 'view2'">
+                        <span class='indicated-value mhm phs' ng-repeat="scenarioType in data.scenarioTypes">
+
+                            <a ui-sref="content.task.scenario({taskId: childListItem._id, friendlyId: childListItem.data.friendlyId +'.'+ scenarioType.code})"
+                               ng-class="(phases[childListItem._id.concat(scenarioType.code)])?'phase':authorization.canAccess('edit_content')?'plus':'not_applicable'"
+                               class="mhx horizontal-navigation"
+                               title='{{(phases[childListItem._id.concat(scenarioType.code)])?(scenarioType.code):authorization.canAccess("edit_content")?(("content.label_create_scenario"|translate)+" "+scenarioType.code):(("content.label_scenario"|translate)+" "+scenarioType.code+" "+("content.label_not_available"|translate))}}'
+                               ng-click="phase.click=true">
+
+                                <span ng-if="phases[childListItem._id + scenarioType.code]"
+                                      ng-bind="phases[childListItem._id + scenarioType.code].phase"></span>
+                                <span class="plus-icon" ng-if="!phases[childListItem._id + scenarioType.code]"
+                                      user-can='edit_content'>+</span>
+                                <span ng-if="(!phases[childListItem._id + scenarioType.code]) && (!authorization.canAccess('edit_content'))">NA</span>
+                            </a>
+                        </span>
+
+                        </div>
+                    </div>
+                    <div class="pull-right indicated-values mvs text-small count" ng-if="view === 'view1'">
+                        <span class='indicated-value'>
+                            <a class="mhl" title="{{projectCountLabel}}"><span
+                                    ng-bind="data.projectCount[childListItem._id]"></span></a>
+                        </span>
+                        <span class='indicated-value'>
+                            <a class="mhl" title="{{taskCountLabel}}"><span
+                                    ng-bind="data.taskCount[childListItem._id]"></span></a>
+                        </span>
+                    </div>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+

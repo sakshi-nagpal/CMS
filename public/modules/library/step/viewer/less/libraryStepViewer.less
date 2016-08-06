@@ -1,0 +1,106 @@
+.library-step-viewer{
+  .method-count{
+    display :inline-block;
+    font-weight: normal;
+  }
+  .library-step-header{
+    position: relative;
+    z-index: 5;
+  }
+  .stepname-container{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width:600px;
+  }
+  .tag-container, .history-icon {
+    display: inline-block;
+  }
+  .tag-container {
+    border-left: 1px solid #999999;
+    .tag-icon {
+      position: relative;
+      top: 2px;
+      cursor: pointer;
+      &:hover {
+        .bg-primary;
+        border-radius: 4px;
+      }
+    }
+  }
+  .history-icon{
+    position: relative;
+    top: 1px;
+    height: 28px;
+    border-left: 1px solid #999999;
+    .baloo-icon-history {
+      top: 2px;
+      position: relative;
+      cursor: pointer;
+      &:hover {
+        .bg-primary;
+        border-radius: 4px;
+      }
+    }
+  }
+
+  .metadata-dropdown {
+    margin-left:20px;
+    display: inline;
+    margin-top: -13px !important;
+    margin-bottom: 5px;
+    padding-bottom: 2px;
+    border-bottom: #777777 1px solid;
+    &.open {
+      border-bottom: @brand-primary 1px solid;
+      .dropdown-toggle {
+        .text-color;
+        &:hover{
+          .text-color;
+        }
+      }
+      .caret {
+        color: @brand-primary;
+      }
+    }
+    .title-value {
+      display: inline-block;
+    }
+    .dropdown-toggle {
+      box-shadow: none !important;
+      &:hover{
+        .text-color;
+      }
+    }
+    .dropdown-menu {
+      width:290px !important;
+      .mapped-tasks, .metadata {
+        background-color: #f8f8f8;
+        color: @text-color;
+        font-weight: bold;
+      }
+      .step-metadata{
+        .step-data {
+          color: @grey3;
+        }
+        .skills {
+          margin-left:15px !important;
+        }
+        .skill-list {
+          padding-left: 0 !important;
+        }
+      }
+      .task {
+        margin-left:15px !important;
+        a {
+          color: #337ab7;
+          padding:0;
+          &:hover{
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+}
+

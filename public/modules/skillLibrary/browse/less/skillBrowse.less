@@ -1,0 +1,165 @@
+.skill-browse {
+  .browse-view{
+    .import-grid-view{
+     .skill-import-grid{
+       .phn;
+     }
+    }
+  }
+  .header-container {
+    cursor: default;
+    .breadcrumb {
+      border: none;
+      background-color: transparent;
+      li
+      a {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        line-height: 20px;
+        vertical-align: middle;
+        &:hover{
+          text-decoration: underline;
+        }
+      }
+    }
+    .app-img-container {
+      display: inline-block;
+      .img {
+        width: 40px;
+      }
+    }
+    .legend-container{
+      display: inline-block;
+      position: relative;
+      .indicator-color {
+        width: 15px;
+        height: 15px;
+        border-width: 1px;
+        border-style: solid;
+        display: inline-block;
+        vertical-align: sub;
+      }
+      .indicator-counter{
+        display: inline-block;
+      }
+    }
+    .grid-header{
+      .legend-container{
+        top:10px;
+      }
+      .app-name {
+        display: inline-block;
+        font-weight: bold;
+        vertical-align: text-top;
+        border-right: 1px solid;
+        position: relative;
+        top: 5px;
+      }
+      .change-product{
+        position: relative;
+        top: 11px;
+        display: inline-block;
+      }
+    }
+    .list-header{
+      .app-img-container {
+        display: inline-block;
+        .img {
+          width: 40px;
+        }
+      }
+      .legend-container{
+        top:-20px;
+      }
+      .border-container{
+        border-right: 1px solid @grey2;
+      }
+      .skill-detail{
+        display: inline-block;
+        white-space: nowrap;
+        width: 65%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        .skill-breadcrumb{
+          font-weight: bold;
+          display: inline;
+        }
+      }
+      .add-library-container{
+        display:inline-block;
+        .add-library{
+          position: relative;
+          top: -9px;
+          margin-bottom: 5px;
+        }
+      }
+    }
+  }
+  .skill-import-grid {
+    position: relative;
+    .legend-container{
+      position: absolute;
+      top: -60px;
+      right: 25px;
+      border: none;
+    }
+
+    .ui-data-grid {
+      .ui-grid-row{
+        .browse-column{
+          span{
+            max-width: 48% !important;
+            float:left;
+            display: inline-block;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            .mrm;
+          }
+          .pill{
+            border:1px solid;
+            line-height: 12px;
+            border-radius: 5px;
+            border-color: #777777 ;
+          }
+          .step-count-container{
+            border-right: 1px solid;
+            height: 40px;
+
+          }
+          .add-step{
+            .text-h3 !important;
+            &:hover{
+              .bg-indicator-yellow;
+              .text-white;
+            }
+          }
+        }
+        &:hover{
+          .ui-grid-cell
+          {
+            button{
+              .bg-theme;
+            }
+          }
+        }
+      }
+    }
+
+  }
+  .import-list-view{
+    position: relative;
+    border-top: 7px solid @color-theme;
+    .steps-container{
+      .pan;
+    }
+   .legend-container {
+      position: absolute;
+      top: -45px;
+    }
+  }
+
+}
+
+

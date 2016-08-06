@@ -1,0 +1,22 @@
+<div class="bg-white history-comparison-view">
+    <div class="history-comparion-header">
+        <nav class="navbar navbar-default mbn pam">
+            <div class="history-label pull-left text-h3 pll" ng-if="!versionView" ng-bind="historyConfig.comparisonHeaderTitle | translate"></div>
+            <div class="history-label pull-left text-h3 pll" ng-if="versionView">
+                <span ng-bind="historyConfig.versionHeaderTitle | translate"></span>
+                <span ng-bind="'v.'"></span><span class="mlx" ng-bind="(history | filter:{_id:historyId})[0].version"></span>
+            </div>
+            <div class="navbar-right mrl">
+                <button class="btn header-btn btn-large mlx"
+                        ng-click="onComparisonViewClose()"
+                        ng-bind="'history.label_close_button' | translate">
+                </button>
+            </div>
+        </nav>
+    </div>
+
+    <div id="compare-view" class="box compare-view-box hidden man plxl prl" ng-init="getContainerHeight()">
+        <div ng-include="historyConfig.template"></div>
+    </div>
+</div>
+

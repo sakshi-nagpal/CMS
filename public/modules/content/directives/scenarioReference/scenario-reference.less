@@ -1,0 +1,136 @@
+.scenario-reference {
+  &.modal {
+    .modal-backdrop.in {
+      opacity: .4;
+    }
+    .modal-dialog {
+      width: 1044px;
+      .modal-content {
+        top: 7px;
+        .title {
+          font-weight: bold;
+          .close {
+            font-size: 26px;
+            margin-top: -4px;
+            &:hover {
+              .text-primary;
+              opacity: 1;
+            }
+          }
+        }
+        .body {
+          .header-wrapper {
+            padding-top: 21px !important;
+            .header {
+              font-weight: bold;
+            }
+          }
+          table {
+            border-bottom: 1px solid !important;
+            border-left: 1px solid !important;
+            .border-theme;
+            table-layout: fixed;
+            thead {
+              background-color: rgb(252, 252, 252);
+              .scenario_prop {
+                width: 224px;
+              }
+              .scenario_type {
+                width: 270px;
+              }
+            }
+            tbody {
+              .doc_name {
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+              }
+              input {
+                border: 1px solid @grey2;
+                &:focus {
+                  border-color: @input-border-focus !important;
+                  outline: none !important;
+                }
+              }
+              input, .ref_name {
+                height: 30px;
+                .pls;
+                width: 190px;
+              }
+              .sampleRefName {
+                display: inline-block;
+                height: 30px;
+              }
+              td {
+                .border-theme;
+                .dropdown {
+                  display: inline-block;
+                  .search {
+                    .caret {
+                      cursor: pointer;
+                      position: absolute;
+                      right: 10px;
+                      top: 13px;
+                      &.search-clicked {
+                        color: @input-border-focus !important;
+                      }
+                    }
+                  }
+
+                  .dropdown-menu {
+                    width: 190px;
+                    max-height: 450px;
+                    overflow-y: auto;
+                    .list-item {
+                      border-bottom: 1px solid;
+                      .border-color;
+                      cursor: pointer;
+
+                      &:hover {
+                        .bg-theme;
+                        .ref, .ref_id {
+                          color: black;
+                        }
+                      }
+                      a {
+                        /*display: inline-block;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        width: 190px;*/
+                        white-space: normal;
+                        word-break: break-all;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            tr {
+              .border-theme;
+              th, td {
+                border-top: 1px solid !important;
+                border-right: 1px solid !important;
+                .border-theme;
+                .plxxl;
+                padding-bottom: 15px;
+                padding-top: 15px;
+                vertical-align: middle;
+              }
+            }
+          }
+        }
+
+      }
+    }
+    input:invalid {
+      box-shadow: none;
+    }
+    input:-moz-submit-invalid {
+      box-shadow: none;
+    }
+
+    input:-moz-ui-invalid {
+      box-shadow: none;
+    }
+  }
+}

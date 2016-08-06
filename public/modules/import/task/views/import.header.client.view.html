@@ -1,0 +1,32 @@
+<div class='import-header bg-theme'>
+    <nav class='navbar navbar-default mbn bg-theme'>
+        <div class='navbar-header mll mvm pvx'>
+            <label class='man text-color heading text-x-large'>
+                <span ng-if="importTask.isCopyScenario" ng-bind="'importModule.label_copy_scenario_title' | translate"></span>
+                <span ng-if="!importTask.isCopyScenario" ng-bind="'importModule.label_step_import_title' | translate"></span>
+            </label>
+        </div>
+        <div class='navbar-right mvm mrxl'>
+            <button ng-click='popupClose(importTask.friendlyId)' class='btn btn-primary pvs mvs text-base' ng-bind="'importModule.label_close'| translate"></button>
+        </div>
+    </nav>
+    <div class='search-box text-center'>
+        <div class='search text-center mvxxl'>
+            <span class="text-large" ng-bind="'importModule.label_search_title'| translate"></span>
+            <div class='input-icon right prs ptm'>
+                <form ng-submit='searchTask(importTask.taskSearchText)'>
+
+                    <i class='fa baloo-icon-search search-icon img-circle mtx'
+                       ng-class='{"bg-primary cursor-pointer text-white":(importTask.taskSearchText),
+                               "bg-theme-darker cursor-default text-color":!(importTask.taskSearchText)}'
+                       ng-click='(importTask.taskSearchText)? searchTask(importTask.taskSearchText):null '></i>
+
+                    <input  placeholder="{{'dashboard.label_placeholder_text' | translate}}" tabindex='0'
+                            class='form-control rounded-box text-small box-shadow-two-sides' type='text'
+                            ng-model='importTask.taskSearchText'>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

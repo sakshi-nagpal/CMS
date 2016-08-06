@@ -1,0 +1,181 @@
+#reports-module{
+
+  .reports-header{
+    border-bottom: 7px solid  @color-theme;
+    .breadcrumb{
+      .bg-white;
+      border:none;
+    }
+    .reports-title{
+      font-weight: bold;
+    }
+  }
+  .reports-panel{
+    border:1px solid @brand-primary;
+  }
+
+
+
+  .series-options{
+      display: inline-block;
+      width: 400px;
+    }
+  .content-download{
+    text-align: center;
+  }
+  .series-label{
+    top: 3px;
+    position: relative;
+  }
+
+  .bootstrap-select {
+    .btn{
+      border-bottom-color: @grey2;
+      .caret {
+        .text-grey2;
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        border-top: 6px solid !important;
+      }
+    }
+    &.open{
+      .caret{
+        color:@brand-primary !important;
+      }
+      .btn{
+        border-bottom-color: @brand-primary !important;
+      }
+    }
+    &.dropup{
+      .caret{
+        border-bottom: 6px solid;
+        border-top: none !important;
+      }
+    }
+  }
+  .selectpicker {
+    .text-base;
+    a {
+      .text-base;
+    }
+  }
+  input[type="radio"] {
+    outline:none;
+  }
+
+  .task-ids{
+    display: inline-block;
+    width:35%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 6px 12px;
+    font-size: 14px;
+    box-shadow:none;
+    &:focus{
+      outline:none !important;
+    }
+    &.border-indicator-pink {
+      box-shadow: 0 0 3px #d1293a;
+    }
+  }
+  .focus-text-box{
+    border-color: #66afe9;
+  }
+
+  .input-box{
+    display:block;
+    width:250px;
+    height:250px;
+  }
+  .disable-button{
+    pointer-events: none;
+    opacity:1
+  }
+  .default-cursor{
+    cursor: default;
+  }
+  .date-picker-container{
+    .date-picker-label{
+      position: relative;
+      top: -13px;
+    }
+    .date-picker-div{
+      display: inline-block;
+      width: 60%;
+      .input-group-addon{
+        cursor: pointer;
+        border: 1px;
+      }
+      .date-picker{
+        .bg-white;
+        .cursor-pointer;
+        width:35%;
+      }
+    }
+  }
+}
+.daterangepicker{
+  border: 1px solid #ccc;
+  width: 547px;
+  padding:20px;
+  height: 394px;
+  color: #205f9f !important;
+  .calendar{
+    padding-top: 56px !important;
+    margin: 0px !important;
+  }
+  .calendar.second{
+    padding-right: 18px;
+    border-right: 1px solid #ddd;
+  }
+  .calendar.first{
+    padding-left: 18px;
+  }
+  .ranges{
+    position: absolute;
+    width: 100%;
+    left:0px;
+    top: 10px;
+    .range_inputs{
+      .btn-sm{
+        position: absolute;
+        top: 330px;
+      }
+      .applyBtn{
+        left: 201px;
+        width: 61px;
+      }
+      .cancelBtn{
+        right: 212px;
+        width: 61px;
+      }
+      .daterangepicker_start_input{
+        margin-right: 24px;
+        margin-left: 16px;
+      }
+    }
+    label{
+      font-size: 12px;
+      width: 100%;
+    }
+    text-align: center;
+    .input-mini{
+      padding: 0px;
+      text-align: center;
+      width: 235px !important;
+      font-size: 12px;
+      color: #205f9f !important;
+    }
+  }
+  td.available.off{
+   opacity: 0.4;
+  }
+  td.off.disabled{
+    opacity: 0.4;
+  }
+  td.disabled{
+    cursor: not-allowed;
+  }
+}
+
+

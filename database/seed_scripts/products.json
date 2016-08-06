@@ -1,0 +1,41 @@
+[
+  {
+    "title":"Word",
+    "thumbnail":"Word.png",
+    "applications":[
+      {"title":"Word 2013", "thumbnail":"Word.png"},
+      {"title":"Word 2016", "thumbnail":"Word.png"}
+    ]
+  },
+  {
+    "title":"Excel",
+    "thumbnail":"Excel.png",
+    "applications":[
+      {"title":"Excel 2013", "thumbnail":"Excel.png"},
+      {"title":"Excel 2016", "thumbnail":"Excel.png"}
+    ]
+  },
+  {
+    "title":"PPT",
+    "thumbnail":"PPT.png",
+    "applications":[
+      {"title":"PPT 2013", "thumbnail":"PPT.png"},
+      {"title":"PPT 2016", "thumbnail":"PPT.png"}
+    ]
+  },
+  {
+    "title":"Access",
+    "thumbnail":"Access.png",
+    "applications":[
+      {"title":"Access 2013", "thumbnail":"Access.png"},
+      {"title":"Access 2016", "thumbnail":"Access.png"}
+    ]
+  },
+  {
+    "title":"Windows",
+    "thumbnail":"Windows.png",
+    "applications":[
+      {"title":"Windows 10", "thumbnail":"Windows.png"}
+    ]
+  }
+]

@@ -1,0 +1,10 @@
+<div class="import-container" ui-view>
+    <div class="scenario-viewer-module bg-white" ng-init="getScenarioByFriendlyID(importTask.sourceFriendlyId); flag.initialScreen = false">
+
+        <div ng-include="'scenario.viewer.header.client.view.html'"></div>
+        <div class="scenario-content">
+            <step-list-view capabilities='capabilities' steps="scenario.steps" on-step-click="onStepClick(index)" view-only="true"></step-list-view>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>

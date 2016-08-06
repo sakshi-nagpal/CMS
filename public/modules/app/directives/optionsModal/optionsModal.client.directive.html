@@ -1,0 +1,50 @@
+<div  role="dialog" aria-labelledby="modal-default-label" aria-hidden="true" class="modal fade options-modal {{optionsModal.customClass}}">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="title bg-theme pal">
+                    <span class="text-color text-large" ng-bind="optionsModal.title"></span>
+                    <button data-dismiss="modal" aria-hidden="true" class="text-color close">&times;</button>
+                </div>
+                <div class="body">
+                    <div class="instruction pal" ng-if="optionsModal.instruction">
+                        <span class="text-color text-medium" ng-bind="optionsModal.instruction"></span>
+                    </div>
+                    <div class="content ptl text-center">
+                        <div  class="list " ng-repeat="data in optionsModal.data">
+
+                            <div class="list-item search-box text-center" ng-if="data.search">
+                                <div  class="search">
+                                    <span class="text-color text-medium " ng-bind="data.searchInstruction"></span>
+                                    <div class="input-icon right prs pvl">
+                                        <form ng-submit="searchTask(optionsModal.taskSearchText, data.stateRef, data.options.stepNum)">
+                                            <i class="fa baloo-icon-search search-icon img-circle mtx" ng-class="{'bg-primary cursor-pointer text-white':(optionsModal.taskSearchText),
+                                       'bg-theme-darker cursor-default text-color':!(optionsModal.taskSearchText)}" ng-click="(optionsModal.taskSearchText)? searchTask(optionsModal.taskSearchText, data.stateRef):null ">
+                                            </i>
+                                            <input  placeholder="Eg: GO13.WD13.01.1A.01.T1" autocomplete="off" tabindex="0" class="form-control rounded-box text-base
+                                            box-shadow-two-sides" type="text" ng-model="optionsModal.taskSearchText"  ng-disabled="data.disable">
+
+                                        </form>
+
+                                    </div>
+                                </div>
+                                <span class="caption text-color text-large" ng-bind="data.caption"></span>
+                            </div>
+
+                            <div ui-sref="{{data.stateRef}}" class="list-item thumbnail-box text-center" ng-if="!data.search && data.stateRef" ng-click="dismissModal()">
+
+                                <img class="mbl img" ng-src="/modules/app/directives/optionsModal/img/{{data.thumbnail}}.png"/>
+                                <span class="caption text-color text-large" ng-bind="data.caption"></span>
+                            </div>
+
+                            <div ng-click="callback(data.event,data.caption);dismissModal()" class="list-item thumbnail-box text-center" ng-if="!data.search && !data.stateRef">
+                                <img class="mbl img" ng-src="/modules/app/directives/optionsModal/img/{{data.thumbnail}}    "/>
+                                <span class="caption text-color text-large" ng-bind="data.caption"></span>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

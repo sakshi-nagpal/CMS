@@ -1,0 +1,73 @@
+# iOS / Apple
+# ===========
+.DS_Store
+ehthumbs.db
+Icon?
+Thumbs.db
+
+# Node and related ecosystem
+# ==========================
+.nodemonignore
+.sass-cache/
+npm-debug.log
+node_modules/
+public/lib
+app/tests/coverage/
+.bower-*/
+.idea/
+
+# MEAN.js app and assets
+# ======================
+config/sslcerts/*.pem
+access.log
+
+# Sublime editor
+# ==============
+.sublime-project
+*.sublime-project
+*.sublime-workspace
+
+# Eclipse project files
+# =====================
+.project
+.settings/
+.*.md.html
+.metadata
+*~.nib
+local.properties
+
+# IntelliJ
+# ========
+*.iml
+
+# Cloud9 IDE
+# =========
+.c9/
+data/
+mongod
+
+# General
+# =======
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.gz
+*.tmp
+*.bak
+*.swp
+logs/
+build/
+/test-results.xml
+/xunit.xml
+/coverage*
+/public/css
+/public/templates.js
+/public/routes.js
+/public/modules/itemEditor/directives/ngCkeditor/ckeditor/dev/builder/ckbuilder
+/public/modules/itemEditor/directives/ngCkeditor/ckeditor/dev/builder/release/ckeditor_4.4.8_dev.zip
+/public/modules/itemEditor/directives/ngCkeditor/ckeditor/dev/builder/release/ckeditor_4.4.8_dev.tar.gz
+bower_repo
+/public/skill_analysis/modules/compare/compare_min.js
+/public/skill_analysis/modules/compare/item_config_min.js

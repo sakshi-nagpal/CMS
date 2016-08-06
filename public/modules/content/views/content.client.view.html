@@ -1,0 +1,56 @@
+<section id="content-module" class="full-height">
+    <div class="content-child">
+        <header class="header limit-content">
+            <div class="ptm header-content">
+                <!-- breadcrumb-->
+                <breadcrumbs breadcrumbs='data.breadcrumbs'></breadcrumbs>
+                <div class="header-label-container">
+
+                    <!-- content thumbnail -->
+                    <img ng-if="data.header.appIcon" class="header-icon prm pull-left"
+                         ng-src="/modules/content/img/{{data.header.appIcon.split(' ')[0]}}.png">
+                    <!-- subtitle & title -->
+                    <div ng-class='{"no-subtitle": !data.header.title1.length}' class="header-label mts phn text-large">
+                        <div class="title1 text-base pbx" ng-bind="data.header.title1"></div>
+                        <div ellipsis-tooltip='data.header.title2' class="title2 ellipsis  pln"
+                             ng-bind="data.header.title2"></div>
+
+                        <div user-can='bulk_phase_change' ng-show="setPhaseChanger()" class="btn-group header-dropdown"
+                             dropdown
+                             dropdown-append-to-body>
+                            <button id="btn-append-to-body" type="button"
+                                    class="btn-dropdown btn-white phase-dropdown text-base" dropdown-toggle>
+                                Change Phase <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="btn-append-to-body">
+                                <li role="menuitem" class="text-base" ng-repeat="phase in phases"
+                                    ng-click="changePhase(phase)"><a
+                                        ng-bind="phase.name"></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- color-indicators -->
+                        <ul class="color-indicators list-inline pull-right man">
+                            <li ng-repeat="indicator in data.indicators" class="plm">
+                                <span class="indicator-color"></span><span class="indicator-label pls"
+                                                                           ng-bind="indicator"></span>
+                            </li>
+                        </ul>
+
+                        <span title="{{data.task.data.isActive ? ('common.label.task_status_inactive' | translate ): ('common.label.task_status_active' | translate)}}"
+                              ng-if="data.task._id"
+                              class="task-status text-large baloo-font baloo-icon-flag mrl pull-right cursor-pointer"
+                              ng-class="data.task.data.isActive ? 'active' : 'inactive'"
+                              user-can='edit_task_status' ng-click="onTaskStatusChange()"></span>
+
+                    </div>
+                </div>
+                <cms-tabs class='scenario-tabs' obj='data.scenarioTabs'></cms-tabs>
+                <div class="phase-change-modal" alert-modal='phaseChange.popupData'
+                     show-modal='phaseChange.showModal'></div>
+            </div>
+
+        </header>
+        <div ui-view class='limit-content'></div>
+    </div>
+</section>

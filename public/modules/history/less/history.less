@@ -1,0 +1,107 @@
+
+.history{
+  left: 0;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+  input[type="checkbox"], input[type="radio"] {
+    outline: none !important;
+  }
+  .history-label{
+    display: inline-block;
+    font-weight: bold;
+    line-height: 34px;
+  }
+  button {
+    &.header-btn {
+      .text-white;
+      background-color: @brand-primary;
+    }
+    &:hover {
+      background-color: darken(@brand-primary, 8%);
+    }
+  }
+  .history-container{
+    overflow-y: scroll;
+    .compare-header-container {
+      position: relative;
+      .version_radio_filters {
+        float: right;
+        position: absolute;
+        right:0;
+        bottom: 0;
+        top:0;
+        margin:auto;
+        height: 18px;
+      }
+    }
+    .entity-metadata{
+      .publish-info-container {
+        float: right;
+        .publish-icon {
+          line-height: 18px;
+          .text-medium;
+        }
+      }
+    }
+    .compare-btn-inactive, .btn-inactive{
+      opacity: 0.7;
+      pointer-events: none;
+      &:hover{
+        background-color: @grey2;
+      }
+      background-color : @grey2;
+      color: @color-theme !important;
+      cursor: default;
+    }
+    .history-content{
+      table{
+        .border-theme;
+        border-collapse: collapse;
+        thead{
+          tr{
+            .border-theme;
+            th{
+              .border-theme;
+            }
+          }
+        }
+        tbody{
+          tr{
+            .border-theme;
+            td{
+              .border-theme;
+            }
+          }
+        }
+
+      }
+      .history-heading{
+        background-color: @color-theme;
+      }
+      .version{
+        .select{
+          float: left;
+        }
+        .version-no{
+          .text-primary;
+          cursor: pointer;
+          > a{
+            .text-primary;
+            margin-top: 2px;
+            float: left;
+          }
+        }
+        .publish-icon {
+          float: right;
+          line-height: 20px;
+          .text-medium;
+        }
+      }
+    }
+  }
+}
+
+@import '../comparison/less/libraryStepComparison';

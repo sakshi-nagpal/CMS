@@ -1,0 +1,93 @@
+{
+  "contentExport":{
+    "get":{
+      "tags": ["contentAdminstration"],
+      "summary": "Export Content",
+      "description": "Content Export endpoint will return an array of all the Hierarchy objects of specfied content and series",
+      "parameters": [
+        {
+          "name": "content",
+          "in": "body",
+          "description": "content type",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "seriesId",
+          "in": "body",
+          "description": "series Id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Array of object"
+        },
+        "default": {
+          "description": "Unexpected error",
+          "schema": {
+            "$ref": "#/definitions/ErrorModel"
+          }
+        }
+      }
+    }
+  },
+  "contentImport":{
+    "get":{
+      "tags": ["contentAdminstration"],
+      "summary": "Import Content",
+      "description": "Import Export endpoint will import the modified data in thr database ",
+      "parameters": [
+        {
+          "name": "content",
+          "in": "body",
+          "description": "content type",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "seriesId",
+          "in": "body",
+          "description": "series Id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "fliename",
+          "in": "body",
+          "description": "File name",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Array of object",
+          "schema": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        },
+        "default": {
+          "description": "Unexpected error",
+          "schema": {
+            "$ref": "#/definitions/ErrorModel"
+          }
+        }
+      }
+    }
+  }
+}

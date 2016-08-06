@@ -1,0 +1,13 @@
+web:
+  extends:
+    file: common.yml
+    service: web
+  environment:
+   NODE_ENV: development
+  links:
+    - db
+  command:  bash -c 'nginx && npm install && bower install --config.interactive=false --allow-root && grunt'
+db:
+  extends:
+    file: common.yml
+    service: db

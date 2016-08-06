@@ -1,0 +1,15 @@
+<ol class="breadcrumb cent-line-height bg-theme">
+    <li class="list" ng-repeat="breadcrumb in breadcrumbs">
+
+        <a  href="" ellipsis-tooltip = 'breadcrumb.name' ng-if='breadcrumb.state'  ui-sref="{{breadcrumb.state}}"
+           class="text-primary" ng-bind="breadcrumb.name">
+        </a>
+        <a  href="" ellipsis-tooltip = 'breadcrumb.name' ng-if='!breadcrumb.state'
+           class="text-color" ng-bind="breadcrumb.name">
+        </a>
+
+        <i class="fa text-primary fa-angle-right prx" ng-if="!$last"></i>
+
+    </li>
+</ol>
+

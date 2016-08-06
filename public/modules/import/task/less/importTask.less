@@ -1,0 +1,117 @@
+.import-task {
+  .import-header {
+    .navbar {
+      height: 60px;
+      .heading {font-weight: bold}
+      .navbar-default, .navbar-right .btn {
+        .no-border();
+        padding: 0 12px;
+      }
+    }
+    .search-box {
+      height: 150px;
+
+      .search {
+        width: 245px;
+        display: inline-block;
+
+        .rounded-box {
+          border-radius: 20px !important;
+        }
+        .search-icon {
+          display: block;
+          padding-top: 4px;
+          position: absolute;
+          height: 28px;
+          width: 28px;
+          right:6px;
+
+        }
+        .box-shadow-two-sides {
+          box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.15) !important;
+        }
+
+
+        .search-task {
+          height: 135px;
+          text-align: center;
+
+          .input-textbox {
+            width: 100%;
+
+            .input-icon {
+              height: 35px;
+              width: 200px;
+              display: inline-block;
+              .search-icon{
+                line-height: 28px;
+              }
+            }
+          }
+        }
+      }
+    }
+
+  }
+  .import-container {
+      .step-viewer-container {
+        .steps_label {
+          font-weight: normal;
+        }
+        .step-index span{
+          right: 0;
+        }
+        .method-count {
+          .text-color;
+          .no-border();
+        }
+        .step-text-div {
+          .pvxl;.mtn;
+          .step-text{
+            .pts;
+          }
+        }
+        .method-header {
+          margin-top: 7px !important;
+          .star-icon{
+            top: 19px;
+          }
+        }
+      }
+    .step-list-view {
+       overflow-y: scroll;
+     }
+  }
+  .import-footer {
+      position: absolute;
+      bottom: 0;
+      height: 80px;
+      width: 100%;
+
+    .include-attachments {
+      position: absolute;
+      top: 27px;
+      .include-label{
+        position: relative;
+        bottom: 3px;
+      }
+      input[type="checkbox"]{
+        width: 20px;
+        height: 20px;
+      }
+    }
+    button {
+      &.header-btn{
+        color: #fff;
+        background-color: @brand-primary;
+        &:hover {
+          background-color: darken(@brand-primary, 8%);
+        }
+      }
+
+    }
+    .copy-button-container, .import-button-container {
+      display: inline-block;
+    }
+  }
+}

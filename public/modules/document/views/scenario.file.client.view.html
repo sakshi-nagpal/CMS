@@ -1,0 +1,128 @@
+<div id="document-module">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" ng-click="close()"
+                aria-hidden="true" ng-disabled="uploadItems.length !== 0">&times;</button>
+        <h4 class="modal-title">{{title}}</h4>
+    </div>
+    <div class="modal-body">
+        <div id="dropzones">
+            <div ng-repeat="category in categories | orderObjectBy:'order':false">
+                <div class="upload-drop-zone" ngf-drag-over-class="upload-drop-drop" ngf-drop
+                     ngf-change="fileDropped($files, category)" ngf-allow-dir="false"
+                     ng-disabled="!authorization.canAccess(category.capability) || !isAllowed(category) || category.disabled"
+                     ngf-multiple="true" ng-hide="category.downloadOnly">
+                    <p class="document-paragraph">{{category.displayName}}</p>
+
+                    <p class="drop-files-label">Drop files here <br><span
+                            class="or-label">or</span></p>
+                    <button class="btn btn-primary" ngf-select
+                            ng-disabled="!authorization.canAccess(category.capability) || !isAllowed(category) || category.disabled"
+                            ngf-multiple="true" ngf-allow-dir="false"
+                            ngf-change="fileDropped($files, category)">Browse
+                    </button>
+                    <p style="padding:4px;" class="upload-alert">
+                        <alert style="font-size: 12px; padding:2px;" ng-repeat="alert in alerts|limitTo:1"
+                               type="{{alert.type}}" close="closeAlert($index)"
+                               ng-show="(category._id==alert.doctypeid && showAlertMsg)"
+                               dismiss-on-timeout="2000"><b>{{alert.msg}}</b></alert>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+
+        <table class="table manage-files-document-progress">
+            <tr>
+                <td ng-repeat="value in uploadItems |limitTo :-3">
+                    <div class="orig-filename">
+                        <p>
+                            {{value.filename|limitTo:8}}<span ng-show="value.filename.length>8">...</span>
+                        </p>
+                        <progressbar max="100" value="value.percentage"><span
+                                style="color:white; white-space:nowrap;">{{value.percentage}}%</span>
+                        </progressbar>
+                        <p align="center">
+                            <button ng-show="value.percentage<100"
+                                    ng-click="cancelUpload(value.cancel,value.categoryId)"
+                                    class="btn btn-xs btn-primary upload-cancel">
+                                Cancel
+                            </button>
+                        </p>
+                    </div>
+                </td>
+            </tr>
+
+        </table>
+
+        <!--<div class="table manage-files-document-progress">-->
+        <!--<ul>-->
+        <!--<li style="display: inline" ng-repeat="value in uploadItems |limitTo :-3">-->
+        <!--<div class="orig-filename">-->
+        <!--<p>-->
+        <!--{{value.filename}}....-->
+        <!--</p>-->
+        <!--<progressbar max="100" value="value.percentage"><span-->
+        <!--style="color:white; white-space:nowrap;">{{value.percentage}}%</span>-->
+        <!--</progressbar>-->
+        <!--<p align="center">-->
+        <!--<button ng-show="value.percentage<100"-->
+        <!--ng-click="cancelUpload(value.cancel,value.categoryId)"-->
+        <!--class="btn btn-xs btn-primary upload-cancel">-->
+        <!--Cancel-->
+        <!--</button>-->
+        <!--</p>-->
+        <!--</div>-->
+        <!--</li>-->
+        <!--</ul>-->
+        <!--</div>-->
+
+
+        <table class="table manage-files">
+            <thead>
+            <tr>
+                <th><input type="checkbox" ng-model="checkAll" ng-click="selectAll(checkAll)"/></th>
+                <th>File Type</th>
+                <th>File Name</th>
+                <th>File Size</th>
+                <th>Time Stamp</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody ng-repeat="fileitem in fileItems | orderObjectBy:'category.order':false">
+            <tr ng-hide="fileitem.file.length>0">
+                <td><input type="checkbox" disabled ng-model="file.select"/></td>
+                <td>{{fileitem.category.displayName}}</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr ng-repeat="file in fileitem.file">
+                <td><input type="checkbox" ng-model="file.select"
+                           ng-click="toggleDownloadAll(file.select)"/>
+                </td>
+                <td>{{fileitem.category.displayName}}</td>
+                <td>
+                    <div class="orig-filename">{{file.originalName}}</div>
+                </td>
+                <td><span  ng-hide="file.fileSize===0">{{(file.fileSize/1024).toFixed(2)}} KB</span></td>
+                <td>{{file.timeStamp| date: 'dd-MMM-yy, HH:mm'}}</td>
+                <td>
+                    <a class="glyphicon glyphicon-download" title="Download"
+                       ng-click="download(file._id,fileitem.category);"></a>
+                    <button class="baloo-font baloo-icon-trash" title="Delete"
+                            ng-click="deleteFile(file._id,fileitem.category)" ng-hide="fileitem.category.downloadOnly"
+                            ng-disabled="!authorization.canAccess(fileitem.category.capability) || !isAllowed(fileitem.category)"></button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="modal-footer text-center">
+        <button type="button" ng-click="downloadAll()" ng-show="showDownloadAll"
+                class="btn btn-primary center-block"
+                data-dismiss="modal">
+            Download
+        </button>
+    </div>
+</div>

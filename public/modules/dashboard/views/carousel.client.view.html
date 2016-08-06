@@ -1,0 +1,17 @@
+
+<div id="carousel-items" class="owl-carousel clearfix navigation-parent" tabindex="-1" ng-click="addFocus($event)">
+    <div class="thumbnail box-shadow-allsides pdn mbm mtx cursor-pointer pull-left button-handler horizontal-navigation"  ng-click="addFocus($event)" tabindex="0" ui-sref='content.hierarchy1.0({seriesId: series._id})' ng-repeat="series in selectedCatalog.series">
+
+        <img ng-src="{{baseURL}}/modules/dashboard/img/{{series.thumbnail || 'book_coming_soon.png'}}">
+
+
+        <hr class="mvn border-grey">
+        <div class="book-title">
+            <p class="mhx mbn mtm" ng-bind="series.title"></p>
+        </div>
+        <div class="launch-button mbm mts ptn">
+            <a href="#" tabindex="-1" role="button" class="btn btn-primary" ng-bind="'dashboard.button_launch' | translate"></a>
+        </div>
+
+    </div>
+</div>

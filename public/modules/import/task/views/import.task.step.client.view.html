@@ -1,0 +1,16 @@
+
+<div class="import-container" ng-init="getStepJson(importTask.sourceFriendlyId, stepIndex);flag.initialScreen = true">
+    <div class="step-viewer-container" >
+        <div class="step-header" ng-if="scenario">
+            <nav class="bg-white navbar navbar-default mbn pam">
+                <step-header scenario-switch='false' scenario="scenario" step-switch='true' step-index="stepIndex"  on-change-step="onStepClickInViewer(index)"></step-header>
+                <div class="navbar-right mrs">
+                    <h5 class="method-count prm mhm pvs" ng-if="stepJson">{{'importModule.label_method_count' | translate}}<span
+                            ng-bind="stepJson.methods.length"></span>
+                    </h5>
+                </div>
+            </nav>
+        </div>
+        <step-viewer ng-if="stepJson" step-json="stepJson" step-index="stepIndex" get-viewer-height="getViewerHeight()" ></step-viewer>
+    </div>
+</div>

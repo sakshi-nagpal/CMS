@@ -1,0 +1,49 @@
+.import-step-view{
+
+  .step-container {
+    overflow: auto;
+    .step-container-child {
+
+      .method:not(:last-child) {
+        border: none;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        .border-theme;
+      }
+      .method .method-index {
+        font-weight: bold;
+        .text-color;
+      }
+      .step-text-div {
+        position: relative;
+        border: none;
+        border-top: 1px solid;
+        border-bottom: 1px solid;
+        .step-text:before {
+          content: '';
+        }
+        .task-step-legend {
+          border-width: 1px;
+          border-style: solid;
+          box-sizing: border-box;
+          border-radius: 100%;
+          left: 0;
+          top: 25px;
+          margin: auto 20px;
+          display: inline-block;
+          position: absolute;
+          width: 14px;
+          height: 14px;
+          text-align: center;
+          vertical-align: middle;
+        }
+      }
+    }
+  }
+  .method-container{
+    overflow-y: scroll;
+    .method-heading{
+      font-weight:bold
+    }
+  }
+}

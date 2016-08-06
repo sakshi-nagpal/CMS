@@ -1,0 +1,108 @@
+.skill-import-grid {
+  .ui-data-grid {
+    .mtl;
+    .grid .msg-block{
+      top:80px
+    }
+    .ui-grid-header-cell{
+      cursor: default;
+      &:last-child:after{
+        content: "";
+        .bg-theme;
+        width: 19px;
+        height: 40px;
+        position: absolute;
+        right: -19px;
+        top: 0px;
+      }
+    }
+    .ui-grid-header-canvas {
+      .ui-grid-cell-contents{
+        .bg-theme;
+        .pvn;
+      }
+      .ui-grid-filter-container{
+        cursor: default;
+        .form-control{
+          border: none;
+          border-bottom: 1px solid;
+          border-color: @text-color;
+          border-radius: 0px !important;
+        }
+        .ui-grid-filter-input{
+          font-weight: normal;
+          width: 220px;
+          height: 38px;
+          .form-control;
+
+        }
+
+        input[type="text"].ui-grid-filter-input:focus{
+          border-right: 1px solid transparent;
+          border-bottom: 1px solid;
+        }
+        .ui-grid-filter-button {
+          position: relative;
+          .search-icon{
+            position: absolute;
+            top: -28px;
+          }
+        }
+
+      }
+      .ui-grid-filter-button [class^="ui-grid-icon"] {
+        position: absolute;
+        top: -21px;
+        left: 200px;
+        opacity: .66;
+        width: 20px;
+        height: 34px;
+        cursor: pointer;
+      }
+
+    }
+    .ui-grid-row{
+      &:hover{
+        .ui-grid-cell {
+          button{
+            .bg-theme;
+          }
+        }
+      }
+      .browse-column{
+        span{
+          max-width: 48% !important;
+          float:left;
+          display: inline-block;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          .mrm;
+        }
+        .pill{
+          border:1px solid;
+          line-height: 12px;
+          border-radius: 5px;
+          border-color: #777777 ;
+        }
+        .step-count-container{
+          border-right: 1px solid;
+          height: 40px;
+
+        }
+      }
+
+      &:hover{
+        button{
+          .bg-theme;
+        }
+      }
+    }
+    .ui-grid-cell{
+      .inline-display{
+        display: inline !important;
+      }
+    }
+  }
+
+}

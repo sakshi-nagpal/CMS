@@ -1,0 +1,302 @@
+{
+	"users": {
+		"button_log_in": "Sign In",
+		"label_name": "Username",
+		"label_password": "Password",
+	  	"label_footer_copyright":"Copyright ",
+	  	"label_footer_logo": " 2015 Pearson Education. All rights reserved.",
+	  	"label_version":"Ver",
+	  	"change_password" : {
+		  "label_title": "Change Password",
+		  "label_current": "Current Password",
+		  "label_new": "New Password",
+		  "label_confirm": "Confirm Password",
+		  "label_save": "Save Password"
+		}
+	},
+
+  "dashboard":{
+		"label_search":"Task Search",
+		"label_placeholder_text":"Search by Task Id",
+		"label_product":"Products",
+		"label_version_name":"Office Version",
+		"button_launch":"LAUNCH",
+		"label_browse_skill":"Skill Index",
+		"label_browse_skill_info":"View all steps tagged to skill index, Manage library steps using skill index",
+		"label_reports":"Reports",
+		"label_reports_info":"Export metadata for content entities like task, content hierarchy etc",
+		"label_administration":"Administration",
+		"label_administration_info":"Manage users, permissions, content hierarchy, skill index",
+		"label_catalog":"Catalog"
+
+  },
+
+  "header":{
+		"label_library":"Library",
+		"label_series":"Series",
+		"label_reports":"Reports",
+		"label_admin":"Administration",
+		"label_user_profile":"User Profile",
+		"label_roles":"Roles"
+  },
+
+  "content":{
+	"label_tab_content":"Content",
+	"label_tab_issues":"Issues",
+	"label_tab_history":"History",
+	"label_tab_activity":"Activity",
+	"label_documents":"Documents",
+	"label_comments":"Comments",
+	"label_create_scenario":"Create Scenario",
+	"label_scenario":"Scenario",
+	"label_not_available":"Not Available",
+	"scenario_ref": {
+	  "label_edit_project_metadata": "Edit Project Metadata",
+	  "label_title": "Scenario Reference",
+	  "label_content_scenario_id": "Content Scenario ID",
+	  "label_content_scenario_name": "Content Scenario Name",
+	  "label_doc_name": "Document Name",
+	  "label_project_name": "Project Name",
+	  "label_apply": "Apply",
+	  "label_placeholder": "Eg: Pro Fit Marietta"
+	}
+
+  },
+
+  "scenario":{
+	"label_task_id":"Task ID",
+	"label_task_metadata":"Task Metadata",
+	"label_metadata_info": "Any update to these fields will reflect in all the scenarios of this task",
+	"label_scenario_metadata":"Scenario Metadata",
+	"label_level":"Level",
+	"label_phase":"Phase",
+	"label_created":"Created",
+	"label_updated":"Updated",
+	"label_steps_count":"Steps",
+	"label_level_of_revision":"Level of Revision",
+	"label_reusability_factor":"Reusability Factor",
+	"label_difficulty":"Difficulty",
+	"label_reference":"Scenario Reference",
+	"label_id":"ID",
+	"label_name":"Name",
+	"label_document":"Document",
+	"label_scenario_documents":"Scenario Documents",
+	"label_start_doc":"Start Doc",
+	"label_end_doc":"End Doc",
+	"label_audio":"Audio",
+	"label_learning_aids":"Learning Aids",
+	"label_page_no":"Page no",
+	"label_etext_url":"etext URL",
+	"label_video_url":"Video URL",
+	"label_close_button":"Close",
+	"label_skill":"Skill",
+	"label_blank":"Blank",
+	"label_using_skill_index":"Using Skill Index",
+	"label_using_task_id":"Using Task ID",
+	"label_create_scenario_title_can_edit":"Please choose an option to start authoring this scenario:",
+	"label_create_scenario_title_can_not_edit":"This scenario is not available.",
+	"label_blank_scenario":"Start from Blank Scenario",
+	"label_copy_scenario":"Copy from other Scenario",
+	"label_save_button":"Save",
+	"label_cancel_button":"Cancel",
+	"copyScenario":{
+	  "label_search_caption": "Copy from other task",
+	  "label_copy_caption": "Copy from Scenario ",
+	  "label_search_instruction": "Task Search",
+	  "label_instruction": "Choose an Option to begin with:",
+	  "label_title": "Copy Scenario"
+	},
+	"phaseChange":{
+	  "label_error_info": "You are not allowed to change the phase of the task!",
+	  "label_error_title": "Oops!",
+	  "label_ok": "Ok"
+	},
+	"label_skills":"Skills",
+	"label_skills_title":"This task includes the following skills:",
+	"label_no_skill_title":"There are no skills included in this task.",
+	"label_skill_ok_button":"OK"
+
+  },
+  "history":{
+	"label_close_button":"Close",
+	"label_compare":"Compare Selected Revisions",
+	"label_revision":"Revisions",
+	"label_phase":"Phase",
+	"label_date_time":"Date and time",
+	"label_updated_by":"Updated By",
+	"label_updated_type":"Update Type",
+	"label_task_published":"Task Published",
+	"label_all_filter":"All",
+	"label_major_filter":"Major",
+	"label_version":"Version:",
+	"label_version_compare":"Version Compared:",
+	"label_added_doc":"Added",
+	"label_deleted_doc":"Deleted",
+	"label_updated_doc":"Updated",
+	"label_no_action":"No Change",
+	"label_serial_number":"S No.",
+	"label_document_name":"Document Name",
+	"label_document_type":"Document Type",
+	"label_action":"Action",
+	"label_added":"(Added)",
+	"label_deleted":"(Deleted)",
+	"label_reordered":"(Reordered)",
+	"label_matched_sections_message":"No changes in this section. Click on the “Show Matched Sections” button to view all.",
+	"label_show_matched_section": "Show All Sections",
+	"label_hide_matched_section": "Hide Matched Sections",
+	"label__diff_added": "This text was added.",
+	"label_diff_removed": "This text was removed.",
+	"label_diff_format_changed": "Formatting was changed.",
+	"label__key": "Key",
+	"scenario" : {
+	  "label_history_header_title":"Task History",
+	  "label_history_not_available":"There are no revisions for this scenario",
+	  "label_task_history_comparison":"Task History - Comparison View",
+	  "label_task_history_version":"Task History - Version"
+	},
+	"library" : {
+	  "label_history_header_title":"Library Step History",
+	  "label_history_title":"Library Step Name",
+	  "label_history_comparison_header_title":"Library Step History - Comparison View",
+	  "label_history_version":"Library Step History - Version",
+	  "label_no_step_text":"No Step Text present",
+	  "label_no_methods_and_actions":"No Methods and Actions present",
+	  "label_step_name":"Step Name - ",
+	  "label_history_not_available":"There are no revisions for this Library Step"
+	}
+  },
+  "skillTagging": {
+	"label_header": "Tag Skill for Step",
+	"label_header_libraryStep": "Tag Skill for Library Step",
+	"label_done_tagging": "Done Tagging",
+	"label_cancel": "Cancel",
+	"label_step": "Step",
+	"label_tagged_skills": "Tagged Skills",
+	"label_placeholder_text": "Search Skill",
+	"label_search_title":"Skill Index for ",
+	"label_search_subtitle":"(Click any Skill to Tag)",
+	"label_notification_msg" : "Please tag atleast one skill with the Library Step."
+  },
+  "stepViewer":{
+	"label_close_button":"Close",
+	"label_edit_button":"Edit",
+	"label_mapped_tasks_&_metadata":"Mapped Tasks & Metadata",
+	"label_mapped_tasks":"Mapped Tasks",
+	"label_no_mapped_tasks_message":"Currently, there are no mapped tasks",
+	"label_step_metadata":"Step Metadata",
+	"label_created":"Created: ",
+	"label_updated":"Updated: ",
+	"label_skills":"Skills: "
+  },
+  "skillImport": {
+	"label_header": "Copy methods and actions from another step using Skill Index",
+	"label_close": "Close",
+	"label_skills_for":"Skills Index for",
+	"label_task_id":"Task ID",
+	"label_phase":"Phase",
+	"label_method_count":"Method count",
+	"label_last_updated":"Last Updated",
+	"created":"Created",
+	"label_application":"Application",
+	"label_lib_step":"Library Step Count",
+	"label_task_step":"Task Step Count",
+	"label_finish": "FINISH IMPORT",
+	"label_method": "Methods",
+	"label_notification_msg": "No step for selected skill, please choose another skill"
+
+  },
+  "importModule":{
+	"label_copy_scenario_title": "Copy Scenario",
+	"label_step_import_title": "Copy methods and actions from another Step using Task Id",
+	"label_close": "Close",
+	"label_cancel": "Cancel",
+	"label_back": "BACK",
+	"label_method_count": "Method count: ",
+	"label_include_attachments": "Include attachments",
+	"label_copy_scenario": "COPY SCENARIO",
+	"label_search_title": "Enter Task ID",
+	"label_confirm_copy_scenario_title": "Confirm Copy Scenario!",
+	"label_confirm_import_step_title": "Confirm Import!",
+	"label_confirm_copy_scenario_info": "Copying content from this scenario will result in loss of all changes made to the target scenario. Are you sure you want to continue?",
+	"label_confirm_import_step_info": "Are you sure you want to continue?",
+	"label_import_from_step": "IMPORT FROM STEP "
+  },
+  "common": {
+	"popup": {
+	  "error_title": "Oops!",
+	  "error_ok": "Ok",
+	  "warning_title": "Warning! this cannot be undone",
+	  "warning_cancel": "Cancel",
+	  "warning_continue": "Continue"
+	},
+	"phaseTransitionErrorMessages": {
+	  "noStep": "No steps in the task",
+	  "blankStep": "Step text is blank",
+	  "noMethod": "No methods",
+	  "blankAction": "Action text is blank",
+	  "missingRequiredDocument": "Following required documents are missing in the scenario"
+	},
+	"label": {
+	  "label_step": "Step",
+	  "label_method": "Method",
+	  "label_action": "Action",
+	  "label_active": "Active",
+	  "label_inactive": "Inactive",
+	  "label_confirmation": "Confirmation!",
+	  "label_task_status": "Task status changed to ",
+	  "label_scenario_status": "Scenario status changed to ",
+	  "label_required_documents": "Required Documents",
+	  "task_status_active" : "Click to change the task status to 'Active'",
+	  "task_status_inactive" : "Click to change the task status to 'Inactive'",
+	  "scenario_status_active" : "Click to change the scenario status to 'Active'",
+	  "scenario_status_inactive" : "Click to change the scenario status to 'Inactive'"
+	},
+	"stepMethod": {
+	  "label_start_time": "Start",
+	  "label_end_time": "End"
+	},
+	"helpText": {
+	  "is_missing": "is missing"
+	}
+  },
+  "skillBrowse": {
+	"label_heading": "Choose an application to view Skill Index",
+	"label_add_library_step":"Add Library Step"
+  },
+  "reports":{
+	"label_reports_title": "Reports",
+	"label_export_content_heading": "Export Content Hierarchy",
+	"label_export_content_info": "Export the Content Hierarchy for Selected Series in xlsx format",
+	"label_export_pathways_heading": "Export All Pathways",
+	"label_export_pathways_info": "Export the Data for all the Pathways in xlsx format",
+	"label_export_task_heading": "Export Task Data for JIRA",
+	"label_export_task_info": "Export the Task Data in xlsx format",
+	"label_export_updatedScenarios_heading": "Export Scenario History",
+	"label_export_updatedScenarios_info": "Export the list of Scenarios updated in the specified range of dates",
+	"label_task_series_label": "Export Complete Series",
+	"label_task_ids": "Enter Specific Task Ids",
+	"label_task_placeHolder_text": "Task1,Task2,Task3",
+	"label_export_button": "EXPORT",
+	"label_choose-date" : "Choose a Date Range",
+	"label_error_message":"Please enter valid Task Ids"
+  },
+  "library":{
+	"addStepModal":{
+	  "label_addStep_title": "Add a step to Library",
+	  "label_addStep_step_name": "Specify a Library Step Name:",
+	  "label_addStep_error_message": "Library Step name already exists. Please enter a different name.",
+	  "label_addStep_error_blank_message": "Please enter a Library Step name.",
+	  "label_addStep_save_button": "Save",
+	  "label_addStep_cancel_button": "Cancel",
+	  "label_copyStep_title": "Copy a step to Library",
+	  "label_exportStep_title": "Export a step to Library"
+	},
+	"step":{
+	  "label_step_text": "Step Text",
+	  "label_methods_and_actions": "Methods and Actions",
+	  "label_step_header":"Library Step:",
+	  "label_step_method_count":"Method count: "
+	}
+  }
+	
+}

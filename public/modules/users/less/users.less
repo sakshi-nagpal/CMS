@@ -1,0 +1,61 @@
+.user-container{
+  #signin-page {
+
+    padding: 5px;
+
+    .username-label {
+      cursor: text;
+    }
+    .username:focus ~ .username-label{
+      cursor: default;
+    }
+    .password-label{
+      cursor: text;
+    }
+    .password:focus ~ .password-label{
+      cursor: default;
+    }
+
+    .footer-logo{
+      position: absolute;
+      bottom: 5px;
+      right: 5px;
+    }
+    .page-form {
+      border: 1px solid transparent;
+      width: 521px;
+      .header-content{
+        background:none;
+        padding:0px ;
+        display: block;
+        height: 81px;
+      }
+      .ruler {
+        opacity: 0.5;
+      }
+      .body-content{
+        .error-message{
+          height: 20px;
+          text-align: center;
+        }
+      }
+      &.form-signup {
+        margin: 3% auto;
+      }
+    }
+    input:required {
+      -webkit-box-shadow: none;
+      -moz-box-shadow: none;
+      box-shadow: none;
+    }
+  }
+}
+
+
+
+
+
+
+
+
+

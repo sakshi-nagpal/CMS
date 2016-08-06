@@ -1,0 +1,165 @@
+.step-launcher {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 4;
+}
+
+.step-header-directive {
+  .navbar-brand {
+    padding: 7px 8px;
+    font-weight: bold;
+    font-size: 24px;
+    height: auto;
+    line-height: 1.2;
+    .vertical-divider {
+      display: inline;
+    }
+    .steps{
+      span{
+        font-weight: normal;
+      }
+    }
+  }
+  .step_switch_header {
+    display: inline-block;
+    .steps_label {
+      font-size: 24px;
+      display: inline-block;
+    }
+    .steps {
+      height: 30px;
+      line-height: 40px;
+
+      .step-index {
+        border-radius: 100%;
+        display: inline-block;
+        border: 1px solid #c3c3c3;
+        height: 100%;
+        min-width: 30px;
+        position: relative;
+        text-align: center;
+        cursor: pointer;
+        span {
+          display: inline-block;
+          height: 100%;
+          line-height: 100%;
+          margin: auto;
+          vertical-align: middle;
+          position: relative;
+          top: 1px;
+          right: 1px;
+        }
+        &.selected {
+          cursor: default;
+        }
+        &:nth-child(1) {
+          border-color: @color-indicator-blue;
+          .color-indicator-blue;
+          &.selected, &:hover {
+            background-color: @color-indicator-blue;
+            .text-white;
+          }
+        }
+        &:nth-child(2) {
+          border-color: @color-indicator-yellow;
+          .color-indicator-yellow;
+          &:hover, &.selected {
+            background-color: @color-indicator-yellow;
+            .text-white;
+          }
+        }
+        &:nth-child(3) {
+          border-color: @color-indicator-pink;
+          .color-indicator-pink;
+          &:hover, &.selected {
+            background-color: @color-indicator-pink;
+            .text-white;
+          }
+        }
+        &:nth-child(4) {
+          border-color: @color-indicator-purple;
+          .color-indicator-purple;
+          &:hover, &.selected {
+            background-color: @color-indicator-purple;
+            .text-white;
+          }
+        }
+        &:nth-child(5) {
+          border-color: @color-indicator-green;
+          .color-indicator-green;
+          &:hover, &.selected {
+            background-color: @color-indicator-green;
+            .text-white;
+          }
+        }
+        &:nth-child(6) {
+          border-color: @color-indicator-brown;
+          .color-indicator-brown;
+          &.selected, &:hover {
+            background-color: @color-indicator-brown;
+            .text-white;
+          }
+        }
+        &:nth-child(7) {
+          border-color: @color-indicator-orange;
+          .color-indicator-orange;
+          &:hover, &.selected {
+            background-color: @color-indicator-orange;
+            .text-white;
+          }
+        }
+        &:nth-child(8) {
+          border-color: @color-indicator-majenta;
+          .color-indicator-majenta;
+          &:hover, &.selected {
+            background-color: @color-indicator-majenta;
+            .text-white;
+          }
+        }
+        &:nth-child(9) {
+          border-color: @color-indicator-cyan;
+          .color-indicator-cyan;
+          &:hover, &.selected {
+            background-color: @color-indicator-cyan;
+            .text-white;
+          }
+        }
+        &:nth-child(10) {
+          border-color: @color-indicator-olive;
+          .color-indicator-olive;
+          &:hover, &.selected {
+            background-color: @color-indicator-olive;
+            .text-white;
+          }
+        }
+      }
+
+
+    }
+  }
+  .bootstrap-select.scenario-switcher {
+    .mtn;
+    width: 340px !important;
+    .btn {
+      .ptn;
+      background-color: #f8f8f8 !important;
+      border-bottom-color: @text-color;
+      height: 37px;
+      width: 340px;
+      .filter-option {
+        .text-h3;
+        font-weight: bold;
+      }
+    }
+    .dropdown-menu {
+      .text {
+        .text-x-large;
+        font-weight: bold;
+      }
+
+    }
+  }
+}

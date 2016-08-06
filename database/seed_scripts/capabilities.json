@@ -1,0 +1,21 @@
+[
+  {"capability" : "edit_content", "roles": ["contentAuthor", "systemAdmin"]},
+  {"capability" : "administration", "roles": ["systemAdmin"]},
+  {"capability" : "edit_file", "roles" : ["contentAuthor", "systemAdmin"]},
+  {"capability" : "edit_audio_file", "roles" : ["mediaVendor", "systemAdmin"]},
+  {"capability" : "edit_task_metadata", "roles": ["contentAuthor","systemAdmin","devContentAdmin"]},
+  {"capability" : "edit_method_status", "roles": ["devContentAdmin"]},
+  {"capability" : "edit_scenario_status", "roles": ["devContentAdmin"]},
+  {"capability" : "edit_task_status", "roles": ["devContentAdmin"]},
+  {"capability" : "launch_simulation", "roles": ["systemAdmin", "contentAuthor", "contentReviewer", "customerReviewer", "developer",
+    "devContentAdmin", "editorialAuthor", "mediaVendor", "softwareTester"]},
+  {"capability" : "view_reports", "roles": ["systemAdmin","contentAuthor","contentReviewer","devContentAdmin","developer",
+    "softwareTester","editorialAuthor","mediaVendor"]},
+  {"capability" : "view_skill_steps", "roles": ["systemAdmin","contentAuthor","contentReviewer","devContentAdmin","developer",
+    "softwareTester","editorialAuthor","mediaVendor"]},
+  {"capability" : "view_history", "roles": ["systemAdmin","contentAuthor","contentReviewer","devContentAdmin","developer",
+    "softwareTester","editorialAuthor","mediaVendor"]},
+  {"capability" : "view_authoring_metadata", "roles": ["systemAdmin","contentAuthor","contentReviewer","devContentAdmin","developer",
+    "softwareTester","editorialAuthor","mediaVendor"]}
+
+]

@@ -1,0 +1,32 @@
+{
+  "/health" : {
+    "$ref": "./paths/health.json"
+  },
+  "/auth/signin": {
+    "$ref": "./paths/user.json#/authSignin"
+  },
+  "/auth/signup": {
+    "$ref": "./paths/user.json#/authSignup"
+  },
+  "/auth/signout": {
+    "$ref": "./paths/user.json#/authSignout"
+  },
+  "/users/roles": {
+    "$ref": "./paths/user.json#/usersRoles"
+  },
+  "/user/roles": {
+    "$ref": "./paths/user.json#/userRoles"
+  },
+  "/users/password": {
+    "$ref": "./paths/user.json#/usersPassword"
+  },
+  "/catalog": {
+    "$ref": "./paths/catalog.json#/allCatalogs"
+  },
+  "/catalog/{catalogId}":{
+    "$ref": "./paths/catalog.json#/catalogByID"
+  },
+  "/admin/content/export":{
+    "$ref": "./paths/admin.json#/contentExport"
+  }
+}

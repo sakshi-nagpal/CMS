@@ -1,0 +1,131 @@
+<div class="library-step-comparison">
+    <div class="page-header mbn mtl clearfix pbn">
+        <div class="legend pull-right" ng-if="!versionView">
+            <div class="legend-title text-large" ng-bind="'history.label__key' | translate"></div>
+            <ul>
+                <li><span class="diff-added" ng-bind="'history.label__diff_added' | translate"></span></li>
+                <li><span class="diff-removed" ng-bind="'history.label_diff_removed' | translate"></span></li>
+                <li><span class="diff-format-changed" ng-bind="'history.label_diff_format_changed' | translate"></span></li>
+            </ul>
+        </div>
+        <div class="title text-large">
+            <span ng-bind="'history.library.label_step_name' | translate"></span>
+                <span ng-if="diff.name.changeSet">
+                    <span class="mrx" ng-class="node[0] === 1 ? 'added-text' : node[0] === -1 ? 'deleted-text': ''" ng-repeat="node in diff.name.changeSet">{{node[1]}}</span>
+                </span>
+            <span ng-if="!diff.name.changeSet" ng-bind="diff.name"></span>
+
+        </div>
+        <div class="mbl mtm cent-line-height" >
+    <span ng-if="!versionView">
+            <span><b ng-bind="'history.label_version_compare' | translate"></b></span>
+
+            <span ng-repeat='node in history | filter:{_id:leftId}' class="input-inline mls">
+                <span>v. {{node.version}}, {{node.revisionTimestamp | date: 'dd-MMM-yy, hh:mm'}}, {{node.updatedBy.name}}</span>
+            </span>
+                <span class="text-x-large input-inline text-grey2 mhs">|</span>
+
+            <span ng-repeat='node in history | filter:{_id:rightId}'  class="input-inline mrs">
+                <span>v. {{node.version}}, {{node.revisionTimestamp | date: 'dd-MMM-yy, hh:mm'}}, {{node.updatedBy.name}}</span>
+            </span>
+    </span>
+    <span ng-if="versionView">
+        <span>
+            <span><b ng-bind="'history.label_version' | translate"></b></span>
+            <span ng-repeat='node in history | filter:{_id:historyId}' class="input-inline mls">
+            <span>v. {{node.version}}, {{node.revisionTimestamp | date: 'dd-MMM-yy, hh:mm'}}, {{node.updatedBy.name}}</span>
+            </span>
+        </span>
+    </span>
+        </div>
+        <div ng-if="!versionView">
+            <button class="btn header-btn mbl show-hide-button" ng-click="toggleMatchedSectionsDisplay()" ng-class="{'btn-inactive' : (diff.text.diffDistance && !((diff.methods | filter: {diffDistance : 0} : true).length == diff.methods.length))}">
+            <span ng-if="viewMatchedSection.initCount !== viewMatchedSection.clickCount && !viewMatchedSection.all"
+                  ng-bind="'history.label_show_matched_section' | translate"></span>
+            <span ng-if= "(viewMatchedSection.initCount === viewMatchedSection.clickCount || viewMatchedSection.all)"
+                  ng-bind="'history.label_hide_matched_section' | translate"></span>
+            </button>
+        </div>
+    </div>
+
+    <div class="compare-view view-item-content" data-column="compare-view">
+        <div ng-if= "diff" class="library-step-view">
+            <div class="step-text" ng-init="viewMatchedSection.stepText = false">
+                <div class="step-text-header text-medium mvl bg-theme cent-line-height">
+                    <span class="header" ng-bind="'library.step.label_step_text' | translate"></span>
+                </div>
+                <span ng-if="!viewMatchedSection.stepText && !viewMatchedSection.all && !diff.text.diffDistance" class="cent-line-height">
+                    <div class="mls option-horizontal-parent">
+
+                        <span class="cursor-pointer phs glyphicon glyphicon-option-horizontal" ng-init="viewMatchedSection.initCount=viewMatchedSection.initCount + 1" ng-click="viewMatchedSection.stepText = true;viewMatchedSection.clickCount = viewMatchedSection.clickCount + 1;">
+
+                        </span>
+                    </div>
+                    <i class="plm text-grey3" ng-bind="'history.label_matched_sections_message' | translate"></i>
+                </span>
+
+                <div ng-if="viewMatchedSection.stepText || viewMatchedSection.all || diff.text.diffDistance" class="step-text plm" >
+                    <span ng-if="(versionView && !diff.text) || (!versionView && !diff.text.changeSet.length)"class="pln text-grey3 empty-section" ng-bind="'history.library.label_no_step_text' | translate"></span>
+                    <span class="format" ng-if="diff.text.changeSet"  ng-bind-html="sce.trustAsHtml(diff.text.str)"></span>
+                    <span ng-if="!diff.text.changeSet" ng-bind-html="sce.trustAsHtml(diff.text)"></span>
+                </div>
+            </div>
+
+            <div class="step-text" ng-init="viewMatchedSection.methodData = false">
+                <div class="step-text-header text-medium mvl bg-theme cent-line-height">
+                    <span class="header" ng-bind="'library.step.label_methods_and_actions' | translate"></span>
+                </div>
+                <span ng-if="!viewMatchedSection.methodData && !viewMatchedSection.all && (((diff.methods | filter: {diffDistance : 0} : true).length == diff.methods.length) && !isMethodChanged())" class="cent-line-height">
+                    <div class="mls option-horizontal-parent">
+                        <span class="cursor-pointer phs glyphicon glyphicon-option-horizontal" ng-init="viewMatchedSection.initCount=viewMatchedSection.initCount + 1" ng-click="viewMatchedSection.methodData = true;viewMatchedSection.clickCount = viewMatchedSection.clickCount + 1;">
+
+                        </span>
+                    </div>
+                    <i class="plm text-grey3" ng-bind="'history.label_matched_sections_message' | translate"></i>
+                </span>
+
+                <ul ng-if="viewMatchedSection.methodData || viewMatchedSection.all || !((diff.methods | filter: {diffDistance : 0} : true).length == diff.methods.length) || isMethodChanged()" class="cent-line-height pln text-base methods">
+                    <span class="plm text-grey3 empty-section" ng-if="!diff.methods.length" ng-bind="'history.library.label_no_methods_and_actions' | translate"></span>
+                    <li class="method mtl mlm" ng-repeat="method in diff.methods">
+                        <span title="Primary Method" ng-class="{'now-secondary-icon':method.primary.changeSet[0][0]===-1}" ng-if="method.primary && method.primary.changeSet[0][1]==='true'" class="text-large baloo-font baloo-icon-filled-star primary-method-icon star-icon ng-scope"></span>
+                        <span title="Primary Method" ng-if="method.primary && !method.primary.changeSet" class="text-large baloo-font baloo-icon-filled-star primary-method-icon star-icon ng-scope"></span>
+
+                        <span class="header mll"  ng-class="{'now-primary-method':(method.primary.changeSet[0][0]===1 && method.added!=='history.label_added'),'now-secondary':method.primary.changeSet[0][0]===-1}" ng-bind="'common.label.label_method' | translate"></span>
+                            <span  class="pls" ng-if="method.order.changeSet" ng-class="{'now-primary-method':(method.primary.changeSet[0][0]===1 && method.added!=='history.label_added'),'now-secondary':method.primary.changeSet[0][0]===-1}">
+                                <span  class="header mrx" ng-class="node[0] === 1 ? 'added-text' : node[0] === -1 ? 'deleted-text': ''" ng-repeat="node in method.order.changeSet">{{node[1]}}</span>
+                            </span>
+                        <span class="header pls mrx" ng-if="!method.order.changeSet" ng-bind="$index+1" ></span>
+                        <span class="colon" ng-class="{'now-primary-method':(method.primary.changeSet[0][0]===1 && method.added!=='history.label_added'),'now-secondary':method.primary.changeSet[0][0]===-1}">:</span>
+                            <span class="mls" ng-if="method.type.changeSet">
+                                <span class="mrx" ng-class="node[0] === 1 ? 'added-text' : node[0] === -1 ? 'deleted-text': ''" ng-repeat="node in method.type.changeSet">{{node[1]}}</span>
+                            </span>
+                        <span class="mls" ng-if="!method.type.changeSet" ng-bind="method.type"></span>
+
+                            <span ng-if="method.typeCount.changeSet">
+                                <span class="mrx" ng-class="node[0] === 1 ? 'added-text' : node[0] === -1 ? 'deleted-text': ''" ng-repeat="node in method.typeCount.changeSet">{{node[1]}}</span>
+                            </span>
+                        <span ng-if="!method.typeCount.changeSet" ng-bind="method.typeCount"></span>
+
+                        <span class="added-label" ng-if="!(step.added==='history.label_added')"  ng-bind="method.added | translate"></span>
+                        <span class="deleted-label" ng-if="!step.deleted" ng-bind="method.deleted | translate"></span>
+
+                        <ol class="actions mbn">
+                            <li class="action" ng-repeat="action in method.actions">
+                                <span ng-bind="'common.label.label_action' | translate"></span>
+                                    <span class="" ng-if="action.order.changeSet">
+                                        <span class="mrx" ng-class="node[0] === 1 ? 'added-text' : node[0] === -1 ? 'deleted-text': ''" ng-repeat="node in action.order.changeSet">{{node[1]}}</span>
+                                    </span>
+                                <span class="no-order" ng-if="!action.order.changeSet" ng-bind="$index+1"></span><span class="colon">:</span>
+                                <span class="pls" ng-if="action.text.changeSet"  ng-bind-html="sce.trustAsHtml(action.text.str)"></span>
+                                <span class="pls" ng-if="!action.text.changeSet" ng-bind-html="sce.trustAsHtml(action.text)"></span>
+                                <span class="added-label" ng-if="!(method.added==='history.label_added')"  ng-bind="action.added | translate"></span>
+                                <span class="deleted-label" ng-if="!method.deleted" ng-bind="action.deleted | translate"></span>
+                            </li>
+                        </ol>
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

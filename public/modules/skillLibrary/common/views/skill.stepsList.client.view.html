@@ -1,0 +1,71 @@
+<div class="import-list-view">
+    <ul class="list-unstyled pbs phxl" ng-show="stateData[1].showHeading">
+        <li class="ptl text-large" ng-show="stateData[1].showHeading" ng-bind="view.heading.text"></li>
+        <li class="skill-label text-base"  ellipsis-tooltip="view.subHeading.text" ng-show="stateData[1].showSubHeading" ng-bind="view.subHeading.text"></li>
+    </ul>
+    <div auto-resizer="{{commonData.listAutoResize}}"  class="steps-container plm prxl">
+        <div class="task-step text-color border-theme pvl cursor-pointer" ng-repeat="taskStep in taskSteps"
+             ng-init="util={}" ng-click="util.click===true? util.click=false : onTaskStepClick(taskStep.friendlyId,taskStep.steps._id)">
+            <div class="task-step-legend pull-left bg-indicator-pink border-indicator-pink mlm"></div>
+            <div class="step-content mhs phxl clearfix">
+                <div class="text-large mbm pbx" ng-bind-html="sce.trustAsHtml(taskStep.steps.text)"></div>
+                <div class="text-base skill-list mbm pbs pull-left">{{'scenario.label_skill'| translate}}s :&nbsp;
+                    <label class="attached-skills cursor-pointer mbn" ng-repeat="skill in taskStep.steps.skills" ng-bind="skill.title"></label>
+                </div>
+                <div class="info text-grey3 text-small">
+
+                    <div class="task-id pull-left prl">{{'skillImport.label_task_id'| translate}}:
+                        <span ng-bind="taskStep.friendlyId"></span>
+                    </div>
+                    <div class="phase pull-left prl">{{'skillImport.label_phase'| translate}}:
+                        <span ng-bind="taskStep.phase.code"></span>
+                    </div>
+                    <div class="method-count pull-left prl">{{'skillImport.label_method_count'| translate}}:
+                        <span ng-bind="taskStep.steps.methods.length"></span>
+                    </div>
+                    <div class="last-updated pull-left prl">{{'skillImport.label_last_updated'| translate}}:
+                        <span ng-bind="taskStep.updatedTimestamp|date:'MMMM dd, yyyy'"></span>
+                    </div>
+                    <div ng-if="commonData.app" class="application pull-left prl">{{'skillImport.label_application'| translate}}:
+                        <span ng-bind="commonData.app"></span>
+                    </div>
+                </div>
+            </div>
+            <i ng-class="{true:'baloo-font baloo-icon-export icon text-color', false:'fa fa-angle-right icon text-color text-h3'}
+				[authorization.canAccess('edit_content') == true]" ng-if="view.isExportEnabled" title="Export Step"
+               ng-click="util.click=true;exportTaskStep(constant.STEP.TASK,taskStep.steps._id,taskStep.steps.text)"></i>
+            <i class="fa fa-angle-right icon text-color text-h3" ng-if="! view.isExportEnabled"></i>
+        </div>
+
+        <div class="library-step text-color border-theme pvl cursor-pointer" ng-repeat="libraryStep in librarySteps"
+             ng-init="util={}" ng-click="util.click===true? util.click=false : onLibraryStepClick(libraryStep._id)">
+            <div class="library-step-legend pull-left border-indicator-yellow bg-indicator-yellow mlm"></div>
+            <div class="step-content mhs phxl clearfix">
+                <div class="text-large mbm pbx" ng-bind-html="sce.trustAsHtml(libraryStep.name)"></div>
+                <div class="text-base skill-list mbm pbs pull-left">{{'scenario.label_skill'| translate}}s :&nbsp;
+                    <label class="attached-skills cursor-pointer mbn" ng-repeat="skill in libraryStep.skills" ng-bind="skill.title"></label>
+                </div>
+                <div class="info text-grey3 text-small">
+
+                    <div class="method-count pull-left prl">{{'skillImport.label_method_count'| translate}}:
+                        <span ng-bind="libraryStep.methods.length"></span>
+                    </div>
+                    <div class="last-updated pull-left prl">{{'skillImport.created'| translate}}:
+                        <span ng-bind="libraryStep.createdTimestamp|date:'MMMM dd, yyyy'"></span>
+                    </div>
+                    <div class="last-updated pull-left prl">{{'skillImport.label_last_updated'| translate}}:
+                        <span ng-bind="libraryStep.updatedTimestamp|date:'MMMM dd, yyyy'"></span>
+                    </div>
+                    <div ng-if="commonData.app" class="application pull-left prl">{{'skillImport.label_application'| translate}}:
+                        <span ng-bind="commonData.app"></span>
+                    </div>
+                </div>
+            </div>
+            <i ng-class="{true:'baloo-font baloo-icon-copy icon text-color', false:'fa fa-angle-right icon text-color text-h3'}
+				[authorization.canAccess('edit_content') == true]" ng-if="view.isExportEnabled" title="Copy Library Step"
+               ng-click="util.click=true;copyLibraryStep(constant.STEP.LIBRARY,libraryStep._id,libraryStep.text,libraryStep.name)"></i>
+            <i class="fa fa-angle-right icon text-color text-h3" ng-if="! view.isExportEnabled"></i>
+        </div>
+    </div>
+</div>
+

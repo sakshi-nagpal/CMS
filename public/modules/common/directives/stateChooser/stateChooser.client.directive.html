@@ -1,0 +1,12 @@
+<div class="state-chooser ">
+    <div class="state-block pull-left phxxl" ng-repeat="state in stateData"
+         ng-class="{'selected-block': (currentStateIndex === $index),'focus-block' : (currentStateIndex >= $index) }">
+        <div class="state mbm mhxl">
+            <span class="img-circle state-icon text-white" ng-bind="$index+1"
+                  ng-click="(currentStateIndex > $index) && (onStateClick($index))"></span>
+            <span class="status-line"  ng-if="!$last"></span>
+        </div>
+        <div class="state-info text-base text-grey3" ng-bind="state.stateText"
+             ng-click="(currentStateIndex > $index) && (onStateClick($index))"></div>
+    </div>
+</div>

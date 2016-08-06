@@ -1,0 +1,194 @@
+{
+  "authSignin": {
+    "post": {
+      "tags": ["user"],
+      "summary": "User Signin",
+      "description": "The User Signin endpoint returns a json object with user details. If user credentials are incorrect, it returns error with the appropriate message.",
+      "parameters": [
+        {
+          "name": "userSigninDetails",
+          "in": "body",
+          "description": "contains user's name and password",
+          "required": true,
+          "schema": {
+            "type": "object",
+            "properties": {
+              "username": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Json object with user information",
+          "schema": {
+            "type": "object"
+          }
+        },
+        "default": {
+          "description": "Invalid credentials",
+          "schema": {
+            "$ref": "#/definitions/ErrorModel"
+          }
+        }
+      }
+    }
+  },
+  "authSignup": {
+    "post": {
+      "tags": ["user"],
+      "summary": "User Signup",
+      "description": "The User Signup endpoint returns a json object with new user details.",
+      "parameters": [
+        {
+          "schema": {
+            "$ref": "#/definitions/userSignupModel"
+          },
+          "name": "userSignupDetails",
+          "in": "body",
+          "description": "contains user's details",
+          "required": true
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Json object with user information",
+          "schema": {
+            "type": "object"
+          }
+        },
+        "default": {
+          "description": "Unexpected error",
+          "schema": {
+            "$ref": "#/definitions/ErrorModel"
+          }
+        }
+      }
+    }
+  },
+  "authSignout": {
+    "get": {
+      "tags": ["user"],
+      "summary": "User Signout",
+      "description": "The User Signout endpoint logs out and redirects user to the landing page of the application",
+      "responses": {
+        "302": {
+          "description": "Redirected to landing page"
+        },
+        "default": {
+          "description": "Unexpected error",
+          "schema": {
+            "$ref": "#/definitions/ErrorModel"
+          }
+        }
+      }
+    }
+  },
+  "usersRoles": {
+    "get": {
+      "tags": ["user"],
+      "summary": "Users Roles",
+      "description": "The Users Roles endpoint returns all the roles for a user in the application",
+      "responses": {
+        "200": {
+          "description": "List of roles",
+          "schema": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "default": {
+          "description": "Unexpected error",
+          "schema": {
+            "$ref": "#/definitions/ErrorModel"
+          }
+        }
+      }
+    }
+  },
+  "userRoles": {
+    "post": {
+      "tags": ["user"],
+      "summary": "User Roles Description",
+      "description": "The User Roles Description endpoint returns the description of all the given user role names",
+      "parameters": [
+        {
+          "name": "roles",
+          "in": "body",
+          "description": "an array of user role names",
+          "required": true,
+          "schema": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "an array of user role descriptions",
+          "schema": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        },
+        "default": {
+          "description": "Unexpected error",
+          "schema": {
+            "$ref": "#/definitions/ErrorModel"
+          }
+        }
+      }
+    }
+  },
+  "usersPassword": {
+    "post": {
+      "tags": ["user"],
+      "summary": "Change Password ",
+      "description": "The Change Password endpoints returns a success message on password change for the user in the application",
+      "parameters": [
+        {
+          "name": "changePasswordDetails",
+          "in": "body",
+          "description": "contains user's old and new password",
+          "required": true,
+          "schema": {
+            "type": "object",
+            "properties": {
+              "currentPassword": {
+                "type": "string"
+              },
+              "verifyPassword": {
+                "type": "string"
+              },
+              "newPassword": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "password is changed successfully"
+        },
+        "default": {
+          "description": "Unexpected error",
+          "schema": {
+            "$ref": "#/definitions/ErrorModel"
+          }
+        }
+      }
+    }
+  }
+}

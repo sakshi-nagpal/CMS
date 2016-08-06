@@ -1,0 +1,51 @@
+[
+    {
+        "name" :"Authoring",
+        "code": "AUT",
+        "editable": true,
+        "launchable": false,
+        "usersRoles": ["systemAdmin", "contentAuthor"]
+    },
+    {
+        "name":"Content QA",
+        "code": "CQA",
+        "editable": false,
+        "launchable": false,
+        "usersRoles": ["systemAdmin", "contentReviewer"]
+    },
+    {
+	"name":"Editorial Review",
+	"code": "ERV",
+	"editable": false,
+	"launchable": true,
+	"usersRoles": ["systemAdmin", "editorialAuthor"]
+    },
+    {   
+        "name":"Development",
+        "code": "DEV",
+        "editable": false,
+        "launchable": false,
+        "usersRoles": ["systemAdmin", "devContentAdmin"]
+    },
+    {   
+        "name":"SQA",
+        "code": "SQA",
+        "editable": false,
+        "launchable": true,
+        "usersRoles": ["systemAdmin", "contentReviewer", "softwareTester"]
+    },
+    {   
+    	"name":"Testing",
+        "code": "TES",
+        "editable": false,
+        "launchable": true,
+        "usersRoles": ["systemAdmin", "editorialAuthor"]
+    },
+    {
+        "name":"Release",
+        "code": "REL",
+        "editable": false,
+        "launchable": true,
+        "usersRoles": ["systemAdmin"]
+    }
+]

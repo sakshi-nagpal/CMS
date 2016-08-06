@@ -1,0 +1,55 @@
+{
+  "allCatalogs":{
+    "get":{
+      "tags": ["catalog"],
+      "summary": "Get all Catalogs",
+      "description": "Catalogs endpoint will return an array of all the catalog objects",
+      "responses": {
+        "200": {
+          "description": "Array of Catalogs object",
+          "schema": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        },
+        "default": {
+          "description": "Unexpected error",
+          "schema": {
+            "$ref": "#/definitions/ErrorModel"
+          }
+        }
+      }
+
+    }
+  },
+  "catalogByID":{
+    "get":{
+      "tags": ["catalog"],
+      "summary": "Get Catalog Object",
+      "description": "catalogByID endpoint will return the catalog object of that specific Id",
+      "parameters": [
+        {
+          "name": "catalogId",
+          "in": "path",
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Object of Catalog",
+          "schema": {
+            "type": "object"
+          }
+        },
+        "default": {
+          "description": "Unexpected error",
+          "schema": {
+            "$ref": "#/definitions/ErrorModel"
+          }
+        }
+      }
+    }
+  }
+}

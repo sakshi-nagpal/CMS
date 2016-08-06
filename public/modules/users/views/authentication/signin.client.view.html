@@ -1,0 +1,30 @@
+<div id="signin-page" class="signin-page" data-ng-controller="AuthenticationController">
+    <form data-ng-submit="signin()" class="page-form box-shadow" autocomplete={{autocomplete}}>
+            <div class="header-content mhxxl mvl">
+                <img class="plm" ng-src="{{baseURL}}/modules/users/img/baloo_logo.png">
+            </div>
+        <hr class="ruler man border-primary "/>
+            <div class="body-content bg-white">
+                <div class="error-message text-red mbs" ng-bind="error"></div>
+                <div class="form-group mtl phxl text-large">
+                    <div class="group">
+                        <input class="pam username" ng-change="checkUsername()" type="text" data-ng-model="credentials.username" maxlength="100" ng-blur="removeUsedClass($event)"><span class="bar"></span>
+                        <label class="username-label" ng-bind="'users.label_name' | translate" ng-click="addUsedClass($event)" ></label>
+                    </div>
+                </div>
+                <div class="form-group phxl text-large">
+                    <div class="group">
+                        <input class="pam password" ng-change="checkPassword()" type="password" data-ng-model="credentials.password" maxlength="100" ng-blur="removeUsedClass($event)" ><span class="bar"></span>
+                        <label class="password-label" ng-bind="'users.label_password' | translate" ng-click="addUsedClass($event)"></label>
+                    </div>
+                </div>
+
+                <div class="form-group pull-right mrxl mbl pbs">
+                    <button class="btn btn-primary" type="submit()" ng-bind="'users.button_log_in' | translate"></button>
+                </div>
+
+                <div class="clearfix"></div>
+            </div>
+    </form>
+    <div class="footer-logo"><span ng-bind="'users.label_footer_copyright' | translate"></span><span>&copy;</span><span ng-bind="'users.label_footer_logo' | translate"></span></div>
+</div>

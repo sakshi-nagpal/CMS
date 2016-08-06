@@ -1,0 +1,99 @@
+<div role="dialog" aria-labelledby="modal-default-label" aria-hidden="true" class="modal fade scenario-reference"
+        >
+    <div class="modal-dialog">
+        <div class="modal-content" ng-click="scenarioRefModelClickHandler();">
+            <div class="cent-line-height title bg-theme pal">
+                <span class="text-color text-large"
+                      ng-bind="'content.scenario_ref.label_edit_project_metadata' | translate"></span>
+                <button data-dismiss="modal" aria-hidden="true" class="text-color close">&times;</button>
+            </div>
+            <form name="scenario_ref_form" class="pan man" ng-submit="updateScenarioReference();">
+                <div class="body">
+                    <div>
+                        <div class="text-medium cent-line-height pbl phl header-wrapper">
+                        <span class="header"
+                              ng-bind="'content.scenario_ref.label_project_name' | translate"></span><span>: </span>
+                            <span ng-bind="projectData.title"></span>
+                        </div>
+                        <table class="table mvn border-theme">
+                            <thead>
+                            <tr class="bg-theme">
+                                <th class="pvm phl scenario_prop"
+                                    ng-bind="'content.scenario_ref.label_title' | translate"></th>
+                                <th class="pvm phl scenario_type text-center" ng-repeat="indicator in indicators"
+                                    ng-bind="indicator"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td ng-bind="'content.scenario_ref.label_content_scenario_id' | translate"></td>
+                                <td ng-repeat="indicator in indicators">
+                                    <div class="dropdown" ng-init="isClicked = false">
+                                        <div class="search" data-toggle="dropdown"
+                                             ng-keydown="listKeydownHandler($event)"
+                                             ng-click="searchBoxClickHandler($event)">
+                                            <input class="search-box prl" autocomplete="off"
+                                                   ng-model="(data.projectContentRef | filter : {type : indicator})[0].scenario_ref.reference_id"
+                                                   ng-change="tmp[indicator].isRefNameInputBoxVisible = false;(data.projectContentRef | filter : {type : indicator})[0].scenario_ref.reference_name = '';"
+                                                   ng-focus="isClicked = !isClicked;"
+                                                   ng-blur="isClicked = !isClicked;"/>
+                                            <i class="caret dropdown-toggle"
+                                               ng-class="{'search-clicked': isClicked}"></i>
+                                        </div>
+                                        <ul class="dropdown-menu navigation-parent"
+                                            ng-click="tmp[indicator].isRefNameInputBoxVisible = true;">
+                                            <li class="list-item pan"
+                                                ng-repeat="ref in data.scenarioReferences | filter : {reference_id: ((data.projectContentRef | filter : {type : indicator})[0].scenario_ref.reference_id)} : startsWith | limitTo : 10"
+                                                ng-click="updateScenarioRefModel(ref, indicator)">
+                                                <a class="pam vertical-navigation" tabindex="0">
+                                                    <span class="ref">
+                                                        <span ng-bind="ref.reference_id"></span><span>-</span>
+                                                        <span ng-bind="ref.reference_name"></span>
+                                                    </span>
+                                                </a>
+                                            </li>
+
+                                            <li class="list-item pan"
+                                                ng-if="(tmpRef = (data.projectContentRef | filter : {type : indicator})[0].scenario_ref)
+                                                && (filteredReferences = (data.scenarioReferences | filter : {reference_id : (tmpRef.reference_id | uppercase)} : true))
+                                                && (tmpRef !== undefined && (tmpRef.reference_id.length))
+                                                && !(filteredReferences.length)">
+                                                <a class="pam vertical-navigation" tabindex="0">
+                                                    <span class="ref_id"><span>"</span><span ng-bind="(data.projectContentRef | filter : {type : indicator})[0].scenario_ref.reference_id"></span><span>"  </span></span>
+                                                    <span class="" ng-bind="'(Create New)'"></span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td ng-bind="'content.scenario_ref.label_content_scenario_name' | translate"></td>
+                                <td ng-repeat="indicator in indicators">
+                                    <input ng-if="(data.projectContentRef | filter : {type : indicator})[0].scenario_ref.reference_name || tmp[indicator].isRefNameInputBoxVisible"
+                                           ng-model="(data.projectContentRef | filter : {type : indicator})[0].scenario_ref.reference_name"
+                                           required/>
+                                    <span class="text-grey2 pts sampleRefName"
+                                          ng-if="!((data.projectContentRef | filter : {type : indicator})[0].scenario_ref.reference_name || tmp[indicator].isRefNameInputBoxVisible)"
+                                          ng-bind="'content.scenario_ref.label_placeholder' | translate"></span>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td ng-bind="'content.scenario_ref.label_doc_name' | translate"></td>
+                                <td ng-repeat="indicator in indicators">
+                                    <input ng-model="(data.projectContentRef | filter : {type : indicator})[0].doc_name"/>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="text-center pal">
+                    <button type="submit" class="btn btn-primary ok"
+                            ng-bind="'content.scenario_ref.label_apply' | translate"></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

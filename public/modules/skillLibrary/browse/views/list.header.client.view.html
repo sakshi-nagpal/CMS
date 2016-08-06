@@ -1,0 +1,28 @@
+<div class="list-header clearfix">
+    <ul class="legend-container list-inline pull-right man phxl">
+        <li class="plm prn">
+            <span class="indicator-color img-circle border-indicator-pink bg-indicator-pink"></span>
+            <span class="indicator-label plx" ng-bind="('skillImport.label_task_step' | translate)+': '" ></span>
+            <span class="indicator-counter border-container prm plx" ng-bind="commonData.taskStepsLength"></span>
+        </li>
+        <li class="plm prn">
+            <span class="indicator-color img-circle border-indicator-yellow bg-indicator-yellow"></span>
+            <span class="indicator-label plx" ng-bind="('skillImport.label_lib_step' | translate)+': '" ></span>
+            <span class="indicator-counter plx" ng-bind="commonData.libraryStepsLength"></span>
+        </li>
+    </ul>
+    <div class="app-img-container pull-left prm ptx">
+        <img id="img" class="img" ng-src="/modules/app/directives/productChooser/img/{{commonData.app}}.png"/>
+    </div>
+    <div class="app-name">
+        <span class="pts" >{{commonData.app}}</span>
+    </div>
+    <div class="skill-detail"  ellipsis-tooltip="view.subHeading.text">
+        <span class="skill-breadcrumb text-large">{{view.subHeading.text}}</span>
+    </div>
+    <div class="add-library-container pull-right">
+        <button class="btn btn-primary add-library mrxl text-base" user-can='edit_content'
+                ng-bind="'skillBrowse.label_add_library_step' | translate" ng-click="addLibraryStepFromList($event)"></button>
+    </div>
+</div>
+

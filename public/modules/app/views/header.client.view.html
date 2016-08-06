@@ -1,0 +1,53 @@
+<div class="default-page header-container" data-ng-controller="HeaderController" ng-class="[header.header_topbar]">
+  <div id="header-topbar" class="page-header-topbar">
+
+    <nav id="topbar" role="navigation" data-step="1" class="navbar navbar-default  mbn">
+      <div class="content-topbar limit-content">
+        <a  class="navbar-header logo-container pull-left" tabindex="-1" ui-sref="dashboard">
+          <div id="logo" class="navbar-brand mhs"></div>
+        </a>
+
+        <div class="topbar-main">
+
+          <ul class="nav navbar navbar-top-links navbar-right mbn pull-right mrn menu-right user-dropdown">
+            <li class="dropdown topbar-user mrn">
+              <a id="user-icon" data-hover="dropdown" tabindex="0" href="" class="dropdown-toggle ptn pbn prs clearfix" data-toggle="dropdown">
+                <span class="img-responsive img-circle bg-theme-darker pull-left mtm">
+                  <i class="glyphicon glyphicon-user icon-user text-color pts phx"></i>
+                </span>
+                <span class="user-name text-color pull-left mtm ptx plm prm" title="{{authentication.user.firstName}} {{authentication.user.lastName}}">
+                  {{authentication.user.firstName}} {{authentication.user.lastName}}</span>
+                <span class="caret pull-left text-color mls">&nbsp;</span>
+              </a>
+              <div class = "role-container pbm pts pull-right" ng-click="disableClick($event)">
+                <label class="role pas mbn text-white bg-grey3" ng-repeat="userRole in userRoles">{{userRole.desc}}</label>
+              </div>
+              <ul class="dropdown-menu dropdown-user pull-right" data-navigation="required" role="menu">
+                <li class="divider mvn" ng-if="userRoles.length"></li>
+                <li ><a change-password class="ptm pbm change">Change Password</a></li>
+                <li class="divider mvn"></li>
+                <li><a class="ptm pbm" href="/auth/signout" ng-click="signout()" id="user-signout">Log Out</a></li>
+              </ul>
+            </li>
+          </ul>
+
+          <form id="topbar-search" class="pull-right" method="GET" ng-submit="searchTask(taskSearchText)" ng-class="{open:header.form}" class="hidden-sm hidden-xs pull-right" ng-show="showMenu">
+            <div class="input-group">
+              <input type="text"  placeholder="{{'dashboard.label_placeholder_text' | translate}}" ng-click="$event.stopPropagation();" class="form-control text-color search-text-box" ng-model="taskSearchText"/>
+              <div class="search-button" >
+                <span class="input-group-btn button-handler" tabindex="1" ng-click="header.form==true?header.form=false:header.form=true;header.toggle('form',$event);" >
+                  <a href="" tabindex="-1" class="btn submit search-icon">
+                    <i class="fa baloo-icon-search text-color task-search-icon img-circle bg-theme-darker cursor-pointer">
+                    </i>
+                  </a>
+                </span>
+              </div>
+            </div>
+          </form>
+          <div class="divider-vertical border-grey mas mhs pull-right"></div>
+          <div class="baloo-img mrs pull-right"></div>
+        </div>
+      </div>
+    </nav>
+  </div>
+</div>

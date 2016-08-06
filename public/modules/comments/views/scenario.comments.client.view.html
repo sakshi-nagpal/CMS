@@ -1,0 +1,522 @@
+<div id="comment-module" ng-click="$event.stopPropagation()">
+    <div class="modal-header">
+        <div>
+            <button type="button" class="close" data-dismiss="modal" ng-click="close()"
+                    aria-hidden="true">&times;</button>
+        </div>
+        <p class="modal-title">{{popupTitle}}<span><a scroll-to="footerdiv">
+            <button class="add-comment-button"
+                    title="Add New Comment"
+                    ng-click="editScenario(-1,-1);enterComments=true">
+                <span class="plus-circle">+</span><span style="padding-left: 10px;">Add Comment</span>
+            </button>
+        </a></span></p>
+    </div>
+    <div class="modal-body">
+        <div>
+            <table class="table manage-comment" ng-if="scenario.threads.length>0">
+
+                <tbody ng-repeat="thread in scenario.threads" ng-init="parentIndex = $index">
+                <tr class="username-text">
+                    <td colspan="3">
+                        <span class="username-text"> {{thread.thread.comments[0].comment.user.displayName}}</span>
+                        <span ng-if="thread.thread.comments[0].comment.user._id!=loggedUser._id && thread.thread.comments[0].comment.isNew" class="username-text"><sup><span class="sup-text">&nbsp;New</span></sup></span>
+                    <span class="time-ago" class="time-ago"
+                          am-time-ago="thread.thread.comments[0].comment.timeStamp"></span>
+                    </td>
+                </tr>
+                <tr ng-if="thread.thread.comments[0].comment.user._id==loggedUser._id" ng-hide="thread.isEditable">
+                    <td>
+                    <span class="orig-filename">{{thread.thread.comments[0].comment.text}}
+                    </span>
+                    </td>
+                    <td colspan="2" align="right" ng-if="thread.thread.comments[0].comment.user._id==loggedUser._id">
+                        <a title="Edit"
+                           ng-click="editScenario(parentIndex,-1);">
+                            <span class="baloo-font baloo-icon-pencil"></span>
+                        </a>
+                        <span class="headerDivider">|</span>
+                        <a ng-click="deleteThreadInScenario(parentIndex,-1)" title="Delete">
+                            <span class="baloo-font baloo-icon-trash"></span>
+                        </a>
+                    </td>
+                </tr>
+                <tr ng-if="showScenarioDeleteConfirm[parentIndex] && replyScenarioIndex==-1">
+                    <td colspan="3">
+                        <div class="delete-popup">
+                            <p class="text-center text-white" disabled>
+                                Are you sure to delete this comment?&nbsp;&nbsp;&nbsp;
+                                <button class="btn btn-primary"
+                                        ng-click="deleteThreadFromScenario(parentIndex,thread.thread._id,'No')">No
+                                </button>
+                                <button class="btn btn-primary"
+                                        ng-click="deleteThreadFromScenario(parentIndex,thread.thread._id,'Yes')">Yes
+                                </button>
+
+                            </p>
+                        </div>
+                    </td>
+                </tr>
+                <tr ng-if="thread.thread.comments[0].comment.user._id!=loggedUser._id">
+                    <td colspan="3">
+                    <span class="orig-filename-full">{{thread.thread.comments[0].comment.text}}
+                    </span>
+                    <span align="right" ng-if="thread.thread.comments[0].comment.isNew" class="mark-as-read"><i title="Mark As Read" class="fa fa-check-square-o"
+                                ng-click="markAsRead(parentIndex,thread.thread._id,thread.thread.comments[0]._id)"></i></span>
+                    </td>
+
+                </tr>
+                <tr ng-if="thread.isEditable">
+                    <td colspan="3" align="right" ng-init="changeThread=false">
+                        <div id="anchor_{{parentIndex}}"><textarea class="textArea wrap-comment"
+                                                                   ng-change="changeThread=true" maxlength="5000" focus-me="focusInput"
+                                                                   ng-model="thread.thread.comments[0].comment.text"
+                                                                   class="form-control"
+                                                                   placeholder="&nbsp;Edit Comment..."
+                                                                   aria-describedby="basic-addon2"></textarea>
+
+                            <div>
+                                <br>
+
+                                <p align="center">
+                                    <button ng-disabled="thread.thread.comments[0].comment.text.length<1 || changeThread==false"
+                                            type="button"
+                                            class="btn btn-primary"
+                                            data-dismiss="modal"
+                                            ng-click="editThread(parentIndex,thread.thread.comments[0].comment.text,thread.thread._id,thread.thread.comments[0]._id)">
+                                        &nbsp; Save &nbsp;
+                                    </button>
+
+                                    <button type="button" class="btn btn-primary"
+                                            data-dismiss="modal" class="close" ng-click="editScenario(-1,-1)"
+                                            aria-hidden="true">
+                                        Cancel
+                                    </button>
+                                </p>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr ng-if="thread.thread.comments.length>1">
+                    <td colspan="3" align="right" collapse="thread.isCollapsed">
+                        <table class="table manage-comment-reply">
+                            <tbody ng-repeat="comment in thread.thread.comments">
+                            <tr ng-hide="$index==0">
+                                <td></td>
+                                <td colspan="3">
+                                    <span class="username-text">{{comment.comment.user.displayName}}</span>
+                                    <span ng-if="comment.comment.user._id!=loggedUser._id && comment.comment.isNew" class="username-text"><sup ng-init="thread.isCollapsed=false;"><span class="sup-text">&nbsp;New</span></sup></span>
+                                    <span class="time-ago" am-time-ago="comment.comment.timeStamp"></span></td>
+
+                            </tr>
+                            <tr ng-hide="$index==0||comment.isEditable"
+                                ng-if="comment.comment.user._id==loggedUser._id">
+                                <td>&nbsp;&nbsp;&nbsp;</td>
+                                <td>
+                                    <span class="orig-filename">{{comment.comment.text}}</span>
+                                </td>
+
+                                <td colspan="2" align="right"
+                                    ng-if="comment.comment.user._id==loggedUser._id">
+                                    <a title="Edit"
+                                       ng-click="editScenario(parentIndex,$index)">
+                                        <span class="baloo-font baloo-icon-pencil"></span>
+                                    </a>
+                                    <span class="headerDivider">|</span>
+                                    <a ng-click="deleteThreadInScenario(parentIndex,$index)"
+                                       title="Delete">
+                                        <span class="baloo-font baloo-icon-trash"></span>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr ng-if="showScenarioDeleteConfirm[parentIndex] && replyScenarioIndex==$index">
+                                <td colspan="3">
+                                    <div class="delete-popup">
+                                        <p class="text-center text-white" disabled>
+                                            Are you sure to delete this reply?&nbsp;&nbsp;&nbsp;
+                                            <button class="btn btn-primary"
+                                                    ng-click="deleteReplyScenario(parentIndex,$index,thread.thread._id,comment._id,'No')">
+                                                No
+                                            </button>
+                                            <button class="btn btn-primary"
+                                                    ng-click="deleteReplyScenario(parentIndex,$index,thread.thread._id,comment._id,'Yes')">
+                                                Yes
+                                            </button>
+
+                                        </p>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr ng-hide="$index==0 || comment.isEditable"
+                                ng-if="comment.comment.user._id!=loggedUser._id">
+                                <td>&nbsp;&nbsp;&nbsp;</td>
+                                <td colspan="3">
+                                   <span class="orig-filename-full">{{comment.comment.text}}</span>
+                                   <span align="right" ng-if="comment.comment.isNew" class="mark-as-read"><i title="Mark As Read" class="fa fa-check-square-o" ng-click="markAsRead(parentIndex,thread.thread._id,comment._id)"></i></span>
+                                </td>
+
+                            </tr>
+                            <tr ng-if="comment.isEditable">
+                                <td colspan="4" align="right" ng-init="changeText=false">
+                                    <div id="anchor_{{parentIndex}}_{{$index}}">    <textarea class="textArea"
+                                                                                              ng-model="comment.comment.text" focus-me="focusInput"
+                                                                                              ng-change="changeText=true"
+                                                                                              maxlength="5000"
+                                                                                              class="form-control"
+                                                                                              placeholder="&nbsp;Edit Reply..."
+                                                                                              aria-describedby="basic-addon2"></textarea>
+                                    </div>
+                                    <div>
+                                        <br>
+
+                                        <p align="center">
+                                            <button type="button" class="btn btn-primary"
+                                                    ng-disabled="comment.comment.text.length<1  ||changeText==false"
+                                                    data-dismiss="modal"
+                                                    ng-click="editReply(parentIndex,comment.comment.text,thread.thread._id,comment._id,parentIndex)">
+                                                &nbsp; Save &nbsp;
+                                            </button>
+                                            <button type="button" class="btn btn-primary"
+                                                    data-dismiss="modal" class="close"
+                                                    ng-click="editScenario(-1,-1)"
+                                                    aria-hidden="true">
+                                                Cancel
+                                            </button>
+                                        </p>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" align="left"><a ng-show="thread.isCollapsed && thread.thread.comments.length>1"
+                                                    class="show-all-link"
+                                                    ng-click="thread.isCollapsed = !thread.isCollapsed;reSettingDeleteMessageScenario(parentIndex);">Show
+                        all replies</a>
+                        <a class="show-all-link" ng-show="!thread.isCollapsed && thread.thread.comments.length>1"
+                           ng-click="thread.isCollapsed = !thread.isCollapsed;reSettingDeleteMessageScenario(parentIndex);">Hide
+                            all replies</a></td>
+                </tr>
+                <tr>
+                    <td class="orig-filename">
+                        <hr width="270px">
+                    </td>
+                    <td colspan="2" align="right"><a class="show-all-link"
+                                                     ng-click="replyScenario(parentIndex)">
+                        <span class="fa fa-reply"> </span><span> Reply </span>
+                    </a></td>
+                </tr>
+                <tr ng-if="thread.reply">
+                    <td colspan="3" align="right">
+                        <div id="replyText_{{parentIndex}}">
+
+                    <textarea class="textArea_reply" ng-model="replyCommentText" maxlength="5000" focus-me="focusInput"
+                              class="form-control"
+                              placeholder="&nbsp;Write a reply..." aria-describedby="basic-addon2"></textarea>
+                        </div>
+                        <div>
+
+                            <br>
+
+                            <p align="center">
+                                <button ng-disabled="replyCommentText.length<1" type="button" class="btn btn-primary"
+                                        data-dismiss="modal"
+                                        ng-click="replyScenarioCommentThread(parentIndex,replyCommentText,thread.thread._id)">
+                                    &nbsp; Post &nbsp;
+                                </button>
+
+                                <button type="button" class="btn btn-primary"
+                                        data-dismiss="modal" class="close" ng-click="editScenario(-1,-1)"
+                                        aria-hidden="true">
+                                    Cancel
+                                </button>
+                            </p>
+                        </div>
+                    </td>
+
+                </tr>
+
+
+                </tbody>
+            </table>
+        </div>
+        <div id="footerdiv" class="text-center" ng-if="enterComments===true || threads.length==0">
+
+            <div class="new-comment-username-text">{{loggedUser.displayName}}</div>
+            <div><p><br></p></div>
+          <textarea class="textArea" ng-model="newComment" class="form-control" focus-me="focusInput"
+                    placeholder="&nbsp;Enter Comments..." aria-describedby="basic-addon2">
+
+          </textarea>
+
+            <div>
+                <br>
+
+                <p align="center">
+                    <button ng-disabled="newComment.length<1" type="button" class="btn btn-primary"
+                            data-dismiss="modal" ng-click="postScenarioComment(newComment)">
+                        &nbsp; Post &nbsp;
+                    </button>
+
+                    <button type="button" class="btn btn-primary"
+                            data-dismiss="modal" class="close" ng-click="closeAddComment()"
+                            aria-hidden="true">
+                        Cancel
+                    </button>
+                </p>
+            </div>
+        </div>
+
+
+        <!-- Starting the View All Step  comments -->
+        <div class="padding-no-comments"> <span><p ng-cloak ng-show="scenario.threads.length==0 && stepThreadsCheck==false && enterComments==false">{{noComments}}</p></span></div>
+        <div class="padding-view-all">
+            <span  ng-cloak ng-show="stepThreadsCheck" align="left">
+                <a ng-show="isCollapsed" class="show-all-link" ng-click="isCollapsed = !isCollapsed">
+                    <span class="glyphicon glyphicon-chevron-right"></span> View all step comments </a>
+                <a class="show-all-link" ng-show="!isCollapsed"
+                   ng-click="isCollapsed = !isCollapsed"><span class="glyphicon glyphicon-chevron-down"></span> Hide all
+                    step comments </a>
+            </span>
+        </div>
+
+
+        <div ng-repeat="step in scenario.stepThreads | orderBy:'index'"
+             ng-init="indexArray={stepIndex:step.index,origStepIndex:step.origStepIndex,stepId:step.id}">
+            <table class="table manage-comment" ng-show="step.threads.length>0" collapse="isCollapsed">
+
+                <tr>
+                    <td colspan="3" ng-if="indexArray.stepIndex<=10" style="padding-bottom: 20px;"><span
+                            class="step-comment{{indexArray.stepIndex+1}}">Comments: Step {{indexArray.stepIndex+1}}</span>
+                    </td>
+                    <td colspan="3" ng-if="indexArray.stepIndex>10" style="padding-bottom: 20px;"><span
+                            class="step-comment">Comments: Step {{indexArray.stepIndex+1}}</span>
+                    </td>
+                </tr>
+                <tbody ng-repeat="thread in step.threads" ng-init="parentIndex = $index">
+                <tr class="username-text">
+                    <td colspan="3">
+                        <span class="username-text"> {{thread.thread.comments[0].comment.user.displayName}}</span>
+                    <span class="time-ago"
+                          am-time-ago="thread.thread.comments[0].comment.timeStamp"></span>
+                    </td>
+                </tr>
+                <tr ng-if="thread.thread.comments[0].comment.user._id==loggedUser._id" ng-hide="thread.isEditable">
+                    <td>
+                        <div class="orig-filename">{{thread.thread.comments[0].comment.text}}
+                        </div>
+                    </td>
+                    <td colspan="2" align="right" ng-if="thread.thread.comments[0].comment.user._id==loggedUser._id">
+                        <a title="Edit"
+                           ng-click="edit(indexArray.origStepIndex,parentIndex,-1)">
+                            <span class="baloo-font baloo-icon-pencil"></span>
+                        </a>
+                        <span class="headerDivider">|</span>
+                        <a ng-click="deleteScenarioThreadMethod(indexArray.stepIndex,parentIndex,-1)"
+                           title="Delete">
+                            <span class="baloo-font baloo-icon-trash"></span>
+                        </a>
+                    </td>
+                </tr>
+                <tr ng-if="showDeleteConfirm[parentIndex] && replyIndex==-1 && deleteStepIndex==indexArray.stepIndex">
+                    <td colspan="3">
+                        <div class="delete-popup">
+                            <p class="text-center text-white" disabled>
+                                Are you sure to delete this comment?&nbsp;&nbsp;&nbsp;
+                                <button class="btn btn-primary"
+                                        ng-click="deleteScenarioComment(indexArray.origStepIndex,parentIndex,thread.thread._id,indexArray.stepId,'No')">
+                                    No
+                                </button>
+                                <button class="btn btn-primary"
+                                        ng-click="deleteScenarioComment(indexArray.origStepIndex,parentIndex,thread.thread._id,indexArray.stepId,'Yes')">
+                                    Yes
+                                </button>
+
+                            </p>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr ng-if="thread.thread.comments[0].comment.user._id!=loggedUser._id">
+                    <td colspan="3">
+                        <div class="orig-filename-full">{{thread.thread.comments[0].comment.text}}
+                        </div>
+                    </td>
+
+                </tr>
+                <tr ng-if="thread.isEditable">
+                    <td colspan="3" align="right" ng-init="changeThread=false">
+                        <div><textarea class="textArea wrap-comment" ng-model="thread.thread.comments[0].comment.text"
+                                       ng-change="changeThread=true" maxlength="5000" focus-me="focusInput"
+                                       class="form-control"
+                                       placeholder="&nbsp;Edit Comment..." aria-describedby="basic-addon2"></textarea>
+                        </div>
+                        <div>
+                            <br>
+
+                            <p align="center">
+                                <button ng-disabled="thread.thread.comments[0].comment.text.length<1 ||changeThread==false"
+                                        type="button"
+                                        class="btn btn-primary"
+                                        data-dismiss="modal"
+                                        ng-click="editThread(parentIndex,thread.thread.comments[0].comment.text,thread.thread._id,thread.thread.comments[0]._id)">
+                                    &nbsp; Save &nbsp;
+                                </button>
+
+                                <button type="button" class="btn btn-primary"
+                                        data-dismiss="modal" class="close" ng-click="edit(-1,-1,-1)"
+                                        aria-hidden="true">
+                                    Cancel
+                                </button>
+                            </p>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr ng-if="thread.thread.comments.length>1">
+                    <td colspan="3" align="right" collapse="thread.isCollapsed">
+                        <table class="table manage-comment-reply">
+                            <tbody ng-repeat="comment in thread.thread.comments">
+                            <tr ng-hide="$index==0">
+                                <td></td>
+                                <td colspan="3">
+                                    <span class="username-text">{{comment.comment.user.displayName}}</span>
+
+                                    <span class="time-ago" am-time-ago="comment.comment.timeStamp"></span></td>
+
+                            </tr>
+                            <tr ng-hide="$index==0 ||comment.isEditable"
+                                ng-if="comment.comment.user._id==loggedUser._id">
+                                <td>&nbsp;&nbsp;&nbsp;</td>
+                                <td>
+                                    <div class="orig-filename">{{comment.comment.text}}</div>
+                                </td>
+
+                                <td colspan="2" align="right"
+                                    ng-if="comment.comment.user._id==loggedUser._id">
+                                    <a title="Edit"
+                                       ng-click="edit(indexArray.origStepIndex,parentIndex,$index)">
+                                        <span class="baloo-font baloo-icon-pencil"></span>
+                                    </a>
+                                    <span class="headerDivider">|</span>
+                                    <a ng-click="deleteScenarioThreadMethod(indexArray.stepIndex,parentIndex,$index)"
+                                       title="Delete">
+                                        <span class="baloo-font baloo-icon-trash"></span>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr ng-if="showDeleteConfirm[parentIndex] && replyIndex==$index && deleteStepIndex==indexArray.stepIndex">
+                                <td colspan="3">
+                                    <div class="delete-popup">
+                                        <p class="text-center text-white" disabled>
+                                            Are you sure to delete this comment?&nbsp;&nbsp;&nbsp;
+                                            <button class="btn btn-primary"
+                                                    ng-click="deleteScenarioReply(indexArray.origStepIndex,parentIndex,$index,thread.thread._id,comment._id,'No')">
+                                                No
+                                            </button>
+                                            <button class="btn btn-primary"
+                                                    ng-click="deleteScenarioReply(indexArray.origStepIndex,parentIndex,$index,thread.thread._id,comment._id,'Yes')">
+                                                Yes
+                                            </button>
+
+                                        </p>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr ng-hide="$index==0 ||comment.isEditable"
+                                ng-if="comment.comment.user._id!=loggedUser._id">
+                                <td>&nbsp;&nbsp;&nbsp;</td>
+                                <td colspan="3">
+                                    <div class="orig-filename-full">{{comment.comment.text}}</div>
+                                </td>
+                            </tr>
+                            <tr ng-if="comment.isEditable">
+                                <td colspan="4" align="right" ng-init="changeText=false">
+                                    <div id="anchor_Scenario_{{indexArray.origStepIndex}}_{{parentIndex}}_{{$index}}">  <textarea
+                                            class="textArea" ng-model="comment.comment.text" ng-change="changeText=true"
+                                            class="form-control" maxlength="5000" focus-me="focusInput"
+                                            placeholder="&nbsp;Edit Reply..."
+                                            aria-describedby="basic-addon2"></textarea></div>
+
+                                    <div>
+                                        <br>
+
+                                        <p align="center">
+                                            <button type="button" class="btn btn-primary"
+                                                    ng-disabled="comment.comment.text.length<1 ||changeText==false"
+                                                    data-dismiss="modal"
+                                                    ng-click="editReply(parentIndex,comment.comment.text,thread.thread._id,comment._id,parentIndex)">
+                                                &nbsp; Save &nbsp;
+                                            </button>
+                                            <button type="button" class="btn btn-primary"
+                                                    data-dismiss="modal" class="close"
+                                                    ng-click="edit(-1,-1,-1)"
+                                                    aria-hidden="true">
+                                                Cancel
+                                            </button>
+                                        </p>
+                                    </div>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" align="left"><a ng-show="thread.isCollapsed && thread.thread.comments.length>1"
+                                                    class="show-all-link"
+                                                    ng-click="thread.isCollapsed = !thread.isCollapsed;reSettingDeleteMessage(parentIndex);">Show
+                        all replies</a>
+                        <a class="show-all-link" ng-show="!thread.isCollapsed && thread.thread.comments.length>1"
+                           ng-click="thread.isCollapsed = !thread.isCollapsed;reSettingDeleteMessage(parentIndex);">Hide
+                            all replies</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="orig-filename">
+                        <hr width="270px">
+                    </td>
+                    <td colspan="2" align="right"><a class="show-all-link"
+                                                     ng-click="reply(indexArray.origStepIndex,parentIndex)">
+                        <span class="fa fa-reply"></span><span> Reply </span>
+                    </a></td>
+                </tr>
+                <tr ng-if="thread.reply">
+                    <td colspan="3" align="right">
+                        <div id="replyText_Scenario_{{parentIndex}}">  <textarea
+                                class="textArea_reply" ng-model="replyCommentText" maxlength="5000" focus-me="focusInput"
+                                class="form-control"
+                                placeholder="&nbsp;Write a reply..." aria-describedby="basic-addon2"></textarea></div>
+
+                        <div>
+                            <br>
+
+                            <p align="center">
+                                <button ng-disabled="replyCommentText.length<1" type="button" class="btn btn-primary"
+                                        data-dismiss="modal"
+                                        ng-click="replyForStepComment(parentIndex,replyCommentText,thread.thread._id)">
+                                    &nbsp; Post &nbsp;
+                                </button>
+
+                                <button type="button" class="btn btn-primary"
+                                        data-dismiss="modal" class="close" ng-click="edit(-1,-1,-1)"
+                                        aria-hidden="true">
+                                    Cancel
+                                </button>
+                            </p>
+                        </div>
+                    </td>
+                </tr>
+
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+    </div>
+</div>

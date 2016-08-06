@@ -1,0 +1,58 @@
+<div style="position:relative">
+<div class="step-container phxl">
+
+
+    <div class="step-text-hidden-container man pam pll phxl">
+            <div class="step-text-hidden pll prm"  ng-bind-html="sce.trustAsHtml(stepJson.text)"></div>
+    </div>
+
+    <div class="step-container-child">
+        <div class="step-text-div">
+
+            <div class="btn-group metadata-dropdown pull-right mrxxl" ng-if="isLibrary">
+                <a class="btn dropdown-toggle pvn phn cent-line-height text-color" data-toggle="dropdown" href="#">
+                    <div class="title-value mrm" ng-bind="'stepViewer.label_mapped_tasks_&_metadata' | translate"></div>
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu pull-right cent-line-height mts">
+                    <li>
+                        <div class="mapped-tasks text-base ptm pbm plm" ng-bind="'stepViewer.label_mapped_tasks' | translate"></div>
+                        <ul ng-if="mappedStep.length" class="ptm pbm plm">
+                            <li type="disc" class="pts task" ng-if="friendlyId != 'stepLength'" ng-repeat="(friendlyId,stepNum) in mappedStep.detail" >
+                                <a ui-sref="content.task.scenario({friendlyId: friendlyId})" target="_blank" ng-bind="friendlyId + ': Step '+ stepNum"></a>
+                             </li>
+                        </ul>
+                        <div class="pll ptl pbl prl" ng-if="!mappedStep.length" ng-bind="'stepViewer.label_no_mapped_tasks_message' | translate"></div>
+                    </li>
+                    <li>
+                        <div class="metadata text-base ptm pbm plm" ng-bind="'stepViewer.label_step_metadata' | translate"></div>
+                        <ul class="step-metadata plm">
+                            <li class="ptm">
+                                <span ng-bind="'stepViewer.label_created' | translate"></span>
+                                <span class="step-data" ng-bind="(stepJson.createdTimestamp|date:'dd-MMM-yy') +', '+ stepJson.creatorName"></span>
+                            </li>
+                            <li class="ptm">
+                                <span ng-bind="'stepViewer.label_updated' | translate"></span>
+                                <span class="step-data" ng-bind="(stepJson.updatedTimestamp|date:'dd-MMM-yy') +', '+ stepJson.updatedBy.displayName"></span>
+                            </li>
+                            <li class="ptm">
+                                <ul class="skill-list pbl">
+                                    <span ng-bind="'stepViewer.label_skills' | translate"></span>
+                                    <span class="step-data" ng-bind="stepJson.skills.length"></span>
+                                    <li type="disc" class="ptm skills" ng-repeat="skill in stepJson.skills" ng-bind="skill.title"></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="step-text man pam pll" ng-bind-html="sce.trustAsHtml(stepJson.text)"></div>
+
+        </div>
+
+        <step-method ng-if="stepJson.methods" methods="stepJson.methods" change-method-status="onMethodStatusChange(id,status)" manage-method-status="manageMethodStatus"></step-method>
+    </div>
+</div>
+
+</div>

@@ -1,0 +1,18 @@
+{
+  "name": "SAT",
+  "description": "Skill Analysis Tool",
+  "version": "0.1.0",
+  "scripts": {
+    "install": "echo. && echo ---INITIATING SKILL_ANALYSIS_TOOL BUILD--- && npm run bower",
+    "bower": "echo ---INITIATING BOWER--- && bower install --config.interactive=true && echo ---BOWER SUCCESSFULLY COMPLETED--- && npm run browserify",
+    "browserify": "echo ---INITIATING BROWSERIFY--- && browserify -r ./modules/compare/compare.js:comparatorEngine > ./modules/compare/compare_min.js && browserify -r ./modules/compare-test/item-data-structure.js:itemConfig > ./modules/compare/item_config_min.js && echo ---BROWSERIFY SUCCESSFULLY COMPLETED---",
+    "postinstall": "echo ---SKILL_ANALYSIS_TOOL SUCCESSFULLY COMPLETED---"
+  },
+  "dependencies": {
+
+  },
+  "devDependencies": {
+    "bower": "*",
+    "browserify": "*"
+  }
+}

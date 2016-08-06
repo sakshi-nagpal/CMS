@@ -1,0 +1,57 @@
+<div class="import-step-view">
+    <ul class="list-unstyled mbn pbs phxl">
+        <li class="ptl text-large">{{'skillImport.label_skills_for'| translate}} {{commonData.selectedSkill.product}}</li>
+        <li class="skill-label text-base" ng-bind="commonData.selectedSkill.label"></li>
+    </ul>
+
+
+    <div class="step-container plm">
+        <div class="step-container-child">
+            <div class="step-text-div border-theme phxl clearfix">
+                <div class="task-step-legend pull-left mlm"ng-class="{true:'bg-indicator-pink border-indicator-pink',
+                    false:'bg-indicator-yellow border-indicator-yellow'}[commonData.type == constant.STEP.TASK]" >
+                </div>
+                <div class="step-text text-large pan mbm pbx" ng-bind-html="sce.trustAsHtml(step.text)">
+                </div>
+                <div class="info text-grey3 text-small" ng-if="commonData.type == constant.STEP.TASK">
+                    <div class="task-id pull-left prl">{{'skillImport.label_task_id'| translate}}:
+                        <span ng-bind="scenario.friendlyId"></span>
+                    </div>
+                    <div class="phase pull-left prl">{{'skillImport.label_phase'| translate}}:
+                        <span ng-bind="scenario.phase.code"></span>
+                    </div>
+                    <div class="method-count pull-left prl">{{'skillImport.label_method_count'| translate}}:
+                        <span ng-bind="step.methods.length"></span>
+                    </div>
+                    <div class="last-updated pull-left prl">{{'skillImport.label_last_updated'| translate}}:
+                        <span ng-bind="scenario.updatedTimestamp|date:'MMMM dd, yyyy'"></span>
+                    </div>
+                    <div ng-if="commonData.app" class="application pull-left prl">{{'skillImport.label_application'| translate}}:
+                        <span ng-bind="commonData.app"></span>
+                    </div>
+                </div>
+                <div class="info text-grey3 text-small" ng-if="commonData.type == constant.STEP.LIBRARY">
+                    <div class="method-count pull-left prl">{{'skillImport.label_method_count'| translate}}:
+                        <span ng-bind="step.methods.length"></span>
+                    </div>
+                    <div class="last-updated pull-left prl">{{'skillImport.created'| translate}}:
+                        <span ng-bind="step.createdTimestamp|date:'MMMM dd, yyyy'"></span>
+                    </div>
+                    <div class="last-updated pull-left prl">{{'skillImport.label_last_updated'| translate}}:
+                        <span ng-bind="step.updatedTimestamp|date:'MMMM dd, yyyy'"></span>
+                    </div>
+                    <div ng-if="commonData.app" class="application pull-left prl">{{'skillImport.label_application'| translate}}:
+                        <span ng-bind="commonData.app"></span>
+                    </div>
+                </div>
+            </div>
+            <div auto-resizer class="method-container">
+                <label class="method-heading mtl mbn mhxl text-large">{{'skillImport.label_method'| translate}}:</label>
+                <step-method ng-if="step" methods="step.methods">
+
+                </step-method>
+            </div>
+        </div>
+    </div>
+</div>
+

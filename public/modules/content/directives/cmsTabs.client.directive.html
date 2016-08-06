@@ -1,0 +1,6 @@
+<ul class="cms-tab list-inline mbn mln">
+    <li class="tab-li text-base phn" ng-if="x.stateRef" ng-repeat="x in obj" ui-sref-active="active">
+        <span class="pvm phl"  ui-sref="{{x.stateRef}}">{{x.name | translate}}</span>
+        <!--<span class="pvm phl disabled" ng-if="!x.stateRef">{{x.name | translate}}</span>-->
+    </li>
+</ul>

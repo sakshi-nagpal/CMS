@@ -1,0 +1,51 @@
+<div class="scenario-header cent-line-height text-color text-large border-theme">
+    <span class="scenario-id-label" ng-bind="'scenario.label_task_id' | translate"></span>:&nbsp;
+    <span class="scenario-id" ng-bind="scenario.friendlyId"></span>
+
+    <div ng-if="!viewOnly" class="pull-right right-navbar">
+
+        <span title="{{scenario.isActive ? ('common.label.scenario_status_inactive' | translate ): ('common.label.scenario_status_active' | translate)}}" class="scenario-status text-large baloo-font baloo-icon-flag prl cursor-pointer"
+              user-can='edit_scenario_status' ng-class="scenario.isActive ? 'active' : 'inactive'" ng-click="onScenarioStatusChange()"></span>
+
+        <span class="plm mls text-base phase cent-line-height"></span>
+        <select tabindex="-1" class="selectpicker phase-dropdown text-base" ng-model="scenario.phase" ng-options="phase.name for phase in phases track by phase.code"
+                 ng-change="changePhase('{{scenario.phase.code}}')"></select>
+
+    <!--    <div class="btn-group skill-dialog">
+            <a class="btn dropdown-toggle pvn" data-toggle="dropdown" href="#">
+                <span ng-bind="'scenario.label_skills_button' | translate"></span>
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu pull-right cent-line-height" ng-click="$event.stopPropagation();">
+                <li class="title text-medium text-color pvl plxl">
+                    <span  ng-if="scenarioSkills.length>0" ng-bind="'scenario.label_skills_title' | translate"></span>
+                    <span ng-if="scenarioSkills.length === 0"
+                          ng-bind="'scenario.label_no_skill_title' | translate"></span>
+                </li>
+                <li class="content plxxl">
+                    <ul class="skill-list plm mls">
+                        <li class="pbl" ng-repeat="skill in scenarioSkills"><span
+                                class="text-grey3 text-base" ng-bind="skill.label"></span></li>
+                    </ul>
+                </li>
+                <li class="footer pvl border-theme">
+                    <button class="btn btn-primary" ng-click="closeSkillDialog();"
+                            ng-bind="'scenario.label_skill_ok_button' | translate"></button>
+                </li>
+            </ul>
+        </div>-->
+        <div  class="header-icons">
+            <i title="Copy Scenario" options-modal="copyScenario" user-can='edit_content'
+               phase-editable="scenario.phase.code" class="baloo-font baloo-icon-copy"></i>
+            <i class="baloo-font baloo-icon-comments" title="Add Comment"
+               ng-click="showScenarioComment({id: scenario._id,code:scenario.type.code})"><sup ng-if="scenarioNewCommentCount.count>0"><span class="badge" title="{{scenarioNewCommentCount.count}} New Comments">{{scenarioNewCommentCount.count}}</span></sup></i>
+            <i title="Task History" user-can="view_history" class="baloo-font baloo-icon-history" ui-sref="content.task.scenario.history({id: scenario._id})"></i>
+            <div class="launch-simulation" title="Launch Simulation" user-can='launch_simulation'>
+                <div sim5-launch friendly-id="scenario.friendlyId">
+                    <span><i class="baloo-font baloo-icon-globe"></i></span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

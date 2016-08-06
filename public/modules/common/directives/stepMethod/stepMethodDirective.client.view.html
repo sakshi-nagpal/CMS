@@ -1,0 +1,35 @@
+<div class="method mvm" ng-repeat="method in methods"
+     ng-init="methodTypeCount = updateMethodCountKeyMap(method.type);">
+    <div class="method-header pas pll" ng-class="{'plxxl mlx':!method.status,'pll':method.status}">
+        <span title="Primary Method" class="baloo-font baloo-icon-filled-star primary-method-icon star-icon"
+              ng-class="{'star-left-20':!method.status}" ng-if="method.primary"></span>
+
+        <span title="{{capitalize(method.status)}}" ng-if="!manage.methodStatus && method.status" class="text-large baloo-font baloo-icon-flag mlm plx {{method.status}}"></span>
+        <select ng-if="manageMethodStatus && method.status" user-can='edit_method_status' ng-show="manage.methodStatus=true" class="text-large mhx ptn method-status" ng-model="method.status" ng-change="onMethodStatusChange(method._id,method.status)">
+            <option data-icon="text-large status-icon baloo-font baloo-icon-flag default">default</option>
+            <option data-icon="text-large status-icon baloo-font baloo-icon-flag supported">supported</option>
+            <option data-icon="text-large status-icon baloo-font baloo-icon-flag unsupported">unsupported</option>
+        </select>
+        <span class="mhx method-index">Method <span ng-bind="$index +1"></span></span> :&nbsp;
+        <span class="method-name" ng-bind="method.type"></span>&nbsp;
+        <span class="method-count" ng-if="methodTypeCount > 1" >(<span ng-bind="methodTypeCount"></span>)</span>
+    </div>
+    <div class="action-list-container mlxxl pll">
+        <ul class="action-list mbl">
+            <li class="action action{{actionIndex}}" ng-repeat="action in (method.actions)"
+                ng-init="actionIndex = ($index + 1)">
+                <span class="action-text" ng-bind-html="sce.trustAsHtml(action.text)"></span>
+                <div ng-if="method.primary && 'content.task.scenario.step.view'| isState " class="text-color audio-timing-data">
+                    <div class="start-time time-container mrm">
+                        <span ng-bind="'common.stepMethod.label_start_time' | translate"></span> :
+                        <span ng-bind="action.start"></span>
+                    </div>
+                    <div class="end-time time-container">
+                        <span ng-bind="'common.stepMethod.label_end_time' | translate"></span> :
+                        <span ng-bind="action.end"></span>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+<div class="library-step-viewer">
+        <div class="library-step-header">
+            <nav class="navbar navbar-default mbn pam">
+                <div class="navbar-header stepname-container pll mts mbx" ellipsis-tooltip='stepJson.name'>
+                    <label class="man text-color heading text-x-large font-bold" ng-bind="'library.step.label_step_header' | translate"></label>
+                    <span class="text-x-large font-bold mlm" ng-bind="stepJson.name"></span>
+                </div>
+                <div class="navbar-right mrl">
+                    <h5 class="method-count prm pvs mvn" ng-if="stepJson.methods"><span ng-bind="'library.step.label_step_method_count' | translate" ></span>  {{stepJson.methods.length}}</h5>
+                    <div class="tag-container phs" title="Tag Skill" user-can='edit_content' ng-click="tagSkill()">
+                        <span class="fa fa-tag tag-icon text-large pas"></span>
+                    </div>
+                    <div class="history-icon phs" title="Library Step History">
+                        <span class="baloo-font baloo-icon-history pbs phs text-h3 " ui-sref="libraryStep.view.history"></span>
+                    </div>
+
+                    <button class="btn btn-primary text-white  mrx" ui-sref="libraryStep.edit"
+                            ng-bind="'stepViewer.label_edit_button' | translate" user-can='edit_content'></button>
+
+                    <button class="btn btn-primary text-white  mlx"
+                            ng-bind="'stepViewer.label_close_button' | translate" ng-click="onStepClose()">
+                    </button>
+                </div>
+            </nav>
+        </div>
+    <step-viewer ng-if="stepJson" step-json="stepJson" get-viewer-height="getViewerHeight()" is-library="isLibrary" mapped-step="mappedStep"></step-viewer>
+    <ui-view></ui-view>
+</div>
+
+
+

@@ -1,0 +1,313 @@
+
+
+.baloo {
+  ::-webkit-input-placeholder {
+    .text-grey3;
+  }
+  ::-moz-placeholder { /* Firefox 18- */
+    .text-grey3;
+  }
+  :-ms-input-placeholder {
+    .text-grey3;
+  }
+
+  &.modal-open{
+    padding-right: 17px !important;
+  }
+
+  /*&.max-width{
+    margin: 0 auto;
+    max-width: 1366px;
+  }
+*/
+  &.background-image-signin{
+    background: url('../img/background-image-signin.jpg') repeat-x scroll center top rgb(187, 187, 187);
+    background-attachment: fixed;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+
+  &.background-image{
+    background-image:url('../img/background-image.png');
+  }
+
+  margin: 0 auto;
+  min-height: 100%;
+  min-width: 1002px;
+  position: relative;
+
+  .btn-custom {
+    &:hover, &:focus {
+      .bg-primary;
+      border-color:@brand-primary;
+    }
+  }
+
+  .loading-indicator{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 100px;
+    height: 100px;
+    margin-top: -50px;
+    margin-left: -50px;
+    z-index: 10;
+    background:url('../img/loader.gif') no-repeat center  transparent;
+  }
+  .baloo-header {
+    height: 51px;
+    min-width: 1002px;
+    width: 100%;
+    z-index: 1;
+    .content-header {
+      position: relative;
+      width: 100%;
+      padding: 0 10px;
+
+      .logo-learning {
+        background-image: url('../img/always_learning.png');
+        height: 11px;
+        width: 150px;
+      }
+      .logo-pearson {
+        background-image: url('../img/pearson_logo.png');
+        height: 17px;
+        margin-top: -3px;
+        width: 111px;
+      }
+    }
+    }
+  .main-container {
+    width: 100%;
+    margin: 0 auto;
+    &.min-height {
+      min-height: 635px;
+    }
+    &.overflow-hidden {
+      max-height: 0;
+      overflow: hidden;
+    }
+    /*.content{
+      margin: 0 auto;
+      max-width: 1366px;
+    }*/
+  }
+
+  .header-menu {
+    border-width: 0px;
+    .header-container {
+      #topbar {
+        .content-topbar {
+          margin: 0 auto;
+          height: 100%;
+          .horizontal-menu{
+            li>a {
+              &:hover{
+                .bg-theme-dark !important;
+              }
+            }
+          }
+          .topbar-main {
+            .menu-right {
+              border-width: 0px;
+              height: 100%;
+              .topbar-user {
+                height: 100%;
+                width: 158px;
+                > a {
+                  &:hover{
+                    .bg-theme-dark !important;
+                  }
+                  .icon-user {
+                    height: 30px;
+                    position: relative;
+                    text-align: center;
+                    width: 30px;
+                  }
+                  .caret {
+                    position: relative;
+                    top: 21px;
+                    right:10px;
+                  }
+                  .user-name{
+                    text-overflow: ellipsis;
+                    width: 95px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                  }
+                }
+                .role-container {
+                  display: none;
+                }
+                .change {
+                  cursor: pointer;
+                }
+                &.open {
+                  height: auto;
+                  z-index: 3;
+                  box-shadow:0 4px 5px rgba(0,0,0,.175);
+                  .bg-theme-dark !important;
+                  > a {
+                    height: auto;
+                    .bg-theme-dark !important;
+                    .img-circle {
+                      .bg-primary;
+                      border-color: @brand-primary;
+                      .icon-user {
+                        color: @color-white !important;
+                      }
+                    }
+                    .user-name{
+                      color: @brand-primary !important;
+                    }
+                    .caret {
+                      color: @brand-primary !important;
+                    }
+                  }
+                  .role-container {
+                    display: block;
+                    cursor: default;
+                    padding-right: 15px;
+                    .role{
+                      display:inline-block;
+                      border-radius: 2px;
+                      font-size: 11px!important;
+                    }
+                  }
+                }
+
+              }
+            }
+            #topbar-search {
+              background-color: transparent;
+              height: 50px;
+              position: relative;
+              border: 1px solid transparent;
+              z-index: 0;
+              .input-group {
+                position: absolute;
+                top: -2px;
+                right: 0px;
+                min-width: 50px;
+
+                .search-text-box {
+                  margin-left: 0px !important;
+                  width: 50px;
+                  position: relative;
+                  padding-left: 12px;
+                  top:2px;
+                  border: 1px solid transparent;
+                }
+                .search-button{
+                  width: 50px;
+                  position: absolute;
+                  top: 0px;
+                  right: 0px;
+                }
+                .search-icon{
+                  margin-left: 0px;
+                }
+                .input-group-btn {
+                  top: 3px;
+                  height: 47px;
+                  right: 0px;
+                }
+              }
+
+              &:focus {
+                outline: 0px;
+              }
+              &.open {
+                .search-text-box {
+                  width: 300px;
+                  height: 48px;
+                  .bg-white !important;
+                  border: 1px solid darken(@color-theme, 8%);
+                }
+                .task-search-icon {
+                  .bg-primary;
+                  .text-white;
+                }
+              }
+            }
+
+            .task-search-icon {
+              width: 30px;
+              height: 30px;
+              line-height: 26px;
+            }
+          }
+          .logo-container {
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-color:transparent;
+            width:185px;
+            &:active{
+              .bg-theme-dark !important;
+            }
+
+
+            #logo {
+              margin-top: 7px ;
+              margin-bottom: 6px ;
+              width: 175px;
+              height: 37px;
+              background-image: url("../img/logo.png");
+              //padding-top: 12px !important;
+
+            }
+          }
+        }
+      }
+
+    }
+  }
+
+  #footer{
+    text-align: left;
+    line-height: 50px;
+  }
+
+  .limit-content{
+    max-width: 1260px;
+    margin: 0 auto;
+    .phm;
+  }
+// Keyboard Focus Class
+  .focussed{
+    outline: 1px dashed black !important;
+    box-shadow: inset 0px 0px 2px 1px #8bafd1,0px 0px 5px 1px #8bafd1 !important;
+  }
+
+  // Keyboard Focus Issues
+
+
+  .vertical-navigation, .horizontal-navigation{
+    &:focus:not(.focussed){
+      outline: none;
+    }
+  }
+
+  .bootstrap-select {
+    .btn {
+      &.focussed:focus {
+        outline: 1px dashed #000 !important;
+      }
+    }
+
+  }
+
+  .jquery-notific8-notification.baloo-notific8 {
+    .bg-primary;
+    .text-white;
+    border-color: @brand-primary;
+    border-top-right-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+  }
+}
+
+@import "../directives/breadcrumbs/breadcrumbs";
+@import "../directives/optionsModal/options-modal";
+@import "../directives/changePassword/change-password";

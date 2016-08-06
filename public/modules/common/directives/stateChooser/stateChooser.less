@@ -1,0 +1,84 @@
+.state-chooser{
+  display:inline-block;
+  .state-block{
+    position: relative;
+    display:inline-block !important;
+    text-align: center;
+    .state{
+      position: relative;
+      height:55px;
+      width:55px;
+      border:2px solid;
+      border-color :@color-theme;
+      line-height: 51px;
+      margin-left: auto;
+      margin-right: auto;
+
+      .state-icon{
+        display: inline-block;
+        height:35px;
+        width: 35px;
+        line-height: 34px;
+        background-color: @grey2;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .status-line{
+        width: 165px;
+        height: 1px;
+        top: 0px;
+        bottom:0px;
+        margin-top: auto;
+        margin-bottom: auto;
+        position: absolute;
+        display: inline-block;
+        background-color: @grey2;
+        z-index:2;
+      }
+    }
+    .state-info{
+      width: 120px;
+    }
+
+    &.focus-block:not(.selected-block){
+      .state-icon{
+        cursor : pointer;
+      }
+      .state-info{
+        cursor : pointer;
+      }
+
+  }
+    &.focus-block{
+      .state{
+        .state-icon{
+          .bg-primary !important;
+          .text-white !important;
+        }
+      }
+      .state-info{
+        .text-primary;
+      }
+    }
+  &.selected-block{
+    .state{
+      .bg-white;
+      border:2px solid;
+      .border-blue;
+      z-index:2;
+    }
+    .state-info {
+      font-weight: bold;
+    }
+
+    .status-line{
+      width: 155px;
+      .mlm;
+    }
+
+  }
+
+
+  }
+}

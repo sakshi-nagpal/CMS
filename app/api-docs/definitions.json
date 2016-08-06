@@ -1,0 +1,39 @@
+{
+  "ErrorModel": {
+    "type": "object",
+    "required": [
+      "message"
+    ],
+    "properties": {
+      "message": {
+        "type": "string"
+      }
+    }
+  },
+  "userSignupModel": {
+    "type": "object",
+    "properties": {
+      "firstName": {
+        "type": "string"
+      },
+      "lastName": {
+        "type": "string"
+      },
+      "email": {
+        "type": "string"
+      },
+      "userName": {
+        "type": "string"
+      },
+      "password": {
+        "type": "string"
+      },
+      "roles": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

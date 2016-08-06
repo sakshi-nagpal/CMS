@@ -1,0 +1,112 @@
+.options-modal {
+  &.modal {
+    .modal-backdrop.in {
+      opacity: .4;
+    }
+    .modal-dialog {
+      width: 847px;
+      .modal-content {
+        top: 7px;
+        text-align: left;
+        .title {
+          font-weight: bold;
+          .close {
+            font-size: 26px;
+            margin-top: -3px;
+            &:hover {
+              .text-primary;
+              opacity: 1;
+            }
+          }
+        }
+        .body {
+          height: 330px;
+          .list {
+            display: inline-block;
+           /* .caption {
+              display: inline-block;
+              line-height: 1.2em;
+              width: 134px;
+              position: relative;
+              left: -10px;
+            }*/
+            .search {
+              input::-webkit-input-placeholder {
+                color:    @grey3 !important;
+              }
+              input:-moz-placeholder {
+                color:    @grey3 !important;
+              }
+              input::-moz-placeholder {
+                color:    @grey3 !important;
+              }
+              input:-ms-input-placeholder {
+                color:    @grey3 !important;
+              }
+              width: 245px;
+              .rounded-box {
+                border-radius: 20px !important;
+              }
+              .search-icon {
+                display: block;
+                height: 28px;
+                position: absolute;
+                padding-top: 4px;
+                right: 6px;
+                width: 28px;
+              }
+              .box-shadow-two-sides {
+                box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.15) !important;
+              }
+              .box-shadow-two-sides[disabled] {
+                opacity: 0.5 !important;
+              }
+
+              .search-task {
+                height: 135px;
+                text-align: center;
+                .input-textbox {
+                  width: 100%;
+                  .input-icon {
+                    height: 35px;
+                    display: inline-block;
+                    .search-icon {
+                      line-height: 24px;
+                    }
+                  }
+                }
+              }
+            }
+            .list-item {
+              cursor: pointer;
+              display: inline-block;
+              margin-left: 110px;
+              width: 110px;
+              &.thumbnail-box {
+                .img {
+                  border: 2px solid transparent;
+                  &:hover {
+                    border: 2px solid;
+//                    .border-primary-lighter;
+                    border-color: lighten(@brand-primary,30%);
+                    .border-radius(5px);
+                  }
+                }
+              }
+              &.search-box {
+                cursor: default;
+                padding-top: 55px;
+                margin-left: 53px;
+                margin-right: 182px;
+                .caption {
+                  margin-left: 67px;
+                }
+              }
+            }
+          }
+
+        }
+      }
+    }
+  }
+}

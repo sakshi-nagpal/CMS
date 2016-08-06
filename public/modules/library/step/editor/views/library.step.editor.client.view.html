@@ -1,0 +1,12 @@
+<div class="library-step-editor">
+         <div class="step-editor-container" ng-init="getMethodTypes()">
+             <step-editor ng-if="stepJson._id" step-json="stepJson" method-types="methodTypes" scenario="scenario"
+                          step-index="stepIndex" timer-delay="timerDelay"
+                          save-data="saveData(isAutoSave)" editor-close="editorClose(isCancel)" delete-step="deleteStep()"
+                          on-step-Editor-initialise ="onStepEditorInitialise()" is-library="isLibrary" 
+						  error-message="errorMessage"></step-editor>
+         </div>
+    </div>
+
+
+
